@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="16dp"
+    tools:context=".presentasion.SearchActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <AutoCompleteTextView
+            android:id="@+id/et_search_query"
+            android:layout_width="286dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="3"
+            android:completionThreshold="3"
+            android:hint="kalimat" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp">
+
+        <androidx.appcompat.widget.SwitchCompat
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/sw_date"
+            android:checked="true"
+            android:text="tanggal"
+            android:textOn="On"
+            android:textOff="Off"/>
+
+        <androidx.appcompat.widget.SwitchCompat
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/sw_synonym"
+            android:checked="true"
+            android:text="sinonim"
+            android:textOn="On"
+            android:textOff="Off"/>
+
+        <androidx.appcompat.widget.SwitchCompat
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/sw_4gram"
+            android:checked="true"
+            android:text="bobot"
+            android:textOn="On"
+            android:textOff="Off"/>
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/bt_search_action"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="cari" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rv_show_results"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+</LinearLayout>
