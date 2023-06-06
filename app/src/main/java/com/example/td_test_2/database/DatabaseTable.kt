@@ -364,7 +364,7 @@ class DatabaseTable private constructor(context: Context) {
         val selection = FTS_VIRTUAL_TABLE + " MATCH ? COLLATE NOCASE"
 
         Log.d("searchtask_date_selection","$selection $selectionArgs $columns")
-        return columns?.let { query(selection, selectionArgs, it) }
+        return query(selection, selectionArgs)
     }
 
     fun getSinom(expression: String?): String? {
@@ -417,8 +417,8 @@ class DatabaseTable private constructor(context: Context) {
     private fun query(
         selection: String,
         selectionArgs: Array<String?>,
-        columns: Array<String>
     ): Cursor? {
+        Log.d("DATABASETABLE_selection", selection.toString())
         val builder = SQLiteQueryBuilder()
         builder.tables = FTS_VIRTUAL_TABLE
         val mColumns = arrayOf(MATCHINFO, "*")
@@ -426,12 +426,13 @@ class DatabaseTable private constructor(context: Context) {
             mDatabaseOpenHelper.readableDatabase,
             mColumns, selection, selectionArgs, null, null, null
         )
-        if (cursor == null) {
-            return null
-        } else if (!cursor.moveToFirst()) {
-            cursor.close()
-            return null
-        }
+//        if (cursor == null) {
+//            return null
+//        } else if (!cursor.moveToFirst()) {
+//            cursor.close()
+//            return null
+//        }
+
         Log.d("DATABASETABLE", cursor.columnNames.toString())
         return cursor
     }

@@ -11,12 +11,19 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.td_test_2.R
 import com.example.td_test_2.database.DatabaseTable
+import com.example.td_test_2.presentasion.ChatActivity
 import com.example.td_test_2.utils.TfIdfHelper
 
 class SearchResultsAdapter(private val mContext: Context) :
     RecyclerView.Adapter<SearchResultsAdapter.ResultViewHolder>() {
     private var mCursor: Cursor? = null
     private var offset: IntArray? = null
+    private lateinit var itemCallback : OnDetailItemCallback
+
+    fun onItemDetailCallback(callback : OnDetailItemCallback){
+        this.itemCallback = callback
+    }
+
     override fun onCreateViewHolder(
         parent: ViewGroup,
         viewType: Int
@@ -43,12 +50,15 @@ class SearchResultsAdapter(private val mContext: Context) :
         @SuppressLint("Range") val date =
             mCursor!!.getString(mCursor!!.getColumnIndex(DatabaseTable.COL_DATE))
         var pos: String? = ""
-        if (offset != null) pos = Integer.toString(position + 1)
+        if (offset != null) pos = Integer.toString(position + 0)
         holder.doctorName.text = doctor
         holder.hospitalName.text = hospital
         holder.displayTranscript.text = transcript
         holder.displayDate.text = date
         holder.displayIndex.text = pos
+        if (mContext.javaClass == ChatActivity::class.java) {
+            itemCallback.onDetailCallback(transcript)
+        }
     }
 
     override fun getItemCount(): Int {
@@ -81,5 +91,9 @@ class SearchResultsAdapter(private val mContext: Context) :
             displayDate = itemView.findViewById(R.id.tv_display_date)
             displayIndex = itemView.findViewById(R.id.tv_display_result_index)
         }
+    }
+
+    interface OnDetailItemCallback{
+        fun onDetailCallback(data : String)
     }
 }

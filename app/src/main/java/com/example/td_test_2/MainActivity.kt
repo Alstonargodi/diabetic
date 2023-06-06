@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.widget.Button
 import androidx.appcompat.app.AppCompatActivity
 import com.example.td_test_2.databinding.ActivityMainBinding
+import com.example.td_test_2.presentasion.ChatActivity
 
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
@@ -23,6 +24,9 @@ class MainActivity : AppCompatActivity() {
         binding.btViewData.setOnClickListener {
             val intent = Intent(this@MainActivity, ViewDataActivity::class.java)
             startActivity(intent)
+        }
+        binding.btnSchat.setOnClickListener {
+            startActivity(Intent(this@MainActivity,ChatActivity::class.java))
         }
     }
 }

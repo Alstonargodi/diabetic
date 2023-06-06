@@ -23,12 +23,13 @@ class SearchActivity : AppCompatActivity() {
     private lateinit var binding : ActivitySearchBinding
 
     private var mAdapter: SearchResultsAdapter? = null
-    private var mAsyncTask: SearchTask? = null
+//    private var mAsyncTask: SearchTask? = null
     private var mQuery = ""
     private var mLast4gramState = false
     private var mLastDateState = false
     private var mLastSynonymState = false
     private var mToast: Toast? = null
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivitySearchBinding.inflate(layoutInflater)
@@ -43,10 +44,9 @@ class SearchActivity : AppCompatActivity() {
             mLast4gramState = binding.sw4gram.isChecked()
             mLastDateState = binding.swDate.isChecked()
             mLastSynonymState = binding.swSynonym.isChecked()
-            if (mAsyncTask != null) {
-                Log.d("search_task", "cancel")
-            }
-            mAsyncTask = SearchTask()
+//            if (mAsyncTask != null) {
+//                Log.d("search_task", "cancel")
+//            }
             testDb(query)
         }
         val linearLayoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
@@ -68,42 +68,6 @@ class SearchActivity : AppCompatActivity() {
         mAdapter?.swapCursor(cursor)
     }
 
-    private inner class SearchTask : AsyncTask<String?, Void?, Cursor?>() {
-        override fun doInBackground(vararg params: String?): Cursor? {
-            Log.d("searchtask","do in background")
-
-            setT1(Calendar.getInstance().timeInMillis)
-            val db = DatabaseTable.getInstance(baseContext)?.getWordMatches(
-                params[0]!!, null,
-                binding.sw4gram!!.isChecked,
-                binding.swDate!!.isChecked,
-                binding.swSynonym!!.isChecked
-            )
-            Log.d("searchtask_doinbacgrkoud_result", db?.count.toString())
-            return db
-        }
-
-        override fun onPostExecute(cursor: Cursor?) {
-            Log.d("searchtask_date_postexecute", cursor.toString())
-            if (cursor == null || isCancelled) {
-                Log.d("search_task_cursor","empty")
-                showToast("No results")
-                return
-            }
-            setT5(Calendar.getInstance().timeInMillis)
-            Log.d("search_task_cursor","swap cursor")
-            mAdapter?.swapCursor(cursor)
-            setT6(Calendar.getInstance().timeInMillis)
-            showToast(
-                """
-                    Total results: ${cursor!!.count}
-                    $toastMessage
-                    """.trimIndent()
-            )
-        }
-
-
-    }
 
     private fun showToast(message: String) {
         if (mToast != null) mToast!!.cancel()

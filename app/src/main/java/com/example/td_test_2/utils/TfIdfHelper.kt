@@ -71,7 +71,7 @@ object TfIdfHelper {
         val valuesArray = ArrayList<DoubleArray>()
 
         // Total number of rows in the table
-        val totalDocs = context?.let { DatabaseTable.getInstance(it)?.rowCount ?: 0L } as Int
+        val totalDocs = DatabaseTable.getInstance(context!!)!!.rowCount
 
         // Document Frequency for each searched term
         val documentFrequency = LongArray(searchTerms.size)
