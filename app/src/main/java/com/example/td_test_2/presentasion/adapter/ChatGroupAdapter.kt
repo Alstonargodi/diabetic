@@ -2,7 +2,7 @@ package com.example.td_ad.presentasion.adapter
 
 import android.util.Log
 
-import com.example.td_test_2.database.Message
+import com.example.td_test_2.database.entity.Message
 import com.example.td_test_2.R
 import com.example.td_test_2.databinding.ItemReceiveBinding
 import com.example.td_test_2.databinding.ItemSendMsgBinding

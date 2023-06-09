@@ -1,16 +1,18 @@
 package com.example.td_test_2
 
+import android.content.Context
 import android.os.AsyncTask
 import android.os.Bundle
-import android.view.View
-import android.view.View.OnLongClickListener
+import android.util.Log
 import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import com.example.td_test_2.R
-import com.example.td_test_2.database.DatabaseTable
+import com.example.td_test_2.database.entity.WordEntity
+import com.example.td_test_2.database.room.json.Loadjson
+import com.example.td_test_2.database.sqldb.DatabaseTable
 import com.example.td_test_2.databinding.ActivityEnterDataBinding
+import org.json.JSONException
 
 class EnterDataActivity : AppCompatActivity() {
     private lateinit var binding: ActivityEnterDataBinding
@@ -29,11 +31,10 @@ class EnterDataActivity : AppCompatActivity() {
         mDoctorName = findViewById(R.id.et_doctor_name)
         mTranscript = findViewById(R.id.et_transcript)
         mAddButton = findViewById(R.id.bt_submit_data)
-        binding.btSubmitData.setOnClickListener({ AddDataTask().execute() })
-        binding.btSubmitData.setOnLongClickListener({
-            AddFakeDataTask().execute()
-            true
-        })
+        binding.btSubmitData.setOnClickListener {
+            insertDataset(this)
+        }
+
     }
 
     private inner class AddFakeDataTask :
@@ -60,6 +61,34 @@ class EnterDataActivity : AppCompatActivity() {
 
         override fun doInBackground(vararg params: Void?): Long {
             return storeInfo()
+        }
+    }
+
+    private fun insertDataset(
+        context: Context,
+    ){
+        val db: DatabaseTable = DatabaseTable.getInstance(baseContext)!!
+        val pimaArray = Loadjson.loadDiabeticJson(context)
+        try {
+            if (pimaArray != null){
+                for (i in 0 until pimaArray.length()){
+                    val item = pimaArray.getJSONObject(i)
+                    WordEntity(
+                        id = 0,
+                        type = item.getString("type"),
+                        sentence = item.getString("sentence"),
+                        result = item.getString("result")
+                    )
+                    db.addNewEntry(
+                        tipe = item.getString("type"),
+                        pattern = item.getString("sentence"),
+                        answer = item.getString("result")
+                    )
+                }
+            }
+        }catch (e : JSONException){
+            Log.d("roomDb",e.message.toString())
+            e.printStackTrace()
         }
     }
 

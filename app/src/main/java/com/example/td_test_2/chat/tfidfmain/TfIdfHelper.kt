@@ -1,9 +1,9 @@
-package com.example.td_test_2.utils
+package com.example.td_test_2.chat.tfidfmain
 
 import android.content.Context
 import android.database.Cursor
 import android.util.Log
-import com.example.td_test_2.database.DatabaseTable
+import com.example.td_test_2.database.sqldb.DatabaseTable
 import java.util.Arrays
 import java.util.TreeMap
 
@@ -53,95 +53,77 @@ object TfIdfHelper {
         return result
     }
 
-    /*
-    * This function takes a cursor with a search result
-    * and performs the TFxIDF ranking algorithm using
-    * the information provided by the matchinfo auxiliary
-    * function from the module FTS3 from SQLite.
-    */
+
     fun calcTfIdf(context: Context?, cursor: Cursor?): IntArray? {
-        Log.d("searchtask_setsearchters", searchTerms[0].toString())
-        Log.d("searchtask_result_tfidf", "start tfidf");
 
         if (cursor == null) {
             Log.d("searchtask_result_tfidf", "null");
             return null
         }
-        // Array to store the tfxidf value of each row from the result
-        val valuesArray = ArrayList<DoubleArray>()
 
-        // Total number of rows in the table
+        val valuesArray = ArrayList<DoubleArray>()
         val totalDocs = DatabaseTable.getInstance(context!!)!!.rowCount
 
-        // Document Frequency for each searched term
         val documentFrequency = LongArray(searchTerms.size)
-
-        // Using vector space model. Vector for the query
         val querySpaceVector = DoubleArray(searchTerms.size)
 
-        // Getting the document frequency for each terms from the database
+        // document frequecny terms
         for (i in searchTerms.indices) {
             documentFrequency[i] = DatabaseTable.getInstance(context)?.getDocumentFrequency(
                 searchTerms[i]
             )!!
+
             if (documentFrequency[i] > 0) querySpaceVector[i] =
                 Math.log(totalDocs.toDouble() / documentFrequency[i]) else querySpaceVector[i] = 0.0
         }
 
-        // Iterating over each result (row);
         cursor.moveToFirst()
         while (!cursor.isAfterLast) {
 
-
-            // Index of the matchinfo column in the cursor
             val colIndex = cursor.getColumnIndex(DatabaseTable.COL_MATCHINFO)
-            // Retrieving information
             val blob = cursor.getBlob(colIndex)
-            // Parsing the byte blob to an int array
             val parsed: IntArray = DatabaseTable.parseMatchInfoBlob(blob)
-            // Collapsing information from all columns to a single row
             val shortened = shortenInitialArray(parsed)
-            // Number of phrases in the query
             val phrases = shortened[0]
-            // Variable to accumulate all tfxIdf values for a given row
             val accumulator = DoubleArray(phrases)
 
-            // Go through all the phrases and calculate each tfxidf value
             for (i in 0 until phrases) {
 
-                // Term Frequency
+                //TODO 1 Term Frequency
                 val tf = shortened[i * 3 + 2]
-                // Inverted document frequency
+                Log.d("TF-IDF TF", tf.toString())
+
+
+                //TODO 2 Inverted document frequency
                 var idf = 0.0
                 if (documentFrequency[i] > 0) idf =
                     Math.log(totalDocs.toDouble() / documentFrequency[i])
-                // Tf x Idf value for 1 phrase
+                Log.d("TF-IDF IDF", idf.toString())
+
+                //TODO 3 TF X IDF
                 val result = tf * idf
-                // Add value to the total of the row
                 accumulator[i] = result
             }
-
-            // Add the row value to the result array
             valuesArray.add(accumulator)
             cursor.moveToNext()
         }
         val values = calculateVectorSpaceModel(querySpaceVector, valuesArray)
 
-
         val result = getOrderedIndexes(values)
 
-        Log.d("TF IDF INDEXES", Arrays.toString(result))
-        Log.d("TF IDF VALUES", values.toString())
+        Log.d("TF-IDF INDEXES", Arrays.toString(result))
+        Log.d("TF-IDF VALUES", values.toString())
 
         Log.d("searchtask_result_tfidf", result.toString());
         return result
     }
 
-    // Function to calculate similarity between each document result and the query vector for ordering
+    //mencari kesaamaan antar dokumen hasil dan vector query
     private fun calculateVectorSpaceModel(
         queryVector: DoubleArray,
         documentVectors: ArrayList<DoubleArray>
     ): ArrayList<Double> {
+        Log.d("value vector","calculate vector model")
         val result = ArrayList<Double>()
         val queryNorm = getVectorNorm(queryVector)
         for (i in documentVectors.indices) {
@@ -149,27 +131,30 @@ object TfIdfHelper {
             val docNorm = getVectorNorm(documentVectors[i])
             var value = 0.0
             if (queryNorm * docNorm > 0) value = dotProduct / (queryNorm * docNorm)
+            Log.d("valuetf_scalardotproduct",value.toString())
             result.add(value)
         }
-
         return result
     }
 
-    // Helper function to get the euclidean distance from a vector
+    // panjang vector
     private fun getVectorNorm(vector: DoubleArray): Double {
         var result = 0.0
         for (i in vector.indices) {
             result += vector[i] * vector[i]
         }
-        return Math.sqrt(result)
+        val srt = Math.sqrt(result)
+        Log.d("valuetf_vectorlength",srt.toString())
+        return srt
     }
 
-    // Helper function to get the dot product of 2 vectors
+    // dot product 2 vektor ( total pembobotan )
     private fun getDotProduct(v1: DoubleArray, v2: DoubleArray): Double {
         var result = 0.0
         for (i in v1.indices) {
             result += v1[i] * v2[i]
         }
+        Log.d("valuetf_vectorweight",result.toString())
         return result
     }
 

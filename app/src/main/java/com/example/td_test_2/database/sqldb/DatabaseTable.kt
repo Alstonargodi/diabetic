@@ -1,4 +1,4 @@
-package com.example.td_test_2.database
+package com.example.td_test_2.database.sqldb
 
 import android.content.ContentValues
 import android.content.Context
@@ -8,8 +8,10 @@ import android.database.sqlite.SQLiteDatabase
 import android.database.sqlite.SQLiteOpenHelper
 import android.database.sqlite.SQLiteQueryBuilder
 import android.util.Log
+import com.example.fts_tes.Utils.Date
 import com.example.fts_tes.Utils.PerformanceTime
-import com.example.td_test_2.utils.TfIdfHelper
+import com.example.td_test_2.chat.tfidfmain.TfIdfHelper
+import com.example.td_test_2.chat.utils.DateMatch
 import java.io.BufferedReader
 import java.io.InputStreamReader
 import java.text.SimpleDateFormat
@@ -31,9 +33,9 @@ class DatabaseTable private constructor(context: Context) {
         private var sDatabaseTable: DatabaseTable? = null
 
         // Columns for table FTS
-        val COL_DOCTOR = "DOCTOR"
-        val COL_HOSPITAL = "HOSPITAL"
-        val COL_TRANSCRIPT = "TRANSCRIPT"
+        val COL_DOCTOR = "TIPE"
+        val COL_HOSPITAL = "PATTERN"
+        val COL_TRANSCRIPT = "ANSWER"
         val COL_DATE = "DATE"
         val COL_TOKENIZE = "tokenize=unicode61"
         val COL_PREFIX = "prefix=\"4\""
@@ -41,7 +43,6 @@ class DatabaseTable private constructor(context: Context) {
         val COL_SNIPPET = "SNIPPET"
         val COL_OFFSETS = "OFFSETS"
 
-        // Columns for table SINONIMOS
         val COL_SINOM1 = "SINOM1"
         val COL_SINOM2 = "SINOM2"
 
@@ -74,14 +75,14 @@ class DatabaseTable private constructor(context: Context) {
     }
 
     // Wrapper method for add entry
-    fun addNewEntry(doctor: String, hospital: String, transcript: String): Long {
+    fun addNewEntry(tipe: String, pattern: String, answer: String): Long {
         Log.d(
             "CONSULTATION", "\n\n\nHospital: "
-                    + hospital + "\nDoctor: "
-                    + doctor + "\nTranscript:\n\""
-                    + transcript + "\""
+                    + tipe + "\nDoctor: "
+                    + pattern + "\nTranscript:\n\""
+                    + answer + "\""
         )
-        return mDatabaseOpenHelper.addEntry(doctor, hospital, transcript)
+        return mDatabaseOpenHelper.addEntry(tipe,pattern,answer)
     }
 
     // Wrapper method for add entry with date
@@ -263,6 +264,7 @@ class DatabaseTable private constructor(context: Context) {
         * */
         var query = query
         Log.d("searchtask_query", query)
+
 //        if (useDate) {
 //            val dMatch: DateMatch = Date.detectDates(query)
 //            val c = Calendar.getInstance()
@@ -343,6 +345,7 @@ class DatabaseTable private constructor(context: Context) {
 //            Log.d("SEARCH TERMS A 4Gram", Arrays.toString(terms))
 //            // End 4gram
 //        }
+
         PerformanceTime.setT4(Calendar.getInstance().timeInMillis)
 
         for (term in terms) {

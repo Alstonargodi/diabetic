@@ -9,10 +9,10 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import com.example.td_test_2.R
-import com.example.td_test_2.database.DatabaseTable
+import com.example.td_test_2.database.sqldb.DatabaseTable
 import com.example.td_test_2.presentasion.ChatActivity
-import com.example.td_test_2.utils.TfIdfHelper
+import com.example.td_test_2.chat.tfidfmain.TfIdfHelper
+import com.example.td_test_2.database.entity.WordEntity
 
 class SearchResultsAdapter(private val mContext: Context) :
     RecyclerView.Adapter<SearchResultsAdapter.ResultViewHolder>() {
@@ -41,23 +41,30 @@ class SearchResultsAdapter(private val mContext: Context) :
         } else {
             mCursor!!.moveToPosition(position)
         }
-        @SuppressLint("Range") val doctor =
+        @SuppressLint("Range") val type =
             mCursor!!.getString(mCursor!!.getColumnIndex(DatabaseTable.COL_DOCTOR))
-        @SuppressLint("Range") val hospital =
+        @SuppressLint("Range") val pattern =
             mCursor!!.getString(mCursor!!.getColumnIndex(DatabaseTable.COL_HOSPITAL))
-        @SuppressLint("Range") val transcript =
+        @SuppressLint("Range") val response =
             mCursor!!.getString(mCursor!!.getColumnIndex(DatabaseTable.COL_TRANSCRIPT))
         @SuppressLint("Range") val date =
             mCursor!!.getString(mCursor!!.getColumnIndex(DatabaseTable.COL_DATE))
         var pos: String? = ""
         if (offset != null) pos = Integer.toString(position + 0)
-        holder.doctorName.text = doctor
-        holder.hospitalName.text = hospital
-        holder.displayTranscript.text = transcript
+        holder.doctorName.text = type
+        holder.hospitalName.text = pattern
+        holder.displayTranscript.text = response
         holder.displayDate.text = date
         holder.displayIndex.text = pos
-        if (mContext.javaClass == ChatActivity::class.java) {
-            itemCallback.onDetailCallback(transcript)
+        if (mContext.javaClass == ChatActivity::class.java || mContext.javaClass == SearchActivity::class.java ) {
+            itemCallback.onDetailCallback(
+                WordEntity(
+                    0,
+                    type,
+                    pattern,
+                    response
+                )
+            )
         }
     }
 
@@ -94,6 +101,6 @@ class SearchResultsAdapter(private val mContext: Context) :
     }
 
     interface OnDetailItemCallback{
-        fun onDetailCallback(data : String)
+        fun onDetailCallback(data : WordEntity)
     }
 }

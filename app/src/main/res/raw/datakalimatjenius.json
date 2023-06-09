@@ -1,0 +1,24 @@
+{
+  "kalimat": [
+    {
+      "type": "info",
+      "sentence": "bagaimana mengisi saldo jenius",
+      "result": "hasil"
+    },
+    {
+      "type": "info",
+      "sentence": "dimana tempat membuat jenius",
+      "result": "hasil"
+    },
+    {
+      "type": "info",
+      "sentence": "bagaimana cara transfer uang",
+      "result": "hasil"
+    },
+    {
+      "type": "info",
+      "sentence": "bagaimana membuat jenius",
+      "result": "hasil"
+    }
+  ]
+}

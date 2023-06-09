@@ -9,9 +9,9 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.td_test_2.SearchActivity
 import com.example.td_test_2.SearchResultsAdapter
-import com.example.td_test_2.database.DatabaseTable
+import com.example.td_test_2.database.sqldb.DatabaseTable
 import com.example.td_test_2.databinding.ItemChatBinding
-import com.example.td_test_2.utils.TfIdfHelper
+import com.example.td_test_2.chat.tfidfmain.TfIdfHelper
 
 class ChatAdapter(
     private val mContext : Context,

@@ -5,9 +5,7 @@ import android.os.Bundle
 import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
-import com.example.td_test_2.R
-import com.example.td_test_2.database.DatabaseTable
+import com.example.td_test_2.database.sqldb.DatabaseTable
 import com.example.td_test_2.databinding.ActivityViewDataBinding
 
 class ViewDataActivity : AppCompatActivity() {

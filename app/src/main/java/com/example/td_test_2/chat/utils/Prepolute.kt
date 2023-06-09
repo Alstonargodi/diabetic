@@ -4,7 +4,7 @@ import java.util.Locale
 import java.util.Random
 import java.util.StringTokenizer
 
-class LoremIpsum(sentences: Int) {
+class Prepolute(sentences: Int) {
     /**
      * Get the lines which make up the generated corpus.
      *
@@ -115,7 +115,7 @@ class LoremIpsum(sentences: Int) {
         )
 
         fun randomCorpus(sentences: Int): String {
-            return LoremIpsum(sentences).toString()
+            return Prepolute(sentences).toString()
         }
     }
 }

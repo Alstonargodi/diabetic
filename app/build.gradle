@@ -1,6 +1,7 @@
 plugins {
     id 'com.android.application'
     id 'org.jetbrains.kotlin.android'
+    id 'kotlin-kapt'
 }
 
 android {
@@ -53,4 +54,9 @@ dependencies {
     implementation "com.github.lisawray.groupie:groupie-viewbinding:2.10.1"
     implementation "com.github.lisawray.groupie:groupie-kotlin-android-extensions:2.10.1"
     implementation "com.github.lisawray.groupie:groupie-databinding:2.10.1"
+
+    //room database
+    implementation 'androidx.room:room-paging:2.5.0'
+    implementation 'androidx.room:room-ktx:2.5.0'
+    kapt 'androidx.room:room-compiler:2.5.0'
 }

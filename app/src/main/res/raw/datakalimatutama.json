@@ -1,0 +1,119 @@
+{
+  "kalimat": [
+    {
+      "type": "info",
+      "sentence": "apa itu diabetes",
+      "result": "Diabetes adalah penyakit kronis yang ditandai dengan tingginya kadar gula (glukosa) dalam darah. Hal ini terjadi ketika tubuh tidak dapat memproduksi atau menggunakan hormon insulin dengan efektif. Insulin diperlukan untuk mengatur kadar glukosa dalam darah dan membantu tubuh mengubah glukosa menjadi energi."
+    },
+    {
+      "type": "info",
+      "sentence": "apa penyebab diabetes",
+      "result": "Ada beberapa faktor yang dapat menyebabkan diabetes. Diabetes tipe 1 disebabkan oleh kerusakan pada sel-sel pankreas yang memproduksi insulin"
+    },
+    {
+      "type": "info",
+      "sentence": "apa gejala umum diabetes",
+      "result": "Sering merasa haus: Peningkatan kadar gula darah dapat menyebabkan dehidrasi dan membuat seseorang merasa haus yang berlebihan.\n\nSering buang air kecil: Tingginya kadar gula dalam darah dapat menyebabkan peningkatan produksi urin, sehingga seseorang mungkin sering buang air kecil.\n\nPenurunan berat badan yang tidak diketahui sebabnya: Meskipun mungkin tampak bertentangan, diabetes tipe 1 dapat menyebabkan penurunan berat badan yang tidak diinginkan karena tubuh tidak dapat menggunakan glukosa dengan efisien dan mulai memetabolisme lemak sebagai sumber energi.\n\nKelelahan: Tingginya kadar gula darah dan masalah dalam mengubah glukosa menjadi energi dapat menyebabkan kelelahan yang berkepanjangan.\n\nPenglihatan kabur: Perubahan kadar gula darah dapat mempengaruhi lensa mata dan menyebabkan gangguan penglihatan sementara."
+    },
+    {
+      "type": "info",
+      "sentence": "bagaimana pengobatan diabetes dilakukan",
+      "result": "Pengobatan diabetes melibatkan perubahan gaya hidup, pengaturan pola makan, olahraga teratur, pengobatan oral, insulin, dan pengawasan terus-menerus oleh dokter. Berikut adalah beberapa langkah pengobatan yang umum digunakan untuk mengelola diabetes:\n\n    Perubahan Gaya Hidup:\n        Pola makan sehat: Konsumsi makanan yang seimbang, terutama makanan tinggi serat, rendah lemak jenuh, dan rendah gula.\n        Kendalikan berat badan: Jika Anda kelebihan berat badan atau obesitas, mengurangi berat badan dapat membantu meningkatkan kontrol gula darah.\n        Aktivitas fisik: Lakukan olahraga secara teratur, seperti berjalan kaki, bersepeda, atau berenang, sesuai dengan rekomendasi dokter.\n        Hindari merokok: Jika Anda perokok, berhenti merokok karena merokok dapat meningkatkan risiko komplikasi diabetes.\n\n    Obat-obatan:\n        Obat antidiabetes oral: Ada beberapa jenis obat yang dapat membantu mengendalikan gula darah, seperti metformin, sulfonilurea, atau inhibitor DPP-4.\n        Insulin: Jika diabetes tidak terkontrol dengan obat oral, dokter mungkin akan meresepkan insulin untuk mengatur gula darah."
+    },
+    {
+      "type": "reminder",
+      "sentence": "atur pemberian insulin setiap pagi hari jam 6",
+      "result": 6
+    },
+    {
+      "type": "reminder",
+      "sentence": "Besok atur makan buah pukul 7",
+      "result": 6
+    },
+    {
+      "type": "predict",
+      "sentence": "perokok aktif tidak makan sayur jarang aktivitas fisik pernah stroke kolestrol tinggi",
+      "result": 0
+    },
+    {
+      "type": "predict",
+      "sentence": "kolestrol tinggi berat 20 jarang melakukan aktivas fisik minum alkohol",
+      "result": 1
+    },
+    {
+      "type": "info",
+      "sentence": "bagaimana pola hidup sehat hindar diabetes",
+      "result": "olahraga"
+    },
+    {
+      "type": "help",
+      "sentence": "alur aplikasi",
+      "result": "olahraga"
+    },
+    {
+      "type": "predict",
+      "sentence": "laki-laki tekanan darah tinggi umur 30 pengecekan kolestrol tahun kolestrol tinggi berat badan 20 perokok aktif tidak minum akohol tidak penyakit jantung tidak pernah berolahraga makan buah makan sayur dua hari stress tinggi 2 hari sakit",
+      "result": 2
+    },
+    {
+      "type": "predict",
+      "sentence": "perempuan tidak tekanan darah tinggi umur 50 pengecekan kolestrol tahun tidak kolestrol tinggi berat badan saya 20 perokok aktif tidak minum berakholol tidak penyakit jantung tidak olahraga makan buah makan sayur dua hari stress tinggi 2 hari sakit",
+      "result": 1
+    },
+    {
+      "tipe": "help",
+      "kalimat": "Apa perbedaan antara diabetes tipe 1 dan tipe 2?",
+      "result": "Diabetes tipe 1 disebabkan oleh ketidakmampuan pankreas untuk memproduksi insulin, sedangkan diabetes tipe 2 melibatkan resistensi insulin dan produksi insulin yang tidak cukup."
+    },
+    {
+      "tipe": "info",
+      "kalimat": "Apakah diabetes dapat disembuhkan?",
+      "result": "Diabetes tipe 1 tidak dapat disembuhkan, tetapi diabetes tipe 2 dapat dikendalikan melalui perubahan gaya hidup sehat dan pengobatan yang tepat."
+    },
+    {
+      "tipe": "info",
+      "kalimat": "Bagaimana cara mendiagnosis diabetes?",
+      "result": "Diabetes dapat didiagnosis melalui tes darah yang mengukur kadar glukosa darah puasa, tes toleransi glukosa oral, atau tes hemoglobin A1c."
+    },
+    {
+      "tipe": "info",
+      "kalimat": "Apa gejala umum diabetes?",
+      "result": "Gejala diabetes meliputi sering buang air kecil, haus berlebihan, penurunan berat badan yang tidak dijelaskan, kelelahan, penglihatan kabur, dan luka yang sulit sembuh."
+    },
+    {
+      "tipe": "info",
+      "kalimat": "Apa saja komplikasi jangka panjang yang dapat terjadi akibat diabetes?",
+      "result": "Komplikasi jangka panjang diabetes meliputi kerusakan saraf (neuropati), kerusakan ginjal (nefropati), masalah mata (retinopati), masalah kardiovaskular, dan luka yang sulit sembuh."
+    },
+    {
+      "tipe": "info",
+      "kalimat": "Apa itu gula darah puasa?",
+      "result": "Gula darah puasa adalah kadar glukosa dalam darah setelah tidak makan apa pun selama setidaknya delapan jam."
+    },
+    {
+      "tipe": "info",
+      "kalimat": "Bagaimana cara mengontrol diabetes tipe 2 dengan diet?",
+      "result": "Diet sehat untuk diabetes tipe 2 melibatkan mengonsumsi makanan rendah karbohidrat, rendah gula, tinggi serat, serta memperhatikan ukuran porsi dan waktu makan."
+    },
+    {
+      "tipe": "info",
+      "kalimat": "Apakah semua orang dengan diabetes harus menggunakan insulin?",
+      "result": "Tidak semua orang dengan diabetes perlu menggunakan insulin. Beberapa orang dengan diabetes tipe 2 dapat mengontrol gula darah mereka melalui obat-obatan oral atau perubahan gaya hidup."
+    },
+    {
+      "tipe": "info",
+      "kalimat": "Apa itu hipoglikemia?",
+      "result": "Hipoglikemia adalah kondisi ketika kadar gula darah terlalu rendah, biasanya di bawah 70 mg/dL. Gejalanya termasuk pusing, gemetar, keringat dingin, dan kebingungan."
+    },
+    {
+      "tipe": "info",
+      "kalimat": "Apa itu hiperglikemia?",
+      "result": "Hiperglikemia adalah kondisi ketika kadar gula darah terlalu tinggi. Gejalanya meliputi rasa haus yang berlebihan, buang air kecil yang sering, kelelahan, dan pandangan kabur."
+    },
+    {
+      "tipe": "info",
+      "kalimat": "Bisakah seseorang dengan diabetes makan makanan manis?",
+      "result": "Seseorang dengan diabetes sebaiknya membatasi konsumsi makanan manis, terutama yang mengandung gula tambahan."
+    }
+  ]
+}
