@@ -18,7 +18,7 @@ import java.util.concurrent.Executors
         WordEntity::class,
         PimaEntity::class
     ],
-    version = 1,
+    version = 3,
     exportSchema = false
 )
 
@@ -44,9 +44,14 @@ abstract class DbConfig : RoomDatabase(){
                                 context,
                                 setDatabase(context).wordDao(),
                             )
+                            insertPimaDataset(
+                                context,
+                                setDatabase(context).wordDao(),
+                            )
                         }
                     }
                 })
+                    .fallbackToDestructiveMigration()
                     .allowMainThreadQueries()
                     .build()
                     .also { INSTANCE = it }
@@ -58,7 +63,6 @@ abstract class DbConfig : RoomDatabase(){
             dataDao: WordDao
         ){
             val setence = Loadjson.loadDiabeticJson(context)
-            val pima = Loadjson.loadPimaJson(context)
 
             try {
                 if (setence != null){
@@ -74,6 +78,19 @@ abstract class DbConfig : RoomDatabase(){
                         )
                     }
                 }
+            }catch (e : JSONException){
+                Log.d("roomDb",e.toString())
+                e.printStackTrace()
+            }
+        }
+
+        private fun insertPimaDataset(
+            context: Context,
+            dataDao: WordDao
+        ){
+            val pima = Loadjson.loadPimaJson(context)
+
+            try {
                 if (pima != null){
                     for (i in 0 until pima.length()){
                         val item = pima.getJSONObject(i)
@@ -94,7 +111,7 @@ abstract class DbConfig : RoomDatabase(){
                     }
                 }
             }catch (e : JSONException){
-                Log.d("roomDb",e.message.toString())
+                Log.d("roomDb",e.toString())
                 e.printStackTrace()
             }
         }

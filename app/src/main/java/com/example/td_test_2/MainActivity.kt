@@ -25,7 +25,6 @@ class MainActivity : AppCompatActivity() {
             Log.d("data",it.toString())
         }
 
-
         setContentView(binding.root)
        binding.btEnterData.setOnClickListener {
             val intent = Intent(this@MainActivity, EnterDataActivity::class.java)

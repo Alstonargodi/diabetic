@@ -1,6 +1,7 @@
 package com.example.td_test_2.database.room.json
 
 import android.content.Context
+import android.util.Log
 import com.example.td_test_2.R
 import org.json.JSONArray
 import org.json.JSONException
@@ -41,8 +42,10 @@ object Loadjson {
             val json = JSONObject(builder.toString())
             return json.getJSONArray("pima")
         }catch (exception: IOException) {
+            Log.d("loadJson",exception.message.toString())
             exception.printStackTrace()
         } catch (exception: JSONException) {
+            Log.d("loadJson",exception.message.toString())
             exception.printStackTrace()
         }
         return null

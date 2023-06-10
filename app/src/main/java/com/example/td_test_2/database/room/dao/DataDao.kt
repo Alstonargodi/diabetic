@@ -15,7 +15,7 @@ interface WordDao {
     @Query("select * from kalimatTable")
     fun readSentence(): LiveData<List<WordEntity>>
 
-    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    @Insert(onConflict = OnConflictStrategy.IGNORE)
     fun insertPimaData(data : PimaEntity)
 
     @Query("select * from dataTable")

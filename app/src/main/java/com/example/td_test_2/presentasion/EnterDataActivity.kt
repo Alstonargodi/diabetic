@@ -73,12 +73,12 @@ class EnterDataActivity : AppCompatActivity() {
             if (pimaArray != null){
                 for (i in 0 until pimaArray.length()){
                     val item = pimaArray.getJSONObject(i)
-                    WordEntity(
-                        id = 0,
-                        type = item.getString("type"),
-                        sentence = item.getString("sentence"),
-                        result = item.getString("result")
-                    )
+//                    WordEntity(
+//                        id = 0,
+//                        type = item.getString("type"),
+//                        sentence = item.getString("sentence"),
+//                        result = item.getString("result")
+//                    )
                     db.addNewEntry(
                         tipe = item.getString("type"),
                         pattern = item.getString("sentence"),
