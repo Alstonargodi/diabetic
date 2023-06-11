@@ -13,7 +13,7 @@ import java.io.InputStreamReader
 object Loadjson {
     fun loadDiabeticJson(context: Context): JSONArray?{
         val builder = StringBuilder()
-        val resources = context.resources.openRawResource(R.raw.datakalimatutama)
+        val resources = context.resources.openRawResource(R.raw.kalimat2)
         val reader = BufferedReader(InputStreamReader(resources))
         var line : String?
         try {

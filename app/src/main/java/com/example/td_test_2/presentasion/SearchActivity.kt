@@ -36,16 +36,12 @@ class SearchActivity : AppCompatActivity() {
 
         title = "Search data"
         binding.btSearchAction.setOnClickListener {
-            var query = "saya memiliki hamil 0 glukosa 340 darah 72 ketebalan 35 insulin 5 berat 536 pedigree 0687 umur 55"
-
+            var query = binding.etSearchQuery.text.toString()
 
             //TODO 1.1 Preprocessing Kalimat
             query = query.replace("[.,]","")
             cleanText = query
             mQuery = query
-//            if (mAsyncTask != null) {
-//                Log.d("search_task", "cancel")
-//            }
 
             //TODO 1.2 Calculate
             calculate(query)
@@ -87,20 +83,16 @@ class SearchActivity : AppCompatActivity() {
             }
             "predict"->{
                 var preprocessing = predictPreprocessing()
-
-                var Bp = preprocessing.get("darah")
                 predictNb(
-                    pregnan = preprocessing.get("hamil").toString(),
-                    glucose = preprocessing.get("glukosa").toString(),
-                    bloodPreasure = preprocessing.get("darah").toString(),
-                    skin = preprocessing.get("ketebalan").toString(),
-                    insulin = preprocessing.get("insulin").toString(),
-                    bmi = preprocessing.get("berat").toString(),
-                    pedigree = preprocessing.get("pedigree").toString(),
-                    age = preprocessing.get("umur").toString()
+                    pregnan = preprocessing["hamil"].toString(),
+                    glucose = preprocessing["glukosa"].toString(),
+                    bloodPreasure = preprocessing["darah"].toString(),
+                    skin = preprocessing["ketebalan"].toString(),
+                    insulin = preprocessing["insulin"].toString(),
+                    bmi = preprocessing["berat"].toString(),
+                    pedigree = preprocessing["pedigree"].toString(),
+                    age = preprocessing["umur"].toString()
                 )
-
-                Log.d("chat_predict", Bp.toString() )
             }
             "reminder"->{
                 Log.d("chat_reminder", answer)

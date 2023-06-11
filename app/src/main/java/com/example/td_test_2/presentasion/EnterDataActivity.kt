@@ -80,8 +80,8 @@ class EnterDataActivity : AppCompatActivity() {
 //                        result = item.getString("result")
 //                    )
                     db.addNewEntry(
-                        tipe = item.getString("type"),
-                        pattern = item.getString("sentence"),
+                        tipe = item.getString("tipe"),
+                        pattern = item.getString("kalimat"),
                         answer = item.getString("result")
                     )
                 }
