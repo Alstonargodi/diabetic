@@ -73,6 +73,7 @@ object TfIdfHelper {
                 searchTerms[i]
             )!!
 
+
             if (documentFrequency[i] > 0) querySpaceVector[i] =
                 Math.log(totalDocs.toDouble() / documentFrequency[i]) else querySpaceVector[i] = 0.0
         }

@@ -79,6 +79,8 @@ class EnterDataActivity : AppCompatActivity() {
 //                        sentence = item.getString("sentence"),
 //                        result = item.getString("result")
 //                    )
+
+
                     db.addNewEntry(
                         tipe = item.getString("tipe"),
                         pattern = item.getString("kalimat"),

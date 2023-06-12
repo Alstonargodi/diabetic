@@ -16,6 +16,7 @@ import com.example.td_test_2.databinding.ActivityChatBinding
 import com.example.td_test_2.chat.preprocessing.Tokenizer
 import com.example.td_test_2.chat.preprocessing.Tokenizer.preprocessingKalimat
 import com.example.td_test_2.chat.preprocessing.Tokenizer.removeLineBreaks
+import com.example.td_test_2.chat.preprocessing.Utils
 import com.example.td_test_2.classification.data.Input
 import com.example.td_test_2.database.Repository
 import com.example.td_test_2.database.entity.WordEntity
@@ -57,17 +58,23 @@ class ChatActivity : AppCompatActivity() {
             var predictNewLow = "prediksi riwayat kesahatan saya memiliki hamil 0 glukosa 90 tekanandarah 52 ketebalankulit 35 insulin 5 beratbadan 53.6 pedigree 0.687 umur 55"
             var predictNoShort = "hamil 1 glukosa 85 tekanandarah 66 ketebalankulit 29 insulin 0 beratbadan 26.6 pedigree 0.351 umur 31"
             var predictYesShort = "hamil 6 glukosa 148 tekanandarah 72 ketebalankulit 35 insulin 0 beratbadan 33.6 pedigree 0.627 umur 50"
-            var info = "apa itu diabetes"
+            var info = "apa itu sakit diabetes"
+            var info2 = "bagaimana gejala diabetes"
+            var info3 = "Apa penyebab diabetes?"
 
             //input kalimat
-            var inputText = "between into through APA ITU SAKIT DIABETES"
+            var inputText = info3
 
             //todo preprocessing kalimat
-            var cleanText = preprocessingKalimat(inputText)
+            var cleanText = preprocessingKalimat(
+                this,
+                inputText
+            )
 
+            Log.d("stop",cleanText.toString())
 
             //mengirimkan data
-            queryDatabase(cleanText)
+            queryDatabase(info3)
             val message = Message(
                 setences = inputText,
                 sender = "me"

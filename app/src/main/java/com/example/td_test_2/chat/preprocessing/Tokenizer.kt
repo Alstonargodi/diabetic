@@ -1,5 +1,6 @@
 package com.example.td_test_2.chat.preprocessing
 
+import android.content.Context
 import android.util.Log
 
 object Tokenizer {
@@ -17,6 +18,7 @@ object Tokenizer {
     )
 
     fun preprocessingKalimat(
+        context : Context,
         setence: String
     ): String{
         //todo tokenizer
@@ -26,7 +28,7 @@ object Tokenizer {
         var capitalRemoval = captialRemoval(kalimatToken)
 
         //todo stopwords
-        var stopWords = removeStopWords(capitalRemoval)
+        var stopWords = removeStopWords(capitalRemoval,context)
 
         //todo removeline
         var removeLine = removeLineBreaks(stopWords)
@@ -56,9 +58,14 @@ object Tokenizer {
         return setenceList
     }
 
-    fun removeStopWords(setence : List<String>): String {
+    fun removeStopWords(setence : List<String>,context: Context): String {
+        var stopword = Utils.csvToString(
+            context,
+            "stopwordbahasa.csv",
+            false
+        )
         var words = setence.filter {
-            !englishStopWords.contains( it.trim() )
+            !stopword.contains( it.trim() )
         }
         return words.toString()
     }
