@@ -1,5 +1,7 @@
 package com.example.td_test_2.chat.preprocessing
 
+import android.util.Log
+
 object Tokenizer {
     private val englishStopWords = arrayOf(
         "i", "me", "my", "myself", "we", "our", "ours", "ourselves", "you", "your", "yours", "yourself", "yourselves",
@@ -14,6 +16,23 @@ object Tokenizer {
         "now"
     )
 
+    fun preprocessingKalimat(
+        setence: String
+    ): String{
+        //todo tokenizer
+        var kalimatToken = sentenceToToken(setence)
+
+        //todo capital removal
+        var capitalRemoval = captialRemoval(kalimatToken)
+
+        //todo stopwords
+        var stopWords = removeStopWords(capitalRemoval)
+
+        //todo removeline
+        var removeLine = removeLineBreaks(stopWords)
+
+        return  removeLine
+    }
 
     fun sentenceToToken(text : String): List<String>{
         val setence = text.trim().toLowerCase()
@@ -21,19 +40,20 @@ object Tokenizer {
         tokens = tokens.map {
             Regex("[^A-Za-z0-9 ]").replace( it , "")
         }
-        //remove stop words
-//        tokens = tokens.filter {
-//            !englishStopWords.contains( it.trim() )
-//        }
-
-        //slang words
-
 
         tokens = tokens.filter {
             it.trim().isNotEmpty() and it.trim().isNotBlank()
         }
 
         return tokens
+    }
+
+    fun captialRemoval(setence : List<String>): List<String> {
+        var setenceList = arrayListOf<String>()
+        setence.forEach {
+            setenceList.add(it.toLowerCase())
+        }
+        return setenceList
     }
 
     fun removeStopWords(setence : List<String>): String {
@@ -43,12 +63,14 @@ object Tokenizer {
         return words.toString()
     }
 
-    fun removeLineBreaks( para : String ) : String {
-        return para
+    fun removeLineBreaks( setence : String ) : String {
+        return setence
             .replace("\n", " " )
             .replace("\r", " " )
             .replace(" ", "" )
             .replace("?", " " )
-            .toLowerCase()
+            .replace(",", " " )
+            .replace("[", " " )
+            .replace("]", " " )
     }
 }

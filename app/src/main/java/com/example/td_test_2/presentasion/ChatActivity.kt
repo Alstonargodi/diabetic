@@ -14,6 +14,7 @@ import com.example.td_test_2.database.sqldb.DatabaseTable
 import com.example.td_test_2.database.entity.Message
 import com.example.td_test_2.databinding.ActivityChatBinding
 import com.example.td_test_2.chat.preprocessing.Tokenizer
+import com.example.td_test_2.chat.preprocessing.Tokenizer.preprocessingKalimat
 import com.example.td_test_2.chat.preprocessing.Tokenizer.removeLineBreaks
 import com.example.td_test_2.classification.data.Input
 import com.example.td_test_2.database.Repository
@@ -59,17 +60,14 @@ class ChatActivity : AppCompatActivity() {
             var info = "apa itu diabetes"
 
             //input kalimat
-            var inputText = binding.etInsertChat.text.toString()
+            var inputText = "between into through APA ITU SAKIT DIABETES"
 
             //todo preprocessing kalimat
-            var text = Tokenizer.sentenceToToken(inputText)
-            var cleanText = Tokenizer.removeStopWords(text) //todo stopword
-            inputText = inputText.replace("[.,]","")
-            cleanText = removeLineBreaks(cleanText)
-            predictText = inputText
+            var cleanText = preprocessingKalimat(inputText)
+
 
             //mengirimkan data
-            queryDatabase(inputText)
+            queryDatabase(cleanText)
             val message = Message(
                 setences = inputText,
                 sender = "me"
