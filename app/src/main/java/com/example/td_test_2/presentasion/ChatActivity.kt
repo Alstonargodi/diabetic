@@ -1,7 +1,6 @@
 package com.example.td_test_2.presentasion
 
 import Classifier
-import android.content.Context
 import android.database.Cursor
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -20,11 +19,8 @@ import com.example.td_test_2.classification.data.Input
 import com.example.td_test_2.database.Repository
 import com.example.td_test_2.database.entity.WordEntity
 import com.example.td_test_2.database.room.DbConfig
-import com.example.td_test_2.database.room.dao.WordDao
-import com.example.td_test_2.database.room.json.Loadjson
 import com.xwray.groupie.GroupAdapter
 import com.xwray.groupie.GroupieViewHolder
-import org.json.JSONException
 
 class ChatActivity : AppCompatActivity() {
     private val messageAdapter = GroupAdapter<GroupieViewHolder>()
@@ -39,6 +35,7 @@ class ChatActivity : AppCompatActivity() {
     private var mQuery = ""
     private var mCursor: Cursor? = null
 
+    private var predictText = ""
     private lateinit var adapter : ChatAdapter
     private lateinit var binding : ActivityChatBinding
 
@@ -46,22 +43,33 @@ class ChatActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityChatBinding.inflate(layoutInflater)
         repository = Repository(DbConfig.setDatabase(this))
-        initializeNb()
         setContentView(binding.root)
 
         binding.rvChat.adapter = messageAdapter
         binding.btnInsert.setOnClickListener {
-//            saya memiliki hamil 0 glukosa 340 darah 72 ketebalan 35 insulin 5 berat 536 pedigree 0687 umur 55
+
+            //kalimat tester
+            var reminder = "atur pemberian insulin setiap pagi hari jam 6"
+            var predictYes = "prediksi riwayat kesahatan saya memiliki hamil 6 glukosa 148 tekanandarah 72 ketebalankulit 35 insulin 0 beratbadan 33.6 pedigree 0.627 umur 50"
+            var predictNewHigh = "prediksi riwayat kesahatan saya memiliki hamil 0 glukosa 340 tekanandarah 72 ketebalankulit 35 insulin 5 beratbadan 53.6 pedigree 0.687 umur 55"
+            var predictNo = "prediksi riwayat kesahatan saya memiliki hamil 1 glukosa 85 tekanandarah 66 ketebalankulit 29 insulin 0 beratbadan 26.6 pedigree 0.351 umur 31"
+            var predictNewLow = "prediksi riwayat kesahatan saya memiliki hamil 0 glukosa 90 tekanandarah 52 ketebalankulit 35 insulin 5 beratbadan 53.6 pedigree 0.687 umur 55"
+            var predictNoShort = "hamil 1 glukosa 85 tekanandarah 66 ketebalankulit 29 insulin 0 beratbadan 26.6 pedigree 0.351 umur 31"
+            var predictYesShort = "hamil 6 glukosa 148 tekanandarah 72 ketebalankulit 35 insulin 0 beratbadan 33.6 pedigree 0.627 umur 50"
+            var info = "apa itu diabetes"
+
+            //input kalimat
             var inputText = binding.etInsertChat.text.toString()
 
-            //preprocessing
+            //todo preprocessing kalimat
             var text = Tokenizer.sentenceToToken(inputText)
-            var cleanText = Tokenizer.removeStopWords(text)
-            cleanText = cleanText.replace("[.,]","")
+            var cleanText = Tokenizer.removeStopWords(text) //todo stopword
+            inputText = inputText.replace("[.,]","")
             cleanText = removeLineBreaks(cleanText)
+            predictText = inputText
 
-            //send
-            searchDb(cleanText)
+            //mengirimkan data
+            queryDatabase(inputText)
             val message = Message(
                 setences = inputText,
                 sender = "me"
@@ -71,9 +79,8 @@ class ChatActivity : AppCompatActivity() {
             binding.etInsertChat.text.clear()
 
         }
-        binding.rvChat.layoutManager = LinearLayoutManager(
-            this
-        )
+        initPredictionDataset()
+        binding.rvChat.layoutManager = LinearLayoutManager(this)
         binding.rvSearch.adapter = messageAdapter
         mAdapter = SearchResultsAdapter(this)
         binding.rvSearch.layoutManager = LinearLayoutManager(
@@ -84,7 +91,8 @@ class ChatActivity : AppCompatActivity() {
         binding.rvSearch.adapter = mAdapter
     }
 
-    private fun searchDb(
+    //mencari kesamaan kalimat dalam database
+    private fun queryDatabase(
         text : String
     ){
         val searchDb = DatabaseTable.getInstance(baseContext)?.getWordMatches(
@@ -97,7 +105,7 @@ class ChatActivity : AppCompatActivity() {
         mAdapter?.swapCursor(searchDb)
         mAdapter!!.onItemDetailCallback(object : SearchResultsAdapter.OnDetailItemCallback{
             override fun onDetailCallback(data: WordEntity) {
-                extractSentence(
+                setenceSelect(
                     data.type,
                     text,
                     data.result
@@ -106,28 +114,26 @@ class ChatActivity : AppCompatActivity() {
         })
     }
 
-
-    private fun extractSentence(
+    //memilah kalimat hasil tfidf berdasarkan tipe
+    private fun setenceSelect(
         type : String,
         question : String,
         answer : String,
     ){
-        Log.d("result_type",type)
         when(type){
             "info"->{
                 replyMessage(answer)
             }
             "predict"->{
-                var preprocessing = predictPreprocessing(
-                    question
-                )
+                //preprocessing prediksi dari kalimat input
+                var preprocessing = predictPreprocessing(question)
                 predictNb(
                     pregnan = preprocessing["hamil"].toString(),
                     glucose = preprocessing["glukosa"].toString(),
-                    bloodPreasure = preprocessing["darah"].toString(),
-                    skin = preprocessing["ketebalan"].toString(),
+                    bloodPreasure = preprocessing["tekanandarah"].toString(),
+                    skin = preprocessing["ketebalankulit"].toString(),
                     insulin = preprocessing["insulin"].toString(),
-                    bmi = preprocessing["berat"].toString(),
+                    bmi = preprocessing["beratbadan"].toString(),
                     pedigree = preprocessing["pedigree"].toString(),
                     age = preprocessing["umur"].toString()
                 )
@@ -141,10 +147,11 @@ class ChatActivity : AppCompatActivity() {
         }
     }
 
+    //preprocessing prediksi dengan key dan value
     private fun predictPreprocessing(
-        cleanText : String
-    ): Map<String,Int>{
-        var predictText = cleanText
+        predict : String
+    ): Map<String,String>{
+        var predictText = predict
             .replace("saya","")
             .replace("memiliki","")
 
@@ -153,13 +160,14 @@ class ChatActivity : AppCompatActivity() {
         val matches = pattern.findAll(predictText)
         val result = matches.map { matchResult ->
             val (word, value) = matchResult.destructured
-            Pair(word, value.toInt())
+            Pair(word, value)
         }.toMap()
 
         return result
     }
 
-    private fun initializeNb(){
+    //inisialisasi dataset untuk prediksi
+    private fun initPredictionDataset(){
         repository.readPimaData().observe(this){
             it.forEach {
                 classifier.apply {
@@ -181,7 +189,7 @@ class ChatActivity : AppCompatActivity() {
         }
     }
 
-
+    //prediksi utama
     private fun predictNb(
         pregnan : String,
         glucose : String,
@@ -193,6 +201,7 @@ class ChatActivity : AppCompatActivity() {
         age : String,
     ){
         val inputData = "$pregnan $glucose $bloodPreasure $skin $insulin $bmi $pedigree $age"
+        Log.d("result_input",inputData)
         val yes = "6 148 72 35 0 336 0.627 50"
         val no = "1 85 66 29 0 266 0351 31"
         val new = "0 340 72 35 5 536 0687 55"
@@ -205,6 +214,7 @@ class ChatActivity : AppCompatActivity() {
         replyMessage(result)
     }
 
+    //mengirimkan jawaban
     private fun replyMessage(
         sentence : String
     ){

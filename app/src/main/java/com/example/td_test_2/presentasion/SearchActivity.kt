@@ -36,10 +36,12 @@ class SearchActivity : AppCompatActivity() {
 
         title = "Search data"
         binding.btSearchAction.setOnClickListener {
-            var query = binding.etSearchQuery.text.toString()
+            var predict2 = "prediksi riwayat kesahatan saya memiliki hamil 6 glukosa 148 darah 72 ketebalan 35 insulin 0 berat 33.6 pedigree 0.627 umur 50"
+            var predict = "prediksi riwayat kesahatan saya memiliki hamil 0 glukosa 340 darah 72 ketebalan 35 insulin 5 berat 53.6 pedigree 0.687 umur 55"
+            var query = predict2
 
             //TODO 1.1 Preprocessing Kalimat
-            query = query.replace("[.,]","")
+//            query = query.replace("[,]","")
             cleanText = query
             mQuery = query
 
@@ -77,6 +79,7 @@ class SearchActivity : AppCompatActivity() {
         type : String,
         answer : String,
     ){
+        Log.d("result_type",type)
         when(type){
             "info"->{
                 Log.d("chat_info", answer)
@@ -103,7 +106,7 @@ class SearchActivity : AppCompatActivity() {
         }
     }
 
-    private fun predictPreprocessing(): Map<String,Int>{
+    private fun predictPreprocessing(): Map<String,String>{
         var predictText = cleanText
             .replace("saya","")
             .replace("memiliki","")
@@ -113,7 +116,7 @@ class SearchActivity : AppCompatActivity() {
         val matches = pattern.findAll(predictText)
         val result = matches.map { matchResult ->
             val (word, value) = matchResult.destructured
-            Pair(word, value.toInt())
+            Pair(word, value)
         }.toMap()
 
         return result

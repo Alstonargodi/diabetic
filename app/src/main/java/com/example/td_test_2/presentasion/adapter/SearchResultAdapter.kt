@@ -75,7 +75,7 @@ class SearchResultsAdapter(private val mContext: Context) :
     fun swapCursor(newCursor: Cursor?) {
         offset = null
         mCursor = newCursor
-        if (mContext.javaClass == SearchActivity::class.java) {
+        if (mContext.javaClass == ChatActivity::class.java || mContext.javaClass == SearchActivity::class.java ){
             Log.d("SEARCHRESULTSADAPTER", "Calculating Tf x Idf")
             offset = TfIdfHelper.calcTfIdf(mContext, mCursor)
             Log.d("search_rvadapter", offset.toString())

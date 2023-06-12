@@ -12,12 +12,12 @@
     },
     {
       "tipe": "predict",
-      "kalimat": "perokok aktif,tidak makan sayur, jarang aktivitas fisik,pernah stroke,kolestrol tinggi",
+      "kalimat": "prediksi riwayat kesahatan perokok aktif,tidak makan sayur, jarang aktivitas fisik,pernah stroke,kolestrol tinggi",
       "result": 0
     },
     {
       "tipe": "predict",
-      "kalimat": "kolestrol tinggi, berat 20, jarang melakukan aktivas fisik, minum alkohol",
+      "kalimat": "prediksi riwayat kesahatan kolestrol tinggi, berat 20, jarang melakukan aktivas fisik, minum alkohol",
       "result": 1
     },
     {
@@ -37,17 +37,17 @@
     },
     {
       "tipe": "predict",
-      "kalimat": "laki-laki,tekanan darah tinggi,umur 30,pengecekan kolestrol tahun, kolestrol tinggi, berat badan 20, perokok aktif,tidak minum akohol , tidak penyakit jantung, tidak pernah berolahraga, makan buah makan sayur, dua hari stress tinggi, 2 hari sakit",
+      "kalimat": "prediksi riwayat kesahatan laki-laki,tekanan darah tinggi,umur 30,pengecekan kolestrol tahun, kolestrol tinggi, berat badan 20, perokok aktif,tidak minum akohol , tidak penyakit jantung, tidak pernah berolahraga, makan buah makan sayur, dua hari stress tinggi, 2 hari sakit",
       "result": 2
     },
     {
       "tipe": "predict",
-      "kalimat": "perempuan,tidak tekanan darah tinggi,umur 50,pengecekan kolestrol tahun,tidak kolestrol tinggi, berat badan saya 20, perokok aktif , tidak minum berakholol , tidak penyakit jantung, tidak olahraga, makan buah ,makan sayur dua hari stress tinggi, 2 hari sakit",
+      "kalimat": "prediksi riwayat kesahatan perempuan,tidak tekanan darah tinggi,umur 50,pengecekan kolestrol tahun,tidak kolestrol tinggi, berat badan saya 20, perokok aktif , tidak minum berakholol , tidak penyakit jantung, tidak olahraga, makan buah ,makan sayur dua hari stress tinggi, 2 hari sakit",
       "result": 1
     },
     {
       "tipe": "predict",
-      "kalimat": "Atur makan buah dan pemberian insulin pada pukul 7 pagi kemudian cek tekanan darah tinggi pada pukul 10 pagi dan olahraga sore pada pukul 3 sore",
+      "kalimat": "prediksi riwayat kesahatan Atur makan buah dan pemberian insulin pada pukul 7 pagi kemudian cek tekanan darah tinggi pada pukul 10 pagi dan olahraga sore pada pukul 3 sore",
       "result": 2
     },
     {
@@ -508,12 +508,17 @@
     {
       "tipe": "help",
       "kalimat": "prediksi",
-      "result": "masukan pola kalimat sebagai berikut glukosa [ jumlah glukosa ], tekanan darah [ jumlah tekanan darah], berat badan [ jumlah bb] , umur [ umur], insulin [ jumlah insulin], ketebalan kulit [ jumlah ketebalan kulit], nilai riwayat diabetes[ nilai], dan kehamilan [jumlah kehamilan]. anda dapat melihat contoh kalimat dengan mengetikan contoh prediksi"
+      "result": "masukan pola kalimat sebagai berikut glukosa [nilai], tekanan darah [nilai], berat badan [nilai] , umur [ umur], insulin [ jumlah insulin], ketebalan kulit [nilai], nilai riwayat diabetes[nilai], dan kehamilan [nilai]"
+    },
+    {
+      "tipe": "predict",
+      "kalimat": "prediksi riwayat kesahatan saya memiliki hamil 0 glukosa 340 darah 72 ketebalan 35 insulin 5 berat 536 pedigree 0687 umur 55",
+      "result": ""
     },
     {
       "tipe": "help",
       "kalimat": "contoh prediksi",
-      "result": "berikut ini contoh kalimat prediksi \"saya memiliki hamil 0 glukosa 340 darah 72 ketebalan 35 insulin 5 berat 536 pedigree 0687 umur 55"
+      "result": "berikut ini contoh kalimat prediksi saya memiliki hamil 0 glukosa 500 darah 72 tebal 35 insulin 5 badan 536 pedigree 0687 umur 55"
     },
     {
       "tipe": "info",
