@@ -11,30 +11,17 @@ object TfIdfHelper {
     private lateinit var searchTerms: Array<String>
     fun setSearchTerms(terms: Array<String>) {
         searchTerms = terms
+        Log.d("searchTerms", terms.toList().toString())
     }
 
-    /* Function to reduce the amount of information the initial parsed array
-    from matchinfo returns in order to calculate the tf * idf for each row
-    */
+    // fungsi untuk mengurangi array pertama dalam perthitungan tf-idf setiap baris
     fun shortenInitialArray(array: IntArray): IntArray {
-
-        // Number of phrases in the query
         val phrases = array[0]
-
-        // Number of user defined columns in the database
         val cols = array[1]
-
-        // Creating the result array with the reduced sized
         val result = IntArray((array.size - 2) / cols + 2)
-
-        // setting the appropriate values
         result[0] = phrases
         result[1] = cols
-
-        // Counter for the results array;
         var counter = 2
-
-        // Loop through the array
         for (p in 0 until phrases step 1) {
             var hits_this_row = 0
             var hits_all_rows = 0
@@ -49,11 +36,10 @@ object TfIdfHelper {
             result[counter + 2] = docs_with_hits
             counter += 3
         }
-        Log.d("search_tfidf",result.toString())
         return result
     }
 
-
+    //fungsi pembobotan tfidf
     fun calcTfIdf(context: Context?, cursor: Cursor?): IntArray? {
 
         if (cursor == null) {
@@ -72,6 +58,7 @@ object TfIdfHelper {
             documentFrequency[i] = DatabaseTable.getInstance(context)?.getDocumentFrequency(
                 searchTerms[i]
             )!!
+            Log.d("searchTerms",documentFrequency[i].toString())
 
 
             if (documentFrequency[i] > 0) querySpaceVector[i] =
@@ -92,14 +79,14 @@ object TfIdfHelper {
 
                 //TODO 1 Term Frequency
                 val tf = shortened[i * 3 + 2]
-                Log.d("TF-IDF TF", tf.toString())
+                Log.d("TF-IDF $i TF", tf.toString())
 
 
                 //TODO 2 Inverted document frequency
                 var idf = 0.0
                 if (documentFrequency[i] > 0) idf =
                     Math.log(totalDocs.toDouble() / documentFrequency[i])
-                Log.d("TF-IDF IDF", idf.toString())
+                Log.d("{$i}IDF", idf.toString())
 
                 //TODO 3 TF X IDF
                 val result = tf * idf
@@ -109,13 +96,12 @@ object TfIdfHelper {
             cursor.moveToNext()
         }
         val values = calculateVectorSpaceModel(querySpaceVector, valuesArray)
-
         val result = getOrderedIndexes(values)
 
+        //indeks perhitungan
         Log.d("TF-IDF INDEXES", Arrays.toString(result))
         Log.d("TF-IDF VALUES", values.toString())
 
-        Log.d("searchtask_result_tfidf", result.toString());
         return result
     }
 
@@ -159,7 +145,7 @@ object TfIdfHelper {
         return result
     }
 
-    // Function to order the indexes for the results array
+    //mengurutkan indeks hasil
     private fun getOrderedIndexes(valuesArray: ArrayList<Double>): IntArray {
         val orderIndexes = IntArray(valuesArray.size)
         val map = TreeMap<Double, Int> { aDouble, t1 -> if (aDouble <= t1) -1 else 1 }

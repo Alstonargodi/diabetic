@@ -6,11 +6,8 @@ import android.util.Log
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.td_ad.presentasion.adapter.ReceiveMessageItem
-import com.example.td_test_2.chat.preprocessing.Tokenizer
 import com.example.td_test_2.classification.data.Input
 import com.example.td_test_2.database.Repository
-import com.example.td_test_2.database.entity.Message
 import com.example.td_test_2.database.entity.WordEntity
 import com.example.td_test_2.database.room.DbConfig
 import com.example.td_test_2.database.sqldb.DatabaseTable

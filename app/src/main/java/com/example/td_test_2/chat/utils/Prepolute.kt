@@ -5,21 +5,11 @@ import java.util.Random
 import java.util.StringTokenizer
 
 class Prepolute(sentences: Int) {
-    /**
-     * Get the lines which make up the generated corpus.
-     *
-     * @return lines
-     */
     val lines: Array<String?>
     private var str: String? = null
     private val r: Random
 
-    /**
-     * Construct a new lorem ipsum corpus consisting of the given number of
-     * sentences.
-     *
-     * @param sentences sentences to construct
-     */
+
     init {
         r = Random()
         lines = arrayOfNulls(sentences)
@@ -42,13 +32,7 @@ class Prepolute(sentences: Int) {
         return str!!
     }
 
-    /**
-     * Randomly replace some words of the given line with randomly-selected
-     * words from the static lipsum text.
-     *
-     * @param line
-     * @return
-     */
+
     private fun strFry(line: String): String {
         val REPLACE_RATE = 30
         val DROP_RATE = 5
@@ -63,12 +47,10 @@ class Prepolute(sentences: Int) {
                             newWord.substring(1)
                 }
 
-                /* match ending punctuation if necessary */word = stripTrailingPunc(newWord)
+                word = stripTrailingPunc(newWord)
             }
 
-            /* we'll only drop lower-case words -- lazy hack to avoid
-			 * killing the first word in our sentence.
-			 */if (r.nextInt(100) > DROP_RATE ||
+			 if (r.nextInt(100) > DROP_RATE ||
                 word.lowercase(Locale.getDefault()) != word
             ) {
                 builder.append(word)

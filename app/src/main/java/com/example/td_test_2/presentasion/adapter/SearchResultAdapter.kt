@@ -9,6 +9,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import com.example.fts_tes.Utils.PerformanceTime
 import com.example.td_test_2.database.sqldb.DatabaseTable
 import com.example.td_test_2.presentasion.ChatActivity
 import com.example.td_test_2.chat.tfidfmain.TfIdfHelper
@@ -42,11 +43,11 @@ class SearchResultsAdapter(private val mContext: Context) :
             mCursor!!.moveToPosition(position)
         }
         @SuppressLint("Range") val type =
-            mCursor!!.getString(mCursor!!.getColumnIndex(DatabaseTable.COL_DOCTOR))
+            mCursor!!.getString(mCursor!!.getColumnIndex(DatabaseTable.COL_TIPE))
         @SuppressLint("Range") val pattern =
-            mCursor!!.getString(mCursor!!.getColumnIndex(DatabaseTable.COL_HOSPITAL))
+            mCursor!!.getString(mCursor!!.getColumnIndex(DatabaseTable.COL_PATTERN))
         @SuppressLint("Range") val response =
-            mCursor!!.getString(mCursor!!.getColumnIndex(DatabaseTable.COL_TRANSCRIPT))
+            mCursor!!.getString(mCursor!!.getColumnIndex(DatabaseTable.COL_ANSWER))
         @SuppressLint("Range") val date =
             mCursor!!.getString(mCursor!!.getColumnIndex(DatabaseTable.COL_DATE))
         var pos: String? = ""
@@ -56,7 +57,9 @@ class SearchResultsAdapter(private val mContext: Context) :
         holder.displayTranscript.text = response
         holder.displayDate.text = date
         holder.displayIndex.text = pos
-        if (mContext.javaClass == ChatActivity::class.java || mContext.javaClass == SearchActivity::class.java ) {
+        Log.d("chat", type)
+        if (mContext.javaClass == ChatActivity::class.java || mContext.javaClass == SearchActivity::class.java || mContext.javaClass == MainActivity::class.java) {
+            Log.d("time_query", PerformanceTime.TimeElapsed().toString())
             itemCallback.onDetailCallback(
                 WordEntity(
                     0,
@@ -75,7 +78,7 @@ class SearchResultsAdapter(private val mContext: Context) :
     fun swapCursor(newCursor: Cursor?) {
         offset = null
         mCursor = newCursor
-        if (mContext.javaClass == ChatActivity::class.java || mContext.javaClass == SearchActivity::class.java ){
+        if (mContext.javaClass == ChatActivity::class.java ||mContext.javaClass == SearchActivity::class.java || mContext.javaClass == MainActivity::class.java){
             Log.d("SEARCHRESULTSADAPTER", "Calculating Tf x Idf")
             offset = TfIdfHelper.calcTfIdf(mContext, mCursor)
             Log.d("search_rvadapter", offset.toString())

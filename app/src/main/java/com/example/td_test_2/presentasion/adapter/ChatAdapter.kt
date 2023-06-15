@@ -58,11 +58,11 @@ class ChatAdapter(
             mCursor!!.moveToPosition(position)
         }
         @SuppressLint("Range") val doctor =
-            mCursor!!.getString(mCursor!!.getColumnIndex(DatabaseTable.COL_DOCTOR))
+            mCursor!!.getString(mCursor!!.getColumnIndex(DatabaseTable.COL_TIPE))
         @SuppressLint("Range") val hospital =
-            mCursor!!.getString(mCursor!!.getColumnIndex(DatabaseTable.COL_HOSPITAL))
+            mCursor!!.getString(mCursor!!.getColumnIndex(DatabaseTable.COL_PATTERN))
         @SuppressLint("Range") val transcript =
-            mCursor!!.getString(mCursor!!.getColumnIndex(DatabaseTable.COL_TRANSCRIPT))
+            mCursor!!.getString(mCursor!!.getColumnIndex(DatabaseTable.COL_ANSWER))
         @SuppressLint("Range") val date =
             mCursor!!.getString(mCursor!!.getColumnIndex(DatabaseTable.COL_DATE))
         Log.d("reply",doctor)

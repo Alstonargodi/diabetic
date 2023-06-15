@@ -12,12 +12,12 @@
     },
     {
       "tipe": "predict",
-      "kalimat": "prediksi riwayat kesahatan perokok aktif,tidak makan sayur, jarang aktivitas fisik,pernah stroke,kolestrol tinggi",
+      "kalimat": "perokok aktif,tidak makan sayur, jarang aktivitas fisik,pernah stroke,kolestrol tinggi",
       "result": 0
     },
     {
       "tipe": "predict",
-      "kalimat": "prediksi riwayat kesahatan kolestrol tinggi, berat 20, jarang melakukan aktivas fisik, minum alkohol",
+      "kalimat": "kolestrol tinggi, berat 20, jarang melakukan aktivas fisik, minum alkohol",
       "result": 1
     },
     {
@@ -37,17 +37,52 @@
     },
     {
       "tipe": "predict",
-      "kalimat": "prediksi riwayat kesahatan laki-laki,tekanan darah tinggi,umur 30,pengecekan kolestrol tahun, kolestrol tinggi, berat badan 20, perokok aktif,tidak minum akohol , tidak penyakit jantung, tidak pernah berolahraga, makan buah makan sayur, dua hari stress tinggi, 2 hari sakit",
+      "kalimat": "laki-laki,tekanan darah tinggi,umur 30,pengecekan kolestrol tahun, kolestrol tinggi, berat badan 20, perokok aktif,tidak minum akohol , tidak penyakit jantung, tidak pernah berolahraga, makan buah makan sayur, dua hari stress tinggi, 2 hari sakit",
       "result": 2
     },
     {
       "tipe": "predict",
-      "kalimat": "prediksi riwayat kesahatan perempuan,tidak tekanan darah tinggi,umur 50,pengecekan kolestrol tahun,tidak kolestrol tinggi, berat badan saya 20, perokok aktif , tidak minum berakholol , tidak penyakit jantung, tidak olahraga, makan buah ,makan sayur dua hari stress tinggi, 2 hari sakit",
+      "kalimat": "perempuan,tidak tekanan darah tinggi,umur 50,pengecekan kolestrol tahun,tidak kolestrol tinggi, berat badan saya 20, perokok aktif , tidak minum berakholol , tidak penyakit jantung, tidak olahraga, makan buah ,makan sayur dua hari stress tinggi, 2 hari sakit",
       "result": 1
     },
     {
       "tipe": "predict",
-      "kalimat": "prediksi riwayat kesahatan Atur makan buah dan pemberian insulin pada pukul 7 pagi kemudian cek tekanan darah tinggi pada pukul 10 pagi dan olahraga sore pada pukul 3 sore",
+      "kalimat": "Atur makan buah dan pemberian insulin pada pukul 7 pagi kemudian cek tekanan darah tinggi pada pukul 10 pagi dan olahraga sore pada pukul 3 sore",
+      "result": 2
+    },
+    {
+      "tipe": "predict",
+      "kalimat": "hamil 0 glukosa 340 darah 72 ketebalan 35 insulin 5 berat 536 pedigree 0687 umur 55",
+      "result": 2
+    },
+    {
+      "tipe": "predict",
+      "kalimat": "hamil 0 glukosa 340 darah 72 ketebalan 35 insulin 5 berat 536 pedigree 0687 umur 56",
+      "result": 2
+    },
+    {
+      "tipe": "predict",
+      "kalimat": "hamil 0 glukosa 340 darah 72 ketebalan 35 insulin 5 berat 536 pedigree 0687 umur 57",
+      "result": 2
+    },
+    {
+      "tipe": "predict",
+      "kalimat": "hamil 0 glukosa 340 darah 72 ketebalan 35 insulin 5 berat 536 pedigree 0687 umur 58",
+      "result": 2
+    },
+    {
+      "tipe": "predict",
+      "kalimat": "hamil 0 glukosa 340 darah 72 ketebalan 35 insulin 5 berat 536 pedigree 0687 umur 59",
+      "result": 2
+    },
+    {
+      "tipe": "predict",
+      "kalimat": "hamil 0 glukosa 340 darah 72 ketebalan 35 insulin 5 berat 536 pedigree 0687 umur 60",
+      "result": 2
+    },
+    {
+      "tipe": "predict",
+      "kalimat": "hamil 0 glukosa 340 darah 72 ketebalan 35 insulin 5 berat 536 pedigree 0687 umur 61",
       "result": 2
     },
     {
@@ -178,302 +213,302 @@
     {
       "tipe": "reminder",
       "kalimat": "Melakukan pemeriksaan gula darah setiap pagi sebelum sarapan.",
-      "result": ""
+      "result": "setalarm"
     },
     {
       "tipe": "reminder",
       "kalimat": "Mulai berolahraga ringan seperti berjalan kaki selama 30 menit setiap pagi pukul 06.00.",
-      "result": ""
+      "result": "setalarm"
     },
     {
       "tipe": "reminder",
       "kalimat": "Hindari makanan tinggi gula dan karbohidrat olahan setiap kali makan siang pukul 12.30.",
-      "result": ""
+      "result": "setalarm"
     },
     {
       "tipe": "reminder",
       "kalimat": "Minum segelas air putih sebelum makan malam pukul 18.00.",
-      "result": ""
+      "result": "setalarm"
     },
     {
       "tipe": "reminder",
       "kalimat": "Sisihkan waktu pukul 09.00 setiap hari untuk melakukan latihan pernapasan dan relaksasi.",
-      "result": ""
+      "result": "setalarm"
     },
     {
       "tipe": "reminder",
       "kalimat": "Konsumsi sepiring sayuran hijau dan ikan panggang setiap malam pukul 19.30.",
-      "result": ""
+      "result": "setalarm"
     },
     {
       "tipe": "reminder",
       "kalimat": "Pastikan Anda membawa camilan sehat seperti buah-buahan saat bepergian pada pukul 15.00.",
-      "result": ""
+      "result": "setalarm"
     },
     {
       "tipe": "reminder",
       "kalimat": "Jangan lupa untuk mengonsumsi obat diabetes sesuai jadwal pukul 08.00 dan 20.00.",
-      "result": ""
+      "result": "setalarm"
     },
     {
       "tipe": "reminder",
       "kalimat": "Tetap aktif selama hari dengan melakukan gerakan ringan setiap jam, mulai pukul 09.00.",
-      "result": ""
+      "result": "setalarm"
     },
     {
       "tipe": "reminder",
       "kalimat": "Hindari minuman beralkohol dan gula tinggi saat bersantap malam pukul 19.00.",
-      "result": ""
+      "result": "setalarm"
     },
     {
       "tipe": "reminder",
       "kalimat": "Berolahraga rutin adalah penting untuk menjaga kesehatan. Mulailah aktivitas fisik Anda pukul 06.00 pagi.",
-      "result": ""
+      "result": "setalarm"
     },
     {
       "tipe": "reminder",
       "kalimat": "Jangan lupa untuk memeriksa kadar gula darah Anda setiap hari pada pukul 07.00 pagi.",
-      "result": ""
+      "result": "setalarm"
     },
     {
       "tipe": "reminder",
       "kalimat": "Minumlah segelas air hangat setiap pagi setelah bangun tidur pada pukul 08.00.",
-      "result": ""
+      "result": "setalarm"
     },
     {
       "tipe": "reminder",
       "kalimat": "Perbanyak konsumsi sayuran segar dalam makan siang Anda, dimulai pukul 12.30 siang.",
-      "result": ""
+      "result": "setalarm"
     },
     {
       "tipe": "reminder",
       "kalimat": "Jangan melewatkan makan malam sehat Anda pada pukul 19.00 malam.",
-      "result": ""
+      "result": "setalarm"
     },
     {
       "tipe": "reminder",
       "kalimat": "Pukul 08.00 pagi adalah waktu yang tepat untuk mengonsumsi obat diabetes Anda.",
-      "result": ""
+      "result": "setalarm"
     },
     {
       "tipe": "reminder",
       "kalimat": "Cegah komplikasi dengan memeriksa tekanan darah Anda setiap hari pada pukul 10.00 pagi.",
-      "result": ""
+      "result": "setalarm"
     },
     {
       "tipe": "reminder",
       "kalimat": "Luangkan waktu untuk berjalan-jalan setiap sore pada pukul 16.00.",
-      "result": ""
+      "result": "setalarm"
     },
     {
       "tipe": "reminder",
       "kalimat": "Batasi konsumsi gula dan makanan olahan, mulai sekarang, pada pukul 09.00 pagi.",
-      "result": ""
+      "result": "setalarm"
     },
     {
       "tipe": "reminder",
       "kalimat": "Jaga pola makan sehat dengan makan buah pada pukul 15.00 sore.",
-      "result": ""
+      "result": "setalarm"
     },
     {
       "tipe": "reminder",
       "kalimat": "Ingatlah untuk mengendalikan stres dan bersantai pada pukul 20.00 malam.",
-      "result": ""
+      "result": "setalarm"
     },
     {
       "tipe": "reminder",
       "kalimat": "Perbanyak asupan serat dalam sarapan Anda setiap pagi pada pukul 07.30.",
-      "result": ""
+      "result": "setalarm"
     },
     {
       "tipe": "reminder",
       "kalimat": "Perhatikan berapa banyak karbohidrat yang Anda makan pada pukul 13.00 siang.",
-      "result": ""
+      "result": "setalarm"
     },
     {
       "tipe": "reminder",
       "kalimat": "Sisihkan waktu 15 menit setiap hari untuk melakukan latihan pernapasan pada pukul 10.30 pagi.",
-      "result": ""
+      "result": "setalarm"
     },
     {
       "tipe": "reminder",
       "kalimat": "Pastikan Anda tidur nyenyak selama 7-8 jam setiap malam, mulai pukul 22.00.",
-      "result": ""
+      "result": "setalarm"
     },
     {
       "tipe": "reminder",
       "kalimat": "Hindari makanan cepat saji yang tinggi lemak dan gula pada pukul 14.00 siang.",
-      "result": ""
+      "result": "setalarm"
     },
     {
       "tipe": "reminder",
       "kalimat": "Catat pola makan Anda dan buat perubahan yang diperlukan pada pukul 16.30 sore.",
-      "result": ""
+      "result": "setalarm"
     },
     {
       "tipe": "reminder",
       "kalimat": "Sisihkan waktu untuk bermain dengan anak-anak pada pukul 18.00 malam.",
-      "result": ""
+      "result": "setalarm"
     },
     {
       "tipe": "reminder",
       "kalimat": "Jangan lupa untuk merawat kaki Anda dengan memeriksa dan mencuci mereka setiap hari pada pukul 09.30 pagi.",
-      "result": ""
+      "result": "setalarm"
     },
     {
       "tipe": "reminder",
       "kalimat": "Periksa berat badan Anda setiap minggu pada pukul 08.30 pagi.",
-      "result": ""
+      "result": "setalarm"
     },
     {
       "tipe": "reminder",
       "kalimat": "Batasi konsumsi minuman beralkohol dan hindari merokok pada pukul 17.00 sore.",
-      "result": ""
+      "result": "setalarm"
     },
     {
       "tipe": "reminder",
       "kalimat": "Jangan lewatkan sarapan sehat pada pukul 07.00 pagi.",
-      "result": ""
+      "result": "setalarm"
     },
     {
       "tipe": "reminder",
       "kalimat": "Luangkan waktu untuk meditasi dan menenangkan pikiran pada pukul 21.00 malam.",
-      "result": ""
+      "result": "setalarm"
     },
     {
       "tipe": "reminder",
       "kalimat": "Cukupi kebutuhan vitamin dengan mengonsumsi buah pada pukul 11.00 pagi.",
-      "result": ""
+      "result": "setalarm"
     },
     {
       "tipe": "reminder",
       "kalimat": "Bawa bekal sehat ke kantor pada pukul 12.00 siang.",
-      "result": ""
+      "result": "setalarm"
     },
     {
       "tipe": "reminder",
       "kalimat": "Pukul 15.30 sore adalah waktu yang baik untuk berenang atau bersepeda.",
-      "result": ""
+      "result": "setalarm"
     },
     {
       "tipe": "reminder",
       "kalimat": "Batasi konsumsi makanan berlemak pada pukul 10.30 pagi.",
-      "result": ""
+      "result": "setalarm"
     },
     {
       "tipe": "reminder",
       "kalimat": "Luangkan waktu untuk membaca buku atau mengikuti hobi pada pukul 19.30 malam.",
-      "result": ""
+      "result": "setalarm"
     },
     {
       "tipe": "reminder",
       "kalimat": "Periksa kadar gula darah setelah makan pada pukul 18.30 malam.",
-      "result": ""
+      "result": "setalarm"
     },
     {
       "tipe": "reminder",
       "kalimat": "Rajin-rajinlah mengganti alat suntik insulin Anda setiap bulan pada pukul 08.30 pagi.",
-      "result": ""
+      "result": "setalarm"
     },
     {
       "tipe": "reminder",
       "kalimat": "Minumlah segelas air putih setiap jam pada pukul 09.00 pagi hingga 17.00 sore.",
-      "result": ""
+      "result": "setalarm"
     },
     {
       "tipe": "reminder",
       "kalimat": "Konsumsilah camilan sehat, seperti buah-buahan, pada pukul 15.30 sore.",
-      "result": ""
+      "result": "setalarm"
     },
     {
       "tipe": "reminder",
       "kalimat": "Jangan melewatkan pemeriksaan mata tahunan pada pukul 14.00 siang.",
-      "result": ""
+      "result": "setalarm"
     },
     {
       "tipe": "reminder",
       "kalimat": "Hindari makan malam terlalu larut, sebaiknya pada pukul 19.30 malam.",
-      "result": ""
+      "result": "setalarm"
     },
     {
       "tipe": "reminder",
       "kalimat": "Luangkan waktu untuk yoga atau stretching pada pukul 06.30 pagi.",
-      "result": ""
+      "result": "setalarm"
     },
     {
       "tipe": "reminder",
       "kalimat": "Jaga kebersihan gigi dengan menyikat gigi setelah makan pada pukul 08.30 pagi dan 20.30 malam.",
-      "result": ""
+      "result": "setalarm"
     },
     {
       "tipe": "reminder",
       "kalimat": "Batasi konsumsi makanan manis pada pukul 10.00 pagi.",
-      "result": ""
+      "result": "setalarm"
     },
     {
       "tipe": "reminder",
       "kalimat": "Periksa kadar kolesterol Anda secara teratur pada pukul 09.30 pagi.",
-      "result": ""
+      "result": "setalarm"
     },
     {
       "tipe": "reminder",
       "kalimat": "Sisihkan waktu 30 menit untuk berjalan kaki setelah makan malam pada pukul 20.00 malam.",
-      "result": ""
+      "result": "setalarm"
     },
     {
       "tipe": "reminder",
       "kalimat": "Konsumsilah makanan tinggi serat pada pukul 13.00 siang.",
-      "result": ""
+      "result": "setalarm"
     },
     {
       "tipe": "reminder",
       "kalimat": "Perbanyak konsumsi makanan yang kaya akan omega-3 pada pukul 12.30 siang.",
-      "result": ""
+      "result": "setalarm"
     },
     {
       "tipe": "reminder",
       "kalimat": "Lakukan latihan kekuatan dan peregangan pada pukul 16.00 sore.",
-      "result": ""
+      "result": "setalarm"
     },
     {
       "tipe": "reminder",
       "kalimat": "Istirahatlah sejenak dan jauhkan diri dari layar gadget pada pukul 11.00 pagi.",
-      "result": ""
+      "result": "setalarm"
     },
     {
       "tipe": "reminder",
       "kalimat": "Batasi konsumsi makanan berlemak dan berminyak pada pukul 14.30 sore.",
-      "result": ""
+      "result": "setalarm"
     },
     {
       "tipe": "reminder",
       "kalimat": "Jangan lupa untuk mengonsumsi obat diabetes Anda pada pukul 07.30 pagi dan 19.30 malam.",
-      "result": ""
+      "result": "setalarm"
     },
     {
       "tipe": "reminder",
       "kalimat": "Luangkan waktu untuk merencanakan menu makanan sehat minggu depan pada pukul 15.00 sore.",
-      "result": ""
+      "result": "setalarm"
     },
     {
       "tipe": "reminder",
       "kalimat": "Cegah dehidrasi dengan minum air putih setiap jam pada pukul 08.00 pagi hingga 18.00 sore.",
-      "result": ""
+      "result": "setalarm"
     },
     {
       "tipe": "reminder",
       "kalimat": "Pukul 09.00 pagi adalah waktu yang tepat untuk melakukan latihan aerobik.",
-      "result": ""
+      "result": "setalarm"
     },
     {
       "tipe": "reminder",
       "kalimat": "Pastikan Anda memiliki waktu istirahat yang cukup setelah olahraga pada pukul 21.30 malam.",
-      "result": ""
+      "result": "setalarm"
     },
     {
       "tipe": "reminder",
       "kalimat": "Ingatlah untuk selalu berkonsultasi dengan dokter Anda mengenai perawatan diabetes dan kegiatan sehat lainnya pada pukul 10.00 pagi.",
-      "result": ""
+      "result": "setalarm"
     },
     {
       "tipe": "help",
@@ -508,17 +543,12 @@
     {
       "tipe": "help",
       "kalimat": "prediksi",
-      "result": "masukan pola kalimat sebagai berikut glukosa [nilai], tekanan darah [nilai], berat badan [nilai] , umur [ umur], insulin [ jumlah insulin], ketebalan kulit [nilai], nilai riwayat diabetes[nilai], dan kehamilan [nilai]"
-    },
-    {
-      "tipe": "predict",
-      "kalimat": "prediksi riwayat kesahatan saya memiliki hamil 0 glukosa 340 darah 72 ketebalan 35 insulin 5 berat 536 pedigree 0687 umur 55",
-      "result": ""
+      "result": "masukan pola kalimat sebagai berikut glukosa [ jumlah glukosa ], tekanan darah [ jumlah tekanan darah], berat badan [ jumlah bb] , umur [ umur], insulin [ jumlah insulin], ketebalan kulit [ jumlah ketebalan kulit], nilai riwayat diabetes[ nilai], dan kehamilan [jumlah kehamilan]. anda dapat melihat contoh kalimat dengan mengetikan contoh prediksi"
     },
     {
       "tipe": "help",
       "kalimat": "contoh prediksi",
-      "result": "berikut ini contoh kalimat prediksi [pattern]"
+      "result": "berikut ini contoh kalimat prediksi [ pattern ]"
     },
     {
       "tipe": "info",

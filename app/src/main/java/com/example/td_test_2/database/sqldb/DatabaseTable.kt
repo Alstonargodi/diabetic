@@ -8,10 +8,8 @@ import android.database.sqlite.SQLiteDatabase
 import android.database.sqlite.SQLiteOpenHelper
 import android.database.sqlite.SQLiteQueryBuilder
 import android.util.Log
-import com.example.fts_tes.Utils.Date
 import com.example.fts_tes.Utils.PerformanceTime
 import com.example.td_test_2.chat.tfidfmain.TfIdfHelper
-import com.example.td_test_2.chat.utils.DateMatch
 import java.io.BufferedReader
 import java.io.InputStreamReader
 import java.text.SimpleDateFormat
@@ -33,9 +31,9 @@ class DatabaseTable private constructor(context: Context) {
         private var sDatabaseTable: DatabaseTable? = null
 
         // Columns for table FTS
-        val COL_DOCTOR = "TIPE"
-        val COL_HOSPITAL = "PATTERN"
-        val COL_TRANSCRIPT = "ANSWER"
+        val COL_TIPE = "TIPE"
+        val COL_PATTERN = "PATTERN"
+        val COL_ANSWER = "ANSWER"
         val COL_DATE = "DATE"
         val COL_TOKENIZE = "tokenize=unicode61"
         val COL_PREFIX = "prefix=\"4\""
@@ -201,10 +199,10 @@ class DatabaseTable private constructor(context: Context) {
                 "d" + String.format("%02d", day) + " m" + month + " y" + year + " w" + day_of_week
             Log.d("ENTRY DATE", date)
             val cv = ContentValues()
-            cv.put(COL_DOCTOR, doctor)
-            cv.put(COL_HOSPITAL, hospital)
+            cv.put(COL_TIPE, doctor)
+            cv.put(COL_PATTERN, hospital)
             cv.put(COL_DATE, date)
-            cv.put(COL_TRANSCRIPT, transcript)
+            cv.put(COL_ANSWER, transcript)
             return mDatabase!!.insert(FTS_VIRTUAL_TABLE, null, cv)
         }
 
@@ -227,10 +225,10 @@ class DatabaseTable private constructor(context: Context) {
                 "d" + String.format("%02d", day) + " m" + month + " y" + year + " w" + day_of_week
             Log.d("CURRENT DATE", date)
             val cv = ContentValues()
-            cv.put(COL_DOCTOR, doctor)
-            cv.put(COL_HOSPITAL, hospital)
+            cv.put(COL_TIPE, doctor)
+            cv.put(COL_PATTERN, hospital)
             cv.put(COL_DATE, date)
-            cv.put(COL_TRANSCRIPT, transcript)
+            cv.put(COL_ANSWER, transcript)
             return mDatabase!!.insert(FTS_VIRTUAL_TABLE, null, cv)
         }
 
@@ -238,10 +236,10 @@ class DatabaseTable private constructor(context: Context) {
             private val mDateFormat = SimpleDateFormat("yyyy/MM/dd HH:mm:ss", Locale.getDefault())
             private val FTS_TABLE_CREATE = "CREATE VIRTUAL TABLE " + FTS_VIRTUAL_TABLE +
                     " USING fts4 (" +
-                    COL_DOCTOR + ", " +
-                    COL_HOSPITAL + ", " +
+                    COL_TIPE + ", " +
+                    COL_PATTERN + ", " +
                     COL_DATE + ", " +
-                    COL_TRANSCRIPT + ", " +
+                    COL_ANSWER + ", " +
                     COL_TOKENIZE + ", " +
                     COL_PREFIX + ")"
             private val SINOMIMOS_TABLE_CREATE = "CREATE TABLE " + SINOM_TABLE + " (" +
@@ -258,10 +256,6 @@ class DatabaseTable private constructor(context: Context) {
         query: String, columns: Array<String>?,
         use4gram: Boolean, useDate: Boolean, useSynonym: Boolean
     ): Cursor? {
-        /*
-        * By using the table name in the match clause we are searching all
-        * columns of the virtual table.
-        * */
         var query = query
         Log.d("searchtask_query", query)
 

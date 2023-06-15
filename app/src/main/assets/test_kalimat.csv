@@ -1,0 +1,86 @@
+type,sentence,result
+info,Obat yang dapat digunakan untuk menurunkan kadar gula darah ,"Pada kemungkinan kadar gula darah sewaktu yang baru dialami hingga mencapai 300 mg/dL dimana normalnya adalah 200 mg/dL, maka dikhawatirkan dapat mengarah kepada kondisi diabetes melitus tipe 2, yang bisa saja disertai gejala seperti sering haus, sering lapar, dan sering BAK, namun ada juga yang tidak mengalami gejala apapun.
+
+Namun penegakkan diagnosis tersebut perlu diikuti dengan pemeriksaan penunjang lainnya seperti pemeriksaan gula darah puasa, gula darah 2 jam setelah makan, dan HbA1c, untuk dapat menentukan pilihan pengobatan yang tepat pada kondisi bapak anda.
+
+Oleh karena itu, sebaiknya periksakan bapak anda dengan dokter penyakit dalam, agar dapat dilakukan pemeriksaan menyeluruh dan penanganan yang tepat. Jika gula darah yang tinggi tersebut tidak diobati, maka dalam jangka waktu yang lama dapat berkembang menjadi komplikasi seperti gagal ginjal, stroke, gangguan saraf, atau gangguan penglihatan."
+reminder,Pukul 08.00 pagi adalah waktu yang tepat untuk mengonsumsi obat diabetes Anda.,setalarm
+reminder,Cegah dehidrasi dengan minum air putih setiap jam pada pukul 08.00 pagi hingga 18.00 sore.,setalarm
+reminder,Batasi konsumsi makanan manis pada pukul 10.00 pagi.,setalarm
+info,Cara cepat menurunkan kadar gula darah yang mencapai 400,"Diabetes merupakan suatu penyakit yang ditandai dengan tingginya kadar gula (glukosa) dalam darah. Maka dari itu, perlu kehati-hatian dalam konsumsi makanan dan minuman agar kadar gula darah tetap stabil.
+Makanan yang dihindari untuk penderita diabetes yaitu:
+
+    Nasi putih, roti tawar putih, makanan yang terbuat dari tepung terigu.
+    Sayuran yang dimasak dengan tambahan garam, keju, mentega, ataupun saus dalam jumlah banyak.
+    Buah-buahan kaleng yang mengandung banyak gula.
+    Sayuran kaleng yang mengandung garam tinggi.
+    Daging berlemak dankulit ayam.
+    Produk susu tinggi lemak.
+    Makanan yang digoreng (ayam goreng, ikan goreng, pisang goreng atau kentang goreng).
+    Makanan dan minuman mengandung gula tinggi (sirop, dan soda).
+
+Makanan yang dianjurkan untuk penderita diabetes adalah:
+
+    Makanan yang terbuat dari biji-bijian utuh atau karbohidrat komplekspengganti nasi putih (nasi merah, ubi panggang,oatmeal, roti gandum,dan sereal dari biji-bijian utuh).
+    Daging tanpa lemak atau ayam tanpa kulit.
+    Sayuran (brokolidanbayam)diproses dengan dengan direbus, dikukus, dipanggang.
+    Buah-buahansegar.
+    Kacang-kacangan (kacang kedelai).
+    Telur.
+    Produk olahan susu rendah lemak (yoghurt).
+    Berbagai jenis ikan (tuna, salmon, sarden dan makarel, tetapi hindari ikan dengan kadar merkuri tinggi,misalnya ikan tongkol)."
+info,bagaimana diabetes di asia tenggara ,"Populasi dari wilayah regional Asia Tenggara secara genetik memang rentan terhadap faktor diabetogenik
+lingkungan, sehingga memiliki ambang lebih rendah terhadap faktor resiko seperti usia, kelebihan berat badan dan distribusi lemak tubuh.
+• Diabetes terjadi 10 tahun lebih cepat di wilayah regional Asia Tenggara daripada orang-orang dari wilayah Eropa, pada usia dimana merupakan masa paling produktif."
+reminder,Jaga kebersihan gigi dengan menyikat gigi setelah makan pada pukul 08.30 pagi dan 20.30 malam.,setalarm
+info,Obat untuk mengatasi kesemutan dan kebas pada penderita diabetes ,"keluhan kesemutan pada penderita diabetes disebut dengan neuropati diabetik yaitu gangguan saraf akibat penyakit diabetes yang ditandai dengan kesemutan, nyeri atau mati rasa. umumnya paling sering mengenai saraf kaki. pada penderita diabetes ketika kadar gula darah tinggi melemahkan dinding pembuluh darah yang memberi asupan oksigen dan nutrisi untuk sel saraf. akibatnya terjadi kerusakan dan gangguan pada fungsi saraf. namun kondisi yang dialami ibu anda tidak selalu akibat diabetes bisa pula memang adanya gangguan pada saraf itu sendiri karena penggunaan tangan aktivitas berulang yang disebut penyakit ini berupa carpal tunnel syndrome.
+
+untuk penangnan kesemutan ini memang sebaiknya sesuai penyebab yang mendasarinya jadi sebaiknya menemui dokter secara langsung agar diberikan penangnan yang tepat. untuk dirumah ada beberapa tips untuk mengurangi keluhan seperti :
+
+    mengoleskan krim capsaicin pada bagian kesemutan
+    atau konsumsi vitamin dengan kandungan B1,B6 dan B12
+    kontrol kadar gula darah dengan rutin cek gula darah dan konsumsi obat sesuai anjuran dokter"
+reminder,"Perbanyak konsumsi sayuran segar dalam makan siang Anda, dimulai pukul 12.30 siang.",setalarm
+help,detail prediksi,"kata kunci predict digunakan untuk mengklassifikaskan berdasarkan riwayat medis anda dengan berdasarkan hasil pengecekan kehamilan,glukosa, tekanan darah,ketebalan kulit,insulin,berat badan,nilai riwayat diabetes (pedigree), dan umur. ketik detail prediksi untuk melihat lebih lanjut"
+reminder,Luangkan waktu untuk merencanakan menu makanan sehat minggu depan pada pukul 15.00 sore.,setalarm
+predict,hamil 0 glukosa 340 darah 72 ketebalan 35 insulin 5 berat 536 pedigree 0687 umur 57,2
+info,bagaimana diabetes di indonesia,"Pada tahun 2015,Indonesia menempati peringkat ke tujuh dunia di dunia untuk prevalensi penderita diabetes tertinggi di dunia bersama dengan China, India, Amerika Serikat, Brazil, Rusia dan Meksiko dengan jumlah estimasi orang dengan diabetes sebesar 10 juta (IDF Atlas 2015)"
+info,Apa itu hipoglikemia?,"Hipoglikemia adalah kondisi ketika kadar gula darah terlalu rendah, biasanya di bawah 70 mg/dL. Gejalanya termasuk pusing, gemetar, keringat dingin, dan kebingungan."
+reminder,Konsumsi sepiring sayuran hijau dan ikan panggang setiap malam pukul 19.30.,setalarm
+reminder,Jangan lewatkan sarapan sehat pada pukul 07.00 pagi.,setalarm
+reminder,Jangan lupa untuk mengonsumsi obat diabetes Anda pada pukul 07.30 pagi dan 19.30 malam.,setalarm
+info,Apa itu hipoglikemia?,"Hipoglikemia adalah kondisi ketika kadar gula darah terlalu rendah, biasanya di bawah 70 mg/dL. Gejalanya termasuk pusing, gemetar, keringat dingin, dan kebingungan."
+info,Apakah diabetes dapat disembuhkan? ,"Diabetes tipe 1 tidak dapat disembuhkan, tetapi diabetes tipe 2 dapat dikendalikan melalui perubahan gaya hidup sehat dan pengobatan yang tepat."
+info,berapa jumlah penderita diabetes,"Pada tahun 2015, 415 juta orang dewasa dengan diabetes, kenaikan 4 kali lipat dari 108 juta di 1980an. Pada tahun 2040 diperkirakan jumlahnya akan menjadi 642 juta (IDFAtlas 2015)"
+info,Apa itu hiperglikemia,"Hiperglikemia adalah kondisi ketika kadar gula darah terlalu tinggi. Gejalanya meliputi rasa haus yang berlebihan, buang air kecil yang sering, kelelahan, dan pandangan kabur."
+predict,hamil 0 glukosa 340 darah 72 ketebalan 35 insulin 5 berat 536 pedigree 0687 umur 58,2
+info,Penjelasan tentang insulin-independent diabetes melitus ,"Diabetes melitus merupakan kondisi di mana terjadinya gangguan pada metabolisme maupun produksi hormon insulin sehingga terjadi peningkatan kadar glukosa darah. Kondisi ini dapat menimbulkan gejala seperti mudah haus, mudah lapar, maupun mudah BAK. Diabetes melitus terbagi menjadi berbagai jenis, salah satunyainsulin-dependentdiabetes melitus, di mana hal tersebut disebabkan oleh tubuh yang tidak mampu memproduksi hormon insulin yang cukup akibat hilangnya sel beta pankreas yang dapat memproduksi insulin tersebut.
+
+Pada penderita insulin-independent diabetes melitus, pasien membutuhkan terapi insulin untuk mengontrol diabetes melitus tersebut. Apabila diabetes melitus tidak terkontrol, maka terdapat risiko terjadinya berbagai komplikasi, salah satunya adalah diabetic ketoacidosis, dimana terjadi penumpukan zat sisa keton di dalam tubuh sehingga suasana tubuh menjadi lebih asam. Hal ini dapat menimbulkan gejala seperti sesak napas, dehidrasi, lemas dan lelah, penurunan kesadaran, sampai risiko kematian.
+
+Oleh karena itu, kontrol gula darah dengan insulin perlu dilakukan dengan baik pada penderita insulin-dependent diabetes melitus untuk mencegah terjadinya komplikasi tersebut. Selain itu, konsumsilah obat sesuai dengan petunjuk dokter, mengonsumsi makanan sesuai dengan diet yang dianjurkan, rutin berolahraga, dan kontrol berkala secara rutin ke dokter.Dokter akan melakukan evaluasi lebih lanjut terkait dengan kondisi Anda dan memberikan terapi yang sesuai."
+reminder,Periksa kadar gula darah setelah makan pada pukul 18.30 malam.,setalarm
+info,Apakah semua orang dengan diabetes harus menggunakan insulin? ,Tidak semua orang dengan diabetes perlu menggunakan insulin. Beberapa orang dengan diabetes tipe 2 dapat mengontrol gula darah mereka melalui obat-obatan oral atau perubahan gaya hidup.
+info,Adakah manfaat buah alpukat untuk penderita diabetes? ,"Buah alpukat memiliki banyak kandungan nutrisi diantaranya adalahkarbohidrat, serat, protein, magnesium, kalium, lutein, folat, vitamin A, B, C, E, dan K, dan juga lemak tak jenuh yang baik untuk menjaga berat badan memelihara kesehatan jantung, menjaga kesehatan mata, mencegah dan mengatasi sembelit, mengontrol tekanan darah, mencegah radang sendi, dan juga mengurangi risiko terjadinya kanker.
+
+Jika dilihat dari manfaatnya tersebut, maka konsumsi buah alpukat secara rutin pada penderita diabetes dapat berperan dalam mencegah komplikasi diabetes seperti penyakit jantung dan gangguan mata.
+
+Dikarenakan kandungan gulanya yang rendah, maka buah alpukat boleh saja dikonsumsi rutin oleh penderita diabetes dalam beberapa kali seminggu seperti 2-3 kali seminggu, yang tentunya tetap perlu diimbangi dengan asupan buah dan sayuran beraneka ragam warna lainnya. Selain itu, tetap lakukan kontrol gula darah setiap bulannya dan konsumsi obat diabetes secara rutin"
+reminder,Hindari minuman beralkohol dan gula tinggi saat bersantap malam pukul 19.00.,setalarm
+reminder,Perbanyak konsumsi makanan yang kaya akan omega-3 pada pukul 12.30 siang.,setalarm
+reminder,Catat pola makan Anda dan buat perubahan yang diperlukan pada pukul 16.30 sore.,setalarm
+help,contoh prediksi,berikut ini contoh kalimat prediksi [ pattern ]
+reminder,Bawa bekal sehat ke kantor pada pukul 12.00 siang.,setalarm
+info,Apa perbedaan antara diabetes tipe 1 dan tipe 2? ,"Diabetes tipe 1 disebabkan oleh ketidakmampuan pankreas untuk memproduksi insulin, sedangkan diabetes tipe 2 melibatkan resistensi insulin dan produksi insulin yang tidak cukup."
+reminder,"Pastikan Anda tidur nyenyak selama 7-8 jam setiap malam, mulai pukul 22.00.",setalarm
+reminder,Sisihkan waktu pukul 09.00 setiap hari untuk melakukan latihan pernapasan dan relaksasi.,setalarm
+help,prediksi,"masukan pola kalimat sebagai berikut glukosa [ jumlah glukosa ], tekanan darah [ jumlah tekanan darah], berat badan [ jumlah bb] , umur [ umur], insulin [ jumlah insulin], ketebalan kulit [ jumlah ketebalan kulit], nilai riwayat diabetes[ nilai], dan kehamilan [jumlah kehamilan]. anda dapat melihat contoh kalimat dengan mengetikan contoh prediksi"
+help,Alur aplikasi,"aplikasi ini dapat mememberikan informasi terkait diabetes dengan menggunakan kata kunci info, untuk prediksi gunakan kata kunci predict, pengingat dengan menggunakan kata kunci reminder, dan bantuan aplikasi menggunakan kata kunci help"
+help,pertanyaan,"berikut ini ada pertanyaan seputar diabetes, ketik salah satu pertanyaan tersebut untuk mencari informasi terkait"
+reminder,"atur,pemberian insulin, setiap pagi hari,jam 6",6
+info,Penyebab dan cara menghilangkan keringat dingin berlebih pada penderita diabetes ," Kondisi seseorang yang berkeringat berlebihan, dalam artian kuantitas berkeringatnya secara signifikan melebihi orang lain dengan intensitas aktivitas dan suhu ruangan yang serupa, disebut dengan kondisi hiperhidrosis, dan hiperhidrosis memang bisa dipicu oleh kondisi diabetes, disamping sejumlah faktor lainnya.
+
+Kaitan antara diabetes dengan kondisi hiperhidrosis disebabkan oleh salah satu komplikasi atau kondisi lanjutan dari tingginya kadar gula darah dalam jangka waktu lama, yakni gangguan sistem saraf, yang dalam hal ini, adalah sistem saraf yang mengatur keringat, sehingga menyebabkan keringat yang diproduksi tubuh orang tua Anda lebih banyak dari semestinya. Adapun selama ini gula darahnya terkontrol, ini memang mengurangi potensi terjadinya komplikasi dari diabetes, tapi tidak menghilangkan kemungkinannya sama sekali. Bila kadar gula darahnya tidak terkontrol, komplikasi ini mungkin muncul lebih awal, dan mungkin melibatkan organ lain sehingga lebih berat, seperti mempengaruhi mata dan ginjal.
+
+Terkait hal ini, tindakan yang dilakukan sudah tepat dengan memperbanyak konsumsi air putih. Selain itu, sebaiknya suhu ruangan di rumah juga disesuaikan, kenakan pakaian yang nyaman dan menyerap keringat serta tidak terlalu tebal, juga kenakan deodoran dengan kandungan antiperspirant. Kemudian, periksakan kondisi ibu Anda pada dokter saraf untuk dikaji lebih lanjut terkait kondisinya, apakah kondisi hiperhidrosisnya murni disebabkan oleh diabetes atau ada pemicu lain seperti ketidakseimbangan hormon, "
+predict,hamil 0 glukosa 340 darah 72 ketebalan 35 insulin 5 berat 536 pedigree 0687 umur 56,2

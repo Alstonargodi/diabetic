@@ -6,6 +6,9 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.fts_tes.Utils.PerformanceTime.StartTimer
+import com.example.fts_tes.Utils.PerformanceTime.TimeElapsed
+import com.example.fts_tes.Utils.Timeidf
 import com.example.td_ad.presentasion.adapter.ChatAdapter
 import com.example.td_ad.presentasion.adapter.ReceiveMessageItem
 import com.example.td_ad.presentasion.adapter.SendMessageItem
@@ -13,16 +16,14 @@ import com.example.td_test_2.SearchResultsAdapter
 import com.example.td_test_2.database.sqldb.DatabaseTable
 import com.example.td_test_2.database.entity.Message
 import com.example.td_test_2.databinding.ActivityChatBinding
-import com.example.td_test_2.chat.preprocessing.Tokenizer
-import com.example.td_test_2.chat.preprocessing.Tokenizer.preprocessingKalimat
-import com.example.td_test_2.chat.preprocessing.Tokenizer.removeLineBreaks
-import com.example.td_test_2.chat.preprocessing.Utils
+import com.example.td_test_2.chat.preprocessing.PreProcessing.preprocessingKalimat
 import com.example.td_test_2.classification.data.Input
 import com.example.td_test_2.database.Repository
 import com.example.td_test_2.database.entity.WordEntity
 import com.example.td_test_2.database.room.DbConfig
 import com.xwray.groupie.GroupAdapter
 import com.xwray.groupie.GroupieViewHolder
+import java.util.Calendar
 
 class ChatActivity : AppCompatActivity() {
     private val messageAdapter = GroupAdapter<GroupieViewHolder>()
@@ -30,16 +31,8 @@ class ChatActivity : AppCompatActivity() {
     private lateinit var repository: Repository
     private val classifier = Classifier<String>()
 
-    private var chatList = ArrayList<String>()
-    private var reply = "empty"
-    private var sizeData = 0
-    private var offset: IntArray? = null
-    private var mQuery = ""
-    private var mCursor: Cursor? = null
-
-    private var predictText = ""
-    private lateinit var adapter : ChatAdapter
     private lateinit var binding : ActivityChatBinding
+    private var time_o = 0L
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -51,30 +44,30 @@ class ChatActivity : AppCompatActivity() {
         binding.btnInsert.setOnClickListener {
 
             //kalimat tester
-            var reminder = "atur pemberian insulin setiap pagi hari jam 6"
+            var reminder = "alarm atur pemberian buah setiap hari pada pukul 6 pagi"
             var predictYes = "prediksi riwayat kesahatan saya memiliki hamil 6 glukosa 148 tekanandarah 72 ketebalankulit 35 insulin 0 beratbadan 33.6 pedigree 0.627 umur 50"
             var predictNewHigh = "prediksi riwayat kesahatan saya memiliki hamil 0 glukosa 340 tekanandarah 72 ketebalankulit 35 insulin 5 beratbadan 53.6 pedigree 0.687 umur 55"
             var predictNo = "prediksi riwayat kesahatan saya memiliki hamil 1 glukosa 85 tekanandarah 66 ketebalankulit 29 insulin 0 beratbadan 26.6 pedigree 0.351 umur 31"
             var predictNewLow = "prediksi riwayat kesahatan saya memiliki hamil 0 glukosa 90 tekanandarah 52 ketebalankulit 35 insulin 5 beratbadan 53.6 pedigree 0.687 umur 55"
             var predictNoShort = "hamil 1 glukosa 85 tekanandarah 66 ketebalankulit 29 insulin 0 beratbadan 26.6 pedigree 0.351 umur 31"
-            var predictYesShort = "hamil 6 glukosa 148 tekanandarah 72 ketebalankulit 35 insulin 0 beratbadan 33.6 pedigree 0.627 umur 50"
-            var info = "apa itu sakit diabetes"
-            var info2 = "bagaimana gejala diabetes"
+            var predictYesShort = "hamil 0 glukosa 248 tekanandarah 72 ketebalankulit 35 insulin 0 beratbadan 80.6 pedigree 0.627 umur 50"
+            var info = "Apa itu sakit Diabetes ?"
+            var info2 = "bagaimana gejala diabetes ?"
             var info3 = "Apa penyebab diabetes?"
 
             //input kalimat
-            var inputText = info3
+            var inputText = predictYesShort
 
             //todo preprocessing kalimat
+            StartTimer()
             var cleanText = preprocessingKalimat(
                 this,
                 inputText
             )
 
-            Log.d("stop",cleanText.toString())
-
+            Log.d("proses",Timeidf.toastMessageNb)
             //mengirimkan data
-            queryDatabase(info3)
+            queryDatabase(cleanText)
             val message = Message(
                 setences = inputText,
                 sender = "me"
@@ -229,5 +222,7 @@ class ChatActivity : AppCompatActivity() {
         )
         val receiveItem = ReceiveMessageItem(receive)
         messageAdapter.add(receiveItem)
+        val endTime = TimeElapsed()
+        Log.d("time",endTime.toString())
     }
 }

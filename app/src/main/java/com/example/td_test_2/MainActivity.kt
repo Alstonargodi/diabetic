@@ -4,16 +4,37 @@ import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.widget.Button
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.lifecycleScope
+import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.td_test_2.chat.preprocessing.PreProcessing
+import com.example.td_test_2.chat.preprocessing.Utils
 import com.example.td_test_2.database.Repository
+import com.example.td_test_2.database.entity.WordEntity
 import com.example.td_test_2.database.room.DbConfig
+import com.example.td_test_2.database.room.json.Loadjson
+import com.example.td_test_2.database.sqldb.DatabaseTable
 import com.example.td_test_2.databinding.ActivityMainBinding
+import com.example.td_test_2.databinding.ActivitySearchBinding
 import com.example.td_test_2.presentasion.ChatActivity
+import org.json.JSONException
+import org.xml.sax.Parser
+import java.io.IOException
 
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
     private lateinit var repository: Repository
+
+    private var mAdapter: SearchResultsAdapter? = null
+    //    private var mAsyncTask: SearchTask? = null
+    private var testList = MutableLiveData<List<String>>()
+
+    private var mQuery = ""
+    private var mToast: Toast? = null
+    private var cleanText = ""
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -24,22 +45,112 @@ class MainActivity : AppCompatActivity() {
         repository.readPimaData().observe(this){
             Log.d("data",it.toString())
         }
+        test()
 
         setContentView(binding.root)
-       binding.btEnterData.setOnClickListener {
-            val intent = Intent(this@MainActivity, EnterDataActivity::class.java)
-            startActivity(intent)
+        binding.apply {
+            btEnterData.setOnClickListener {
+                val intent = Intent(this@MainActivity, EnterDataActivity::class.java)
+                startActivity(intent)
+            }
+            btSearchData.setOnClickListener {
+                val intent = Intent(this@MainActivity, SearchActivity::class.java)
+                startActivity(intent)
+            }
+            btViewData.setOnClickListener {
+                val intent = Intent(this@MainActivity, ViewDataActivity::class.java)
+                startActivity(intent)
+            }
+            btnTest.setOnClickListener {
+                runtest()
+            }
+            btnSchat.setOnClickListener {
+                startActivity(Intent(this@MainActivity,ChatActivity::class.java))
+            }
         }
-        binding.btSearchData.setOnClickListener {
-            val intent = Intent(this@MainActivity, SearchActivity::class.java)
-            startActivity(intent)
+        mAdapter = SearchResultsAdapter(this)
+        binding.rvTest.layoutManager = LinearLayoutManager(
+            this,
+            LinearLayoutManager.VERTICAL,
+            false
+        )
+        binding.rvTest.adapter = mAdapter
+    }
+
+
+    fun test(){
+        val setence = Loadjson.loadTestJson(this)
+        var data = arrayListOf<String>()
+        try {
+            if (setence != null){
+                for (i in 0 until setence.length()){
+                    val item = setence.getJSONObject(i)
+                    var cleanText = PreProcessing.preprocessingKalimat(
+                        this,
+                        item.getString("sentence")
+                    )
+                    data.add(cleanText)
+                    testList.value = data
+                }
+            }
+        }catch (exception: IOException) {
+            exception.printStackTrace()
+        } catch (exception: JSONException) {
+            exception.printStackTrace()
         }
-        binding.btViewData.setOnClickListener {
-            val intent = Intent(this@MainActivity, ViewDataActivity::class.java)
-            startActivity(intent)
+    }
+
+    fun runtest(){
+        repository.readSentence().observe(this){
+            it.forEach {
+                if (it.type != "reminder"){
+                    queryDatabase(it.sentence)
+                }
+            }
         }
-        binding.btnSchat.setOnClickListener {
-            startActivity(Intent(this@MainActivity,ChatActivity::class.java))
-        }
+    }
+    private fun queryDatabase(
+        text : String
+    ){
+        val searchDb = DatabaseTable.getInstance(baseContext)?.getWordMatches(
+            text,
+            null,
+            true,
+            true,
+            true
+        )
+        mAdapter?.swapCursor(searchDb)
+        mAdapter!!.onItemDetailCallback(object : SearchResultsAdapter.OnDetailItemCallback{
+            override fun onDetailCallback(data: WordEntity) {
+//                setenceSelect(
+//                    data.type,
+//                    text,
+//                    data.result
+//                )
+            }
+        })
+    }
+
+    private fun setenceSelect(
+        type : String,
+        question : String,
+        answer : String,
+    ){
+        Log.d("chat", type)
+//        when(type){
+//            "info"->{
+//                Log.d("chat_info", answer)
+//            }
+//            "predict"->{
+//                //preprocessing prediksi dari kalimat input
+//                Log.d("chat_predict", answer)
+//            }
+//            "reminder"->{
+//                Log.d("chat_reminder", answer)
+//            }
+//            "help"->{
+//                Log.d("chat_help", answer)
+//            }
+//        }
     }
 }

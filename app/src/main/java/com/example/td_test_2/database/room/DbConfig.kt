@@ -62,7 +62,7 @@ abstract class DbConfig : RoomDatabase(){
             context: Context,
             dataDao: WordDao
         ){
-            val setence = Loadjson.loadDiabeticJson(context)
+            val setence = Loadjson.loadSentenceJson(context)
 
             try {
                 if (setence != null){

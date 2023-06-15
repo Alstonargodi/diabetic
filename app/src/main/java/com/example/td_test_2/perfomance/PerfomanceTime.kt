@@ -1,6 +1,22 @@
 package com.example.fts_tes.Utils
 
 object PerformanceTime {
+
+    private var time_o = 0L
+    //start timer
+
+    fun StartTimer(){
+        time_o = System.currentTimeMillis()
+    }
+
+    fun TimeElapsed(): String? {
+        var s = (System.currentTimeMillis() - time_o).toDouble() / 1000
+        val h = Math.floor(s / 3600.0).toInt()
+        s -= (h * 3600).toDouble()
+        val m = Math.floor(s / 60.0).toInt()
+        s -= (m * 60).toDouble()
+        return "" + h + "hr " + m + "m " + s + "sec"
+    }
     // Start time
     private var t1: Long = 0
 
