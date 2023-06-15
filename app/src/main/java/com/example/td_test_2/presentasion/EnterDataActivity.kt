@@ -64,11 +64,11 @@ class EnterDataActivity : AppCompatActivity() {
         context: Context,
     ){
         val db: DatabaseTable = DatabaseTable.getInstance(baseContext)!!
-        val pimaArray = Loadjson.loadSentenceJson(context)
+        val setenceArray = Loadjson.loadSentenceJson(context)
         try {
-            if (pimaArray != null){
-                for (i in 0 until pimaArray.length()){
-                    val item = pimaArray.getJSONObject(i)
+            if (setenceArray != null){
+                for (i in 0 until setenceArray.length()){
+                    val item = setenceArray.getJSONObject(i)
 
                     var inputCsv = item.getString("kalimat")
                     var cleanText = PreProcessing.preprocessingKalimat(

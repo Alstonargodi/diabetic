@@ -14,7 +14,6 @@ class SendMessageItem(private val message: Message) : BindableItem<ItemSendMsgBi
     }
 
     override fun bind(viewBinding: ItemSendMsgBinding, position: Int) {
-        Log.d("message",message.toString())
         viewBinding.message = message
     }
 }

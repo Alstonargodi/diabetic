@@ -12,7 +12,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.fts_tes.Utils.PerformanceTime
 import com.example.td_test_2.database.sqldb.DatabaseTable
 import com.example.td_test_2.presentasion.ChatActivity
-import com.example.td_test_2.chat.tfidfmain.TfIdfHelper
+import com.example.td_test_2.chat.tfidfmain.TfIdfMain
 import com.example.td_test_2.database.entity.WordEntity
 
 class SearchResultsAdapter(private val mContext: Context) :
@@ -58,8 +58,9 @@ class SearchResultsAdapter(private val mContext: Context) :
         holder.displayDate.text = date
         holder.displayIndex.text = pos
         Log.d("chat", type)
+
+        //todo 1.16 mengembalikan hasil query berupa kesamaan dokumen
         if (mContext.javaClass == ChatActivity::class.java || mContext.javaClass == SearchActivity::class.java || mContext.javaClass == MainActivity::class.java) {
-            Log.d("time_query", PerformanceTime.TimeElapsed().toString())
             itemCallback.onDetailCallback(
                 WordEntity(
                     0,
@@ -80,8 +81,9 @@ class SearchResultsAdapter(private val mContext: Context) :
         mCursor = newCursor
         if (mContext.javaClass == ChatActivity::class.java ||mContext.javaClass == SearchActivity::class.java || mContext.javaClass == MainActivity::class.java){
             Log.d("SEARCHRESULTSADAPTER", "Calculating Tf x Idf")
-            offset = TfIdfHelper.calcTfIdf(mContext, mCursor)
-            Log.d("search_rvadapter", offset.toString())
+            //todo 1.7 proses perhitungan TFIDF
+            offset = TfIdfMain.calcTfIdf(mContext, mCursor)
+            Log.d("calctime_tfidfend", PerformanceTime.TimeElapsed().toString())
         }
         notifyDataSetChanged()
     }

@@ -15,19 +15,20 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="100dp"
-        android:background="#2196F3">
+        android:layout_marginStart="90dp"
+        android:background="#2196F3"
+        android:padding="10dp">
 
         <TextView
             android:id="@+id/tv_receive"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:padding="10dp"
             android:text="@{message.setences}"
             android:textColor="#FFFFFF"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             tools:text="test" />
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

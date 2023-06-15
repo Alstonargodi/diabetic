@@ -13,7 +13,7 @@ import java.io.InputStreamReader
 object Loadjson {
     fun loadSentenceJson(context: Context): JSONArray?{
         val builder = StringBuilder()
-        val resources = context.resources.openRawResource(R.raw.kalimat3)
+        val resources = context.resources.openRawResource(R.raw.kalimat4)
         val reader = BufferedReader(InputStreamReader(resources))
         var line : String?
         try {

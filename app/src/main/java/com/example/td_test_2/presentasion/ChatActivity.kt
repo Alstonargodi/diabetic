@@ -6,12 +6,14 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.fts_tes.Utils.PerformanceTime
 import com.example.fts_tes.Utils.PerformanceTime.StartTimer
 import com.example.fts_tes.Utils.PerformanceTime.TimeElapsed
 import com.example.fts_tes.Utils.Timeidf
 import com.example.td_ad.presentasion.adapter.ChatAdapter
 import com.example.td_ad.presentasion.adapter.ReceiveMessageItem
 import com.example.td_ad.presentasion.adapter.SendMessageItem
+import com.example.td_test_2.R
 import com.example.td_test_2.SearchResultsAdapter
 import com.example.td_test_2.database.sqldb.DatabaseTable
 import com.example.td_test_2.database.entity.Message
@@ -23,7 +25,9 @@ import com.example.td_test_2.database.entity.WordEntity
 import com.example.td_test_2.database.room.DbConfig
 import com.xwray.groupie.GroupAdapter
 import com.xwray.groupie.GroupieViewHolder
+import patternmatching.BooyerMoore
 import java.util.Calendar
+import java.util.HashMap
 
 class ChatActivity : AppCompatActivity() {
     private val messageAdapter = GroupAdapter<GroupieViewHolder>()
@@ -40,6 +44,8 @@ class ChatActivity : AppCompatActivity() {
         repository = Repository(DbConfig.setDatabase(this))
         setContentView(binding.root)
 
+        //todo init reply
+        replyMessage("Halo !")
         binding.rvChat.adapter = messageAdapter
         binding.btnInsert.setOnClickListener {
 
@@ -56,9 +62,9 @@ class ChatActivity : AppCompatActivity() {
             var info3 = "Apa penyebab diabetes?"
 
             //input kalimat
-            var inputText = predictYesShort
+            var inputText = info
 
-            //todo preprocessing kalimat
+            //todo 1.1 preprocessing kalimat
             StartTimer()
             var cleanText = preprocessingKalimat(
                 this,
@@ -66,7 +72,7 @@ class ChatActivity : AppCompatActivity() {
             )
 
             Log.d("proses",Timeidf.toastMessageNb)
-            //mengirimkan data
+            //todo 1.2 query kalimat
             queryDatabase(cleanText)
             val message = Message(
                 setences = inputText,
@@ -79,6 +85,7 @@ class ChatActivity : AppCompatActivity() {
         }
         initPredictionDataset()
         binding.rvChat.layoutManager = LinearLayoutManager(this)
+
         binding.rvSearch.adapter = messageAdapter
         mAdapter = SearchResultsAdapter(this)
         binding.rvSearch.layoutManager = LinearLayoutManager(
@@ -93,6 +100,9 @@ class ChatActivity : AppCompatActivity() {
     private fun queryDatabase(
         text : String
     ){
+        var queryList = arrayListOf<WordEntity>()
+        var hashList = HashMap<String,String>()
+        //todo 1.3 start query
         val searchDb = DatabaseTable.getInstance(baseContext)?.getWordMatches(
             text,
             null,
@@ -100,12 +110,19 @@ class ChatActivity : AppCompatActivity() {
             true,
             true
         )
+        //todo 1.6 mengambil data bedasarkan query dan proses tfidf
         mAdapter?.swapCursor(searchDb)
         mAdapter!!.onItemDetailCallback(object : SearchResultsAdapter.OnDetailItemCallback{
             override fun onDetailCallback(data: WordEntity) {
+//                var test = data.sentence.toRegex()
+//                if (test.containsMatchIn(text)){
+//                    Log.d("chat",data.sentence)
+//                }
+
                 setenceSelect(
                     data.type,
                     text,
+                    data.sentence,
                     data.result
                 )
             }
@@ -116,15 +133,18 @@ class ChatActivity : AppCompatActivity() {
     private fun setenceSelect(
         type : String,
         question : String,
+        patternFound : String,
         answer : String,
     ){
+        //todo 1.17 berdasarkan pattern tertinggi kemudian dikategorikan
         when(type){
             "info"->{
-                replyMessage(answer)
+                val message = "berikut ini hasil dari pertanyaan anda \n\n$answer"
+                replyMessage(message)
             }
             "predict"->{
-                //preprocessing prediksi dari kalimat input
                 var preprocessing = predictPreprocessing(question)
+                //todo 2.1 klasifikasi nb
                 predictNb(
                     pregnan = preprocessing["hamil"].toString(),
                     glucose = preprocessing["glukosa"].toString(),
@@ -166,6 +186,7 @@ class ChatActivity : AppCompatActivity() {
 
     //inisialisasi dataset untuk prediksi
     private fun initPredictionDataset(){
+        //todo 2.3 init data latih nb
         repository.readPimaData().observe(this){
             it.forEach {
                 classifier.apply {
@@ -199,17 +220,21 @@ class ChatActivity : AppCompatActivity() {
         age : String,
     ){
         val inputData = "$pregnan $glucose $bloodPreasure $skin $insulin $bmi $pedigree $age"
-        Log.d("result_input",inputData)
-        val yes = "6 148 72 35 0 336 0.627 50"
-        val no = "1 85 66 29 0 266 0351 31"
-        val new = "0 340 72 35 5 536 0687 55"
 
+        //todo 2.2 start klasifikasi nb
         var predict = classifier.predict(inputData)
-        var result = "$inputData" +
-                "\n relate ${predict["1"]}" +
-                "\n not relate  ${ predict["0"] }"
-        Log.d("result_nb",result)
-        replyMessage(result)
+        var decission = ""
+        var result = "$inputData \n" +
+                "ya ${predict["1"]} \n" +
+                "tidak  ${ predict["0"] }"
+        if (predict["1"]!! >= predict["0"]!!){
+            decission = "terkena diabetes"
+        }else{
+            decission = "tidak terkena diabetes"
+        }
+
+        var message = getString(R.string.pesanhasil_klasifikasi, decission, result)
+        replyMessage(message)
     }
 
     //mengirimkan jawaban
@@ -217,12 +242,11 @@ class ChatActivity : AppCompatActivity() {
         sentence : String
     ){
         val receive = Message(
-            setences = sentence,
-            sender = "me"
+            setences = "$sentence\n\nwaktu komptuasi ${TimeElapsed().toString()}",
+            sender = "me",
         )
         val receiveItem = ReceiveMessageItem(receive)
         messageAdapter.add(receiveItem)
-        val endTime = TimeElapsed()
-        Log.d("time",endTime.toString())
+        Log.d("calctime_replymessage", TimeElapsed().toString())
     }
 }

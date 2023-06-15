@@ -15,7 +15,7 @@ object PerformanceTime {
         s -= (h * 3600).toDouble()
         val m = Math.floor(s / 60.0).toInt()
         s -= (m * 60).toDouble()
-        return "" + h + "hr " + m + "m " + s + "sec"
+        return "$s sec"
     }
     // Start time
     private var t1: Long = 0

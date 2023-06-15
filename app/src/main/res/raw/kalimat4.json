@@ -1,0 +1,834 @@
+{
+  "kalimat" : [
+    {
+      "tipe": "info",
+      "kalimat": "Apa itu diabetes?",
+      "result": "Diabetes adalah kondisi medis yang ditandai dengan tingginya kadar gula (glukosa) dalam darah."
+    },
+    {
+      "tipe": "info",
+      "kalimat": "bagaimana pola hidup sehat agar terhindar diabetes",
+      "result": "olahraga"
+    },
+    {
+      "tipe": "help",
+      "kalimat": "Alur aplikasi",
+      "result": "aplikasi ini dapat mememberikan informasi terkait diabetes dengan menggunakan kata kunci info"
+    },
+    {
+      "tipe": "reminder",
+      "kalimat": "Atur makan buah dan pemberian insulin pada pukul 7 pagi kemudian cek tekanan darah tinggi pada pukul 10 pagi dan olahraga sore pada pukul 3 sore",
+      "result": "setalarm"
+    },
+    {
+      "tipe": "info",
+      "kalimat": "Apa itu sakit diabetes?",
+      "result": "Diabetes adalah kondisi medis yang ditandai dengan tingginya kadar gula (glukosa) dalam darah."
+    },
+    {
+      "tipe": "info",
+      "kalimat": "Apa itu diabetes?",
+      "result": "Diabetes adalah kondisi medis yang ditandai dengan tingginya kadar gula (glukosa) dalam darah."
+    },
+    {
+      "tipe": "info",
+      "kalimat": "Apa penyebab diabetes?",
+      "result": "Diabetes bisa disebabkan oleh faktor genetik, gaya hidup tidak sehat, kelebihan berat badan, resistensi insulin, atau kombinasi dari faktor-faktor tersebut."
+    },
+    {
+      "tipe": "info",
+      "kalimat": "Apa perbedaan antara diabetes tipe 1 dan tipe 2?",
+      "result": "Diabetes tipe 1 disebabkan oleh ketidakmampuan pankreas untuk memproduksi insulin, sedangkan diabetes tipe 2 melibatkan resistensi insulin dan produksi insulin yang tidak cukup."
+    },
+    {
+      "tipe": "info",
+      "kalimat": "Apakah diabetes dapat disembuhkan?",
+      "result": "Diabetes tipe 1 tidak dapat disembuhkan, tetapi diabetes tipe 2 dapat dikendalikan melalui perubahan gaya hidup sehat dan pengobatan yang tepat."
+    },
+    {
+      "tipe": "info",
+      "kalimat": "Bagaimana cara mendiagnosis diabetes?",
+      "result": "Diabetes dapat didiagnosis melalui tes darah yang mengukur kadar glukosa darah puasa, tes toleransi glukosa oral, atau tes hemoglobin A1c."
+    },
+    {
+      "tipe": "info",
+      "kalimat": "Apa gejala umum diabetes?",
+      "result": "Gejala diabetes meliputi sering buang air kecil, haus berlebihan, penurunan berat badan yang tidak dijelaskan, kelelahan, penglihatan kabur, dan luka yang sulit sembuh."
+    },
+    {
+      "tipe": "info",
+      "kalimat": "Apa saja komplikasi jangka panjang yang dapat terjadi akibat diabetes?",
+      "result": "Komplikasi jangka panjang diabetes meliputi kerusakan saraf (neuropati), kerusakan ginjal (nefropati), masalah mata (retinopati), masalah kardiovaskular, dan luka yang sulit sembuh."
+    },
+    {
+      "tipe": "info",
+      "kalimat": "Apa itu gula darah puasa?",
+      "result": "Gula darah puasa adalah kadar glukosa dalam darah setelah tidak makan apa pun selama setidaknya delapan jam."
+    },
+    {
+      "tipe": "info",
+      "kalimat": "Bagaimana cara mengontrol diabetes tipe 2 dengan diet?",
+      "result": "Diet sehat untuk diabetes tipe 2 melibatkan mengonsumsi makanan rendah karbohidrat, rendah gula, tinggi serat, serta memperhatikan ukuran porsi dan waktu makan."
+    },
+    {
+      "tipe": "info",
+      "kalimat": "Apakah semua orang dengan diabetes harus menggunakan insulin?",
+      "result": "Tidak semua orang dengan diabetes perlu menggunakan insulin. Beberapa orang dengan diabetes tipe 2 dapat mengontrol gula darah mereka melalui obat-obatan oral atau perubahan gaya hidup."
+    },
+    {
+      "tipe": "info",
+      "kalimat": "Apa itu hipoglikemia?",
+      "result": "Hipoglikemia adalah kondisi ketika kadar gula darah terlalu rendah, biasanya di bawah 70 mg/dL. Gejalanya termasuk pusing, gemetar, keringat dingin, dan kebingungan."
+    },
+    {
+      "tipe": "info",
+      "kalimat": "Apa itu hiperglikemia",
+      "result": "Hiperglikemia adalah kondisi ketika kadar gula darah terlalu tinggi. Gejalanya meliputi rasa haus yang berlebihan, buang air kecil yang sering, kelelahan, dan pandangan kabur."
+    },
+    {
+      "tipe": "info",
+      "kalimat": "Bisakah seseorang dengan diabetes makan makanan manis",
+      "result": "Seseorang dengan diabetes sebaiknya membatasi konsumsi makanan manis, terutama yang mengandung gula tambahan."
+    },
+    {
+      "tipe": "info",
+      "kalimat": "apakah diabetes dapat dicegah",
+      "result": "Diabetes dapat dicegah atau kejadiannya dapat ditunda. Dengan tata laksana pengobatan yang optimum, diabetes dapat dikontrol dan orang dengan diabetes dapat berumur panjang dan hidup sehat"
+    },
+    {
+      "tipe": "info",
+      "kalimat": "apakah diabetes dapat menyebab penyakit lainnya",
+      "result": "Diabetes merupakan penyebab utama untuk kebutaan, serangan jantung, stroke, gagal ginjal dan amputasi kak"
+    },
+    {
+      "tipe": "info",
+      "kalimat": "berapa jumlah penderita diabetes",
+      "result": "Pada tahun 2015, 415 juta orang dewasa dengan diabetes, kenaikan 4 kali lipat dari 108 juta di 1980an. Pada tahun 2040 diperkirakan jumlahnya akan menjadi 642 juta (IDFAtlas 2015)"
+    },
+    {
+      "tipe": "predict",
+      "kalimat": "hamil 2 glukosa 88 tekanandarah 72 ketebalankulit 35 insulin 53 berat 29 pedigree 0.229 umur 22",
+      "result": "tidak terkena diabetes"
+    },
+    {
+      "tipe": "predict",
+      "kalimat": "hamil 2 glukosa 129 tekanandarah 84 ketebalankulit 0 insulin 0 berat 28 pedigree 0.284 umur 27",
+      "result": "tidak terkena diabetes"
+    },
+    {
+      "tipe": "predict",
+      "kalimat": "hamil 0 glukosa 102 tekanandarah 78 ketebalankulit 40 insulin 90 berat 34.5 pedigree 0.238 umur 24",
+      "result": "tidak terkena diabetes"
+    },
+    {
+      "tipe": "predict",
+      "kalimat": "hamil 0 glukosa 123 tekanandarah 72 ketebalankulit 0 insulin 0 berat 36.3 pedigree 0.258 umur 52",
+      "result": "terkena diabetes"
+    },
+    {
+      "tipe": "predict",
+      "kalimat": "hamil 1 glukosa 144 tekanandarah 82 ketebalankulit 46 insulin 180 berat 46.1 pedigree 0.335 umur 46",
+      "result": "terkena diabetes"
+    },
+    {
+      "tipe": "predict",
+      "kalimat": "hamil 2 glukosa 98 tekanandarah 60 ketebalankulit 17 insulin 120 berat 34.7 pedigree 0.198 umur 22",
+      "result": "tidak terkena diabetes"
+    },
+    {
+      "tipe": "predict",
+      "kalimat": "hamil 1 glukosa 88 tekanandarah 62 ketebalankulit 24 insulin 44 berat 29.9 pedigree 0.422 umur 23",
+      "result": "tidak terkena diabetes"
+    },
+    {
+      "tipe": "predict",
+      "kalimat": "saya memiliki riwayat kesehatan jumlah kehamilan 2 riwayat glukosa 175 kemudian tekanan darah 88 ketebalankulit 0 penggunaan insulin 0 berat badan 22.9 nilai pedigree 0.326 dan umur 22",
+      "result": "tidak terkena diabetes"
+    },
+    {
+      "tipe": "predict",
+      "kalimat": "saya umur 27 riwayat kesehatan saya beratbadan 26.8 glukosa 73 kemudian tekanan darah 60 ketebalan kulit 0 insulin 0 kehamilan 0 nilai pedigree 0.268",
+      "result": "tidak terkena diabetes"
+    },
+    {
+      "tipe": "info",
+      "kalimat": "bagaimana diabetes di asia tenggara",
+      "result": "Populasi dari wilayah regional Asia Tenggara secara genetik memang rentan terhadap faktor diabetogenik\nlingkungan, sehingga memiliki ambang lebih rendah terhadap faktor resiko seperti usia, kelebihan berat badan dan distrsi lemak tubuh.\n• Diabetes terjadi 10 tahun lebih cepat di wilayah regional Asia Tenggara daripada orang-orang dari wilayah Eropa, pada usia dimana merupakan masa paling produktif."
+    },
+    {
+      "tipe": "info",
+      "kalimat": "bagaimana diabetes di indonesia",
+      "result": "Pada tahun 2015,Indonesia menempati peringkat ke tujuh dunia di dunia untuk prevalensi penderita diabetes tertinggi di dunia bersama dengan China, India, Amerika Serikat, Brazil, Rusia dan Meksiko dengan jumlah estimasi orang dengan diabetes sebesar 10 juta (IDF Atlas 2015)"
+    },
+    {
+      "tipe": "info",
+      "kalimat": "bagaimana komplikasi dan prevelensi diabetes di indonesia",
+      "result": "Diabetes dengan Komplikasi merupakan Penyebab Kematian tertinggi ketiga di Indonesia (SRS 2014) Persentase Kematian akibat diabetes di Indonesia merupakan yang tertinggi kedua setelah SriLanka Prevalensi orang dengan diabetes di Indonesia menunjukkan kecenderungan meningkat yaitu dari 5,7% (2007) menjadi 6,9% (2013). 2/3 orang dengan diabetes di Indonesia tidak mengetahui dirin"
+    },
+    {
+      "tipe": "info",
+      "kalimat": "bagaimana cara menurunkan kadar gula dengan cepat?",
+      "result": "Kadar gula darah yang tinggi menandakan bahwa kondisi orang tersebut sedang tidak stabi bahwa menurunkan kadar gula darah tidak bisa dilakukan tanpa melakukan pemeriksaan menyeluruh terhadap pasien terlebih dahulu. Sebab tergantung dari seberapa tinggi kadar gula dalam darahnya, usia, respon tubuhnya selama ini terhadap obat, obat apa saja yang selama ini dikonsumsi,Jika kadar gula darahnya ekstrem tinggi, malah mungkin ia butuh untuk dirawat inap agar bisa diberikan obat secara berkala dalam pengawasan dokter."
+    },
+    {
+      "tipe": "info",
+      "kalimat": "bagaimana cara mengobati penyakit gula darah secara herbal?",
+      "result": "gula kering dan gula basah umumnya dilihat dari wujud lukanya. wujud luka inilah yang memicu timbulnya istilah diabetes kering dan diabetes basah. sebenarnya tidak ada istilah diabetes basah atau kering dalam dunia medis. istilah diabetes dalam dunia medis adanya diabetes tipe 1, 2 dan diabetes gestational. jadi kemungkinan defensi gula basah di maksud orang awam ialah luka pada penderita DM yang sulit sembuh. sementara diabetes kering di maksud luka yang sulit sembuh sempurna, namun tidak sampai bernanah.\npenanganan diabetes basah ialah mengontrol kadar gula darah tetap normal, dengan konsusmi obat dari dokter serta melakukan pencegahan atau diet diabetes. serta melakukan perawatan luka dengn tepat. jika kadar gula darah tidak terkontrol, luka tidak di rawat dengan tepat maka pastinya luka tidak akan kunjung sembuh. sebaiknya temui dokter secara langsung agar mendapatkan penanganan tepat terhadap diabetes dan mengatasi lukanya dengan tepat. tidak ada obat herbal pasti membuktikan bisa mengatasi diabetes dan luka diabetes, menggunakan obat herbal dapat beresiko menyebabkan tidak sembuh, mengalami efek samping atau luka bisa semakin berat jika ditempelkan deduanan atau apapun."
+    },
+    {
+      "tipe": "info",
+      "kalimat": "apa minuman untuk menurunkan gula darah tinggi",
+      "result": "Untuk menurunkan gula darah, maka anda perlu menerapkan pola hidup dan pola makan sehat yang meliputi:\nMenghindari makanan kemasan, berlemak, berminyak, tinggi gula dan garam, kontrol porsi makanan\nTidak melewatkan waktu makan\nTingkatkan makanan berserat\nPilih jenis makanan dengan indeks glikemik rendah\nCukupi asupan air putih minimal 2 liter per hari\nJaga berat badan ideal atau turunkan berat badan jika berlebih hingga mencapai BMI ideal\nOlahraga teratur 3-5 kali seminggu."
+    },
+    {
+      "tipe": "info",
+      "kalimat": "Bagaimana cara untuk menurunkan HbA1c dengan cepat?",
+      "result": "Hemoglobin A1c ini merupakan rata-rata jumlah sel darah merah atau hemoglobin yang berikatan dengan gula darah atau glukosa selama 3 bulan terakhir, sehingga untuk menurunkannya maka anda memerlukan pengobatan diabetes melalui pemeriksaan dan peresepan oleh dokter secara rutin dan juga kontrol rutin dengan dokter.Penurunan secara cepat pada kadar HbA1c akan sangat sulit dilakukan, dimana sel darah merah memiliki siklus hidup selama 90 hari, sehingga baru akan melakukan regenerasi setelah 90 hari untuk menghasilkan sel darah merah yang baru.Oleh karena itu, jika hasil pemeriksaan HbA1c anda di atas normal, maka akan lebih aman untuk anda berkonsultasi lebih lanjut dengan dokter penyakit dalam, agar dapat dilakukan pengobatan dalam mencegah kemungkinan komplikasi penyakit diabetes di kemudian hari.Terapkan pola hidup sehat untuk membantu mempercepat penurunan kadar gula darah hingga normal."
+    },
+    {
+      "tipe": "info",
+      "kalimat": "Bagaimana cara yang aman untuk mengurangi kadar gula darah?",
+      "result": "jika sudah sangat cukup tinggi diperlukan pengobatan untuk menurunkan kadar gula dalam darah yang mana obat ini harus dengan anjuran dokter yang akan disesuikan dengan kondisi si pasien jadi hindari membeli obat sembarangan tanpa anjuran dokter. selain dengan obatan, perlu disertai penanganan merubah pola gaya hidup seperti :\npilihlah makan sehat yang kaya serat dan protein seperti buah, sayur, ikan, kacang-kacanga, biji-bijian dan lainnya\nkonsumsi air putih yang banyak\nrutin olahraga\nkelola stres\nsering cek kadar gula darah"
+    },
+    {
+      "tipe": "reminder",
+      "kalimat": "atur pemberian insulin pada pukul 7 pagi",
+      "result": "setalarm"
+    },
+    {
+      "tipe": "reminder",
+      "kalimat": "atur makan buah setiap hari pada pukul 8 pagi",
+      "result": "setalarm"
+    },
+    {
+      "tipe": "reminder",
+      "kalimat": "Melakukan pemeriksaan gula darah setiap pagi sebelum sarapan.",
+      "result": "setalarm + 8.00"
+    },
+    {
+      "tipe": "reminder",
+      "kalimat": "olahraga ringan seperti berjalan kaki selama 30 menit setiap pagi pukul 06.00.",
+      "result": "setalarm"
+    },
+    {
+      "tipe": "reminder",
+      "kalimat": "Hindari makanan tinggi gula dan karbohidrat olahan setiap kali makan siang pukul 12.30.",
+      "result": "setalarm"
+    },
+    {
+      "tipe": "reminder",
+      "kalimat": "Minum segelas air putih sebelum makan malam pukul 18.00.",
+      "result": "setalarm"
+    },
+    {
+      "tipe": "reminder",
+      "kalimat": "pukul 09.00 setiap hari untuk melakukan latihan pernapasan dan relaksasi.",
+      "result": "setalarm"
+    },
+    {
+      "tipe": "reminder",
+      "kalimat": "Konsumsi sepiring sayuran hijau dan ikan panggang setiap malam pukul 19.30.",
+      "result": "setalarm"
+    },
+    {
+      "tipe": "reminder",
+      "kalimat": "Pastikan Anda membawa camilan sehat seperti buah-buahan saat bepergian pada pukul 15.00.",
+      "result": "setalarm"
+    },
+    {
+      "tipe": "reminder",
+      "kalimat": "Jangan lupa untuk mengonsumsi obat diabetes sesuai jadwal pukul 08.00 dan 20.00.",
+      "result": "setalarm"
+    },
+    {
+      "tipe": "reminder",
+      "kalimat": "Tetap aktif selama hari dengan melakukan gerakan ringan setiap jam, mulai pukul 09.00.",
+      "result": "setalarm"
+    },
+    {
+      "tipe": "reminder",
+      "kalimat": "Hindari minuman beralkohol dan gula tinggi saat bersantap malam pukul 19.00.",
+      "result": "setalarm"
+    },
+    {
+      "tipe": "reminder",
+      "kalimat": "Berolahraga rutin adalah penting untuk menjaga kesehatan. Mulailah aktivitas fisik Anda pukul 06.00 pagi.",
+      "result": "setalarm"
+    },
+    {
+      "tipe": "reminder",
+      "kalimat": "Jangan lupa untuk memeriksa kadar gula darah Anda setiap hari pada pukul 07.00 pagi.",
+      "result": "setalarm"
+    },
+    {
+      "tipe": "reminder",
+      "kalimat": "Minumlah segelas air hangat setiap pagi setelah bangun tidur pada pukul 08.00.",
+      "result": "setalarm"
+    },
+    {
+      "tipe": "reminder",
+      "kalimat": "Perbanyak konsumsi sayuran segar dalam makan siang Anda, dimulai pukul 12.30 siang.",
+      "result": "setalarm"
+    },
+    {
+      "tipe": "reminder",
+      "kalimat": "Jangan melewatkan makan malam sehat Anda pada pukul 19.00 malam.",
+      "result": "setalarm"
+    },
+    {
+      "tipe": "reminder",
+      "kalimat": "Pukul 08.00 pagi adalah waktu yang tepat untuk mengonsumsi obat diabetes Anda.",
+      "result": "setalarm"
+    },
+    {
+      "tipe": "reminder",
+      "kalimat": "Cegah komplikasi dengan memeriksa tekanan darah Anda setiap hari pada pukul 10.00 pagi.",
+      "result": "setalarm"
+    },
+    {
+      "tipe": "reminder",
+      "kalimat": "Luangkan waktu untuk berjalan-jalan setiap sore pada pukul 16.00.",
+      "result": "setalarm"
+    },
+    {
+      "tipe": "reminder",
+      "kalimat": "Batasi konsumsi gula dan makanan olahan, mulai sekarang, pada pukul 09.00 pagi.",
+      "result": "setalarm"
+    },
+    {
+      "tipe": "reminder",
+      "kalimat": "Jaga pola makan sehat dengan makan buah pada pukul 15.00 sore.",
+      "result": "setalarm"
+    },
+    {
+      "tipe": "reminder",
+      "kalimat": "Ingatlah untuk mengendalikan stres dan bersantai pada pukul 20.00 malam.",
+      "result": "setalarm"
+    },
+    {
+      "tipe": "reminder",
+      "kalimat": "Perbanyak asupan serat dalam sarapan Anda setiap pagi pada pukul 07.30.",
+      "result": "setalarm"
+    },
+    {
+      "tipe": "reminder",
+      "kalimat": "Perhatikan berapa banyak karbohidrat yang Anda makan pada pukul 13.00 siang.",
+      "result": "setalarm"
+    },
+    {
+      "tipe": "reminder",
+      "kalimat": "Sisihkan waktu 15 menit setiap hari untuk melakukan latihan pernapasan pada pukul 10.30 pagi.",
+      "result": "setalarm"
+    },
+    {
+      "tipe": "reminder",
+      "kalimat": "Pastikan Anda tidur nyenyak selama 7-8 jam setiap malam, mulai pukul 22.00.",
+      "result": "setalarm"
+    },
+    {
+      "tipe": "reminder",
+      "kalimat": "Hindari makanan cepat saji yang tinggi lemak dan gula pada pukul 14.00 siang.",
+      "result": "setalarm"
+    },
+    {
+      "tipe": "reminder",
+      "kalimat": "Catat pola makan Anda dan buat perubahan yang diperlukan pada pukul 16.30 sore.",
+      "result": "setalarm"
+    },
+    {
+      "tipe": "reminder",
+      "kalimat": "Sisihkan waktu untuk bermain dengan anak-anak pada pukul 18.00 malam.",
+      "result": "setalarm"
+    },
+    {
+      "tipe": "reminder",
+      "kalimat": "Jangan lupa untuk merawat kaki Anda dengan memeriksa dan mencuci mereka setiap hari pada pukul 09.30 pagi.",
+      "result": "setalarm"
+    },
+    {
+      "tipe": "reminder",
+      "kalimat": "Periksa berat badan Anda setiap minggu pada pukul 08.30 pagi.",
+      "result": "setalarm"
+    },
+    {
+      "tipe": "reminder",
+      "kalimat": "Batasi konsumsi minuman beralkohol dan hindari merokok pada pukul 17.00 sore.",
+      "result": "setalarm"
+    },
+    {
+      "tipe": "reminder",
+      "kalimat": "Jangan lewatkan sarapan sehat pada pukul 07.00 pagi.",
+      "result": "setalarm"
+    },
+    {
+      "tipe": "reminder",
+      "kalimat": "Luangkan waktu untuk meditasi dan menenangkan pikiran pada pukul 21.00 malam.",
+      "result": "setalarm"
+    },
+    {
+      "tipe": "reminder",
+      "kalimat": "Cukupi kebutuhan vitamin dengan mengonsumsi buah pada pukul 11.00 pagi.",
+      "result": "setalarm"
+    },
+    {
+      "tipe": "reminder",
+      "kalimat": "Bawa bekal sehat ke kantor pada pukul 12.00 siang.",
+      "result": "setalarm"
+    },
+    {
+      "tipe": "reminder",
+      "kalimat": "Pukul 15.30 sore adalah waktu yang baik untuk berenang atau bersepeda.",
+      "result": "setalarm"
+    },
+    {
+      "tipe": "reminder",
+      "kalimat": "Batasi konsumsi makanan berlemak pada pukul 10.30 pagi.",
+      "result": "setalarm"
+    },
+    {
+      "tipe": "reminder",
+      "kalimat": "Luangkan waktu untuk membaca buku atau mengikuti hobi pada pukul 19.30 malam.",
+      "result": "setalarm"
+    },
+    {
+      "tipe": "reminder",
+      "kalimat": "Periksa kadar gula darah setelah makan pada pukul 18.30 malam.",
+      "result": "setalarm"
+    },
+    {
+      "tipe": "reminder",
+      "kalimat": "Rajin-rajinlah mengganti alat suntik insulin Anda setiap bulan pada pukul 08.30 pagi.",
+      "result": "setalarm"
+    },
+    {
+      "tipe": "reminder",
+      "kalimat": "Minumlah segelas air putih setiap jam pada pukul 09.00 pagi hingga 17.00 sore.",
+      "result": "setalarm"
+    },
+    {
+      "tipe": "reminder",
+      "kalimat": "Konsumsilah camilan sehat, seperti buah-buahan, pada pukul 15.30 sore.",
+      "result": "setalarm"
+    },
+    {
+      "tipe": "reminder",
+      "kalimat": "Jangan melewatkan pemeriksaan mata tahunan pada pukul 14.00 siang.",
+      "result": "setalarm"
+    },
+    {
+      "tipe": "reminder",
+      "kalimat": "Hindari makan malam terlalu larut, sebaiknya pada pukul 19.30 malam.",
+      "result": "setalarm"
+    },
+    {
+      "tipe": "reminder",
+      "kalimat": "Luangkan waktu untuk yoga atau stretching pada pukul 06.30 pagi.",
+      "result": "setalarm"
+    },
+    {
+      "tipe": "reminder",
+      "kalimat": "Jaga kebersihan gigi dengan menyikat gigi setelah makan pada pukul 08.30 pagi dan 20.30 malam.",
+      "result": "setalarm"
+    },
+    {
+      "tipe": "reminder",
+      "kalimat": "Batasi konsumsi makanan manis pada pukul 10.00 pagi.",
+      "result": "setalarm"
+    },
+    {
+      "tipe": "reminder",
+      "kalimat": "Periksa kadar kolesterol Anda secara teratur pada pukul 09.30 pagi.",
+      "result": "setalarm"
+    },
+    {
+      "tipe": "reminder",
+      "kalimat": "Sisihkan waktu 30 menit untuk berjalan kaki setelah makan malam pada pukul 20.00 malam.",
+      "result": "setalarm"
+    },
+    {
+      "tipe": "reminder",
+      "kalimat": "Konsumsilah makanan tinggi serat pada pukul 13.00 siang.",
+      "result": "setalarm"
+    },
+    {
+      "tipe": "reminder",
+      "kalimat": "Perbanyak konsumsi makanan yang kaya akan omega-3 pada pukul 12.30 siang.",
+      "result": "setalarm"
+    },
+    {
+      "tipe": "reminder",
+      "kalimat": "Lakukan latihan kekuatan dan peregangan pada pukul 16.00 sore.",
+      "result": "setalarm"
+    },
+    {
+      "tipe": "reminder",
+      "kalimat": "Istirahatlah sejenak dan jauhkan diri dari layar gadget pada pukul 11.00 pagi.",
+      "result": "setalarm"
+    },
+    {
+      "tipe": "reminder",
+      "kalimat": "Batasi konsumsi makanan berlemak dan berminyak pada pukul 14.30 sore.",
+      "result": "setalarm"
+    },
+    {
+      "tipe": "reminder",
+      "kalimat": "Jangan lupa untuk mengonsumsi obat diabetes Anda pada pukul 07.30 pagi dan 19.30 malam.",
+      "result": "setalarm"
+    },
+    {
+      "tipe": "reminder",
+      "kalimat": "Luangkan waktu untuk merencanakan menu makanan sehat minggu depan pada pukul 15.00 sore.",
+      "result": "setalarm"
+    },
+    {
+      "tipe": "reminder",
+      "kalimat": "Cegah dehidrasi dengan minum air putih setiap jam pada pukul 08.00 pagi hingga 18.00 sore.",
+      "result": "setalarm"
+    },
+    {
+      "tipe": "reminder",
+      "kalimat": "Pukul 09.00 pagi adalah waktu yang tepat untuk melakukan latihan aerobik.",
+      "result": "setalarm"
+    },
+    {
+      "tipe": "reminder",
+      "kalimat": "Pastikan Anda memiliki waktu istirahat yang cukup setelah olahraga pada pukul 21.30 malam.",
+      "result": "setalarm"
+    },
+    {
+      "tipe": "reminder",
+      "kalimat": "Ingatlah untuk selalu berkonsultasi dengan dokter Anda mengenai perawatan diabetes dan kegiatan sehat lainnya pada pukul 10.00 pagi.",
+      "result": "setalarm"
+    },
+    {
+      "tipe": "help",
+      "kalimat": "Alur aplikasi",
+      "result": "aplikasi ini dapat mememberikan informasi terkait diabetes dengan menggunakan kata kunci info, untuk prediksi gunakan kata kunci predict, pengingat dengan menggunakan kata kunci reminder, dan bantuan aplikasi menggunakan kata kunci help"
+    },
+    {
+      "tipe": "help",
+      "kalimat": "info",
+      "result": "Kata kunci info digunakan untuk memberikan informasi terkait seputar diabetes  berdasarkan beberapa pertanyaan yang sering muncul, gunakan kata kunci pertanyaan untuk menampilkan daftar pertanyaan seputar diabetes"
+    },
+    {
+      "tipe": "help",
+      "kalimat": "pertanyaan",
+      "result": "berikut ini ada pertanyaan seputar diabetes, ketik salah satu pertanyaan tersebut untuk mencari informasi terkait"
+    },
+    {
+      "tipe": "help",
+      "kalimat": "reminder",
+      "result": "Dengan menggunakan kata kunci reminder anda dapat mengatur pengingat dalam ponsel, dengan memberikan pola sebagai berikut [Detail Kegiatan] [waktu pengignat], gunakan kata kunci contoh alarm untuk menampilkan beberapa kalimat pengingat"
+    },
+    {
+      "tipe": "help",
+      "kalimat": "contoh alarm",
+      "result": "berikut ini ada kalimat pengingat"
+    },
+    {
+      "tipe": "help",
+      "kalimat": "detail prediksi",
+      "result": "kata kunci predict digunakan untuk mengklassifikaskan berdasarkan riwayat medis anda dengan berdasarkan hasil pengecekan kehamilan,glukosa, tekanan darah,ketebalan kulit,insulin,berat badan,nilai riwayat diabetes (pedigree), dan umur. ketik detail prediksi untuk melihat lebih lanjut"
+    },
+    {
+      "tipe": "help",
+      "kalimat": "prediksi",
+      "result": "masukan pola kalimat sebagai berikut glukosa [ jumlah glukosa ], tekanan darah [ jumlah tekanan darah], berat badan [ jumlah bb] , umur [ umur], insulin [ jumlah insulin], ketebalan kulit [ jumlah ketebalan kulit], nilai riwayat diabetes[ nilai], dan kehamilan [jumlah kehamilan]. anda dapat melihat contoh kalimat dengan mengetikan contoh prediksi"
+    },
+    {
+      "tipe": "help",
+      "kalimat": "contoh prediksi",
+      "result": "berikut ini contoh kalimat prediksi [ pattern ]"
+    },
+    {
+      "tipe": "info",
+      "kalimat": "Apa itu sakit diabetes?",
+      "result": "Diabetes adalah kondisi medis yang ditandai dengan tingginya kadar gula (glukosa) dalam darah."
+    },
+    {
+      "tipe": "info",
+      "kalimat": "Apa itu diabetes?",
+      "result": "Diabetes adalah kondisi medis yang ditandai dengan tingginya kadar gula (glukosa) dalam darah."
+    },
+    {
+      "tipe": "info",
+      "kalimat": "Apa penyebab diabetes?",
+      "result": "Diabetes bisa disebabkan oleh faktor genetik, gaya hidup tidak sehat, kelebihan berat badan, resistensi insulin, atau kombinasi dari faktor-faktor tersebut."
+    },
+    {
+      "tipe": "info",
+      "kalimat": "Apa perbedaan antara diabetes tipe 1 dan tipe 2?",
+      "result": "Diabetes tipe 1 disebabkan oleh ketidakmampuan pankreas untuk memproduksi insulin, sedangkan diabetes tipe 2 melibatkan resistensi insulin dan produksi insulin yang tidak cukup."
+    },
+    {
+      "tipe": "info",
+      "kalimat": "Apakah diabetes dapat disembuhkan?",
+      "result": "Diabetes tipe 1 tidak dapat disembuhkan, tetapi diabetes tipe 2 dapat dikendalikan melalui perubahan gaya hidup sehat dan pengobatan yang tepat."
+    },
+    {
+      "tipe": "info",
+      "kalimat": "Bagaimana cara mendiagnosis diabetes?",
+      "result": "Diabetes dapat didiagnosis melalui tes darah yang mengukur kadar glukosa darah puasa, tes toleransi glukosa oral, atau tes hemoglobin A1c."
+    },
+    {
+      "tipe": "info",
+      "kalimat": "Apa gejala umum diabetes?",
+      "result": "Gejala diabetes meliputi sering buang air kecil, haus berlebihan, penurunan berat badan yang tidak dijelaskan, kelelahan, penglihatan kabur, dan luka yang sulit sembuh."
+    },
+    {
+      "tipe": "info",
+      "kalimat": "Apa saja komplikasi jangka panjang yang dapat terjadi akibat diabetes?",
+      "result": "Komplikasi jangka panjang diabetes meliputi kerusakan saraf (neuropati), kerusakan ginjal (nefropati), masalah mata (retinopati), masalah kardiovaskular, dan luka yang sulit sembuh."
+    },
+    {
+      "tipe": "info",
+      "kalimat": "Apa itu gula darah puasa?",
+      "result": "Gula darah puasa adalah kadar glukosa dalam darah setelah tidak makan apa pun selama setidaknya delapan jam."
+    },
+    {
+      "tipe": "info",
+      "kalimat": "Bagaimana cara mengontrol diabetes tipe 2 dengan diet?",
+      "result": "Diet sehat untuk diabetes tipe 2 melibatkan mengonsumsi makanan rendah karbohidrat, rendah gula, tinggi serat, serta memperhatikan ukuran porsi dan waktu makan."
+    },
+    {
+      "tipe": "info",
+      "kalimat": "Apakah semua orang dengan diabetes harus menggunakan insulin?",
+      "result": "Tidak semua orang dengan diabetes perlu menggunakan insulin. Beberapa orang dengan diabetes tipe 2 dapat mengontrol gula darah mereka melalui obat-obatan oral atau perubahan gaya hidup."
+    },
+    {
+      "tipe": "info",
+      "kalimat": "Apa itu hipoglikemia?",
+      "result": "Hipoglikemia adalah kondisi ketika kadar gula darah terlalu rendah, biasanya di bawah 70 mg/dL. Gejalanya termasuk pusing, gemetar, keringat dingin, dan kebingungan."
+    },
+    {
+      "tipe": "info",
+      "kalimat": "Apa itu hiperglikemia",
+      "result": "Hiperglikemia adalah kondisi ketika kadar gula darah terlalu tinggi. Gejalanya meliputi rasa haus yang berlebihan, buang air kecil yang sering, kelelahan, dan pandangan kabur."
+    },
+    {
+      "tipe": "info",
+      "kalimat": "Bisakah seseorang dengan diabetes makan makanan manis",
+      "result": "Seseorang dengan diabetes sebaiknya membatasi konsumsi makanan manis, terutama yang mengandung gula tambahan."
+    },
+    {
+      "tipe": "info",
+      "kalimat": "apakah diabetes dapat dicegah",
+      "result": "Diabetes dapat dicegah atau kejadiannya dapat ditunda. Dengan tata laksana pengobatan yang optimum, diabetes dapat dikontrol dan orang dengan diabetes dapat berumur panjang dan hidup sehat"
+    },
+    {
+      "tipe": "info",
+      "kalimat": "apakah diabetes dapat menyebab penyakit lainnya",
+      "result": "Diabetes merupakan penyebab utama untuk kebutaan, serangan jantung, stroke, gagal ginjal dan amputasi kak"
+    },
+    {
+      "tipe": "info",
+      "kalimat": "berapa jumlah penderita diabetes",
+      "result": "Pada tahun 2015, 415 juta orang dewasa dengan diabetes, kenaikan 4 kali lipat dari 108 juta di 1980an. Pada tahun 2040 diperkirakan jumlahnya akan menjadi 642 juta (IDFAtlas 2015)"
+    },
+    {
+      "tipe": "info",
+      "kalimat": "bagaimana diabetes di asia tenggara",
+      "result": "Populasi dari wilayah regional Asia Tenggara secara genetik memang rentan terhadap faktor diabetogenik\nlingkungan, sehingga memiliki ambang lebih rendah terhadap faktor resiko seperti usia, kelebihan berat badan dan distrsi lemak tubuh.\n• Diabetes terjadi 10 tahun lebih cepat di wilayah regional Asia Tenggara daripada orang-orang dari wilayah Eropa, pada usia dimana merupakan masa paling produktif."
+    },
+    {
+      "tipe": "info",
+      "kalimat": "Apa sajakah gejala dari penyakit kencing manis kering?",
+      "result": "Kencing manis dalam bahasa medis disebut dengan diabetes melitus. Penyakit ini ditandai dengan kadar gula darah yang lebih tinggi daripada normal. Selain itu perlu diketahui mengenai tipe diabetes sendiri tidak ada kering ataupun basah, mungkin yang dimaksud tipe basah bila mengalami komplikasi salah satunya luka sulit sembuh.\n\nDiabetes dapat diketahui dari pemeriksaan dokter, yaitu dari wawancara keluhan, pemeriksaan fisik serta pemeriksaan penunjang. Wawancara keluhan dapat membantu untuk mengetahui kecurigaan terkait gejala diabetes. Beberapaciri penyakit diabetesantara lain sering merasa haus/lapar, sering buang air kecil malam hari, berat badan turun, mudah lelah, mudah lemas, luka sulit sembuh, dan sebagainya. Bila terdapat ciri tersebut maka perlu dicurigai adanya diabetes dan harus dilakukan pemeriksaan lanjutan. Salah satu pemeriksaan penting yaitu dengan pemeriksaan gula darah yang diperlukan untuk menegakkan diagnosis. Bila dari pemeriksaan menunjukkan kadar gula darah lebih dari normal maka perlu diberikan penanganan."
+    },
+    {
+      "tipe": "info",
+      "kalimat": "Adakah manfaat buah alpukat untuk penderita diabetes?",
+      "result": "Buah alpukat memiliki banyak kandungan nutrisi diantaranya adalahkarbohidrat, serat, protein, magnesium, kalium, lutein, folat, vitamin A, B, C, E, dan K, dan juga lemak tak jenuh yang baik untuk menjaga berat badan memelihara kesehatan jantung, menjaga kesehatan mata, mencegah dan mengatasi sembelit, mengontrol tekanan darah, mencegah radang sendi, dan juga mengurangi risiko terjadinya kanker.\n\nJika dilihat dari manfaatnya tersebut, maka konsumsi buah alpukat secara rutin pada penderita diabetes dapat berperan dalam mencegah komplikasi diabetes seperti penyakit jantung dan gangguan mata.\n\nDikarenakan kandungan gulanya yang rendah, maka buah alpukat boleh saja dikonsumsi rutin oleh penderita diabetes dalam beberapa kali seminggu seperti 2-3 kali seminggu, yang tentunya tetap perlu diimbangi dengan asupan buah dan sayuran beraneka ragam warna lainnya. Selain itu, tetap lakukan kontrol gula darah setiap bulannya dan konsumsi obat diabetes secara rutin"
+    },
+    {
+      "tipe": "info",
+      "kalimat": "Cara mengatasi telapak kaki dingin pada penderita diabetes",
+      "result": "Neuropati diabetik terjadi pada penderita diabetes ketika kadar gula darah yang tinggi melemahkan dinding pembuluh darah yang memberi asupan oksigen dan nutrisi untuk sel saraf. Akibatnya, terjadi kerusakan dan gangguan pada fungsi saraf.\n\nSemua penderita diabetes berisiko mengalami neuropati diabetik, tetapi risiko akan lebih besar bila terdapat faktor berikut:\n\n    Tidak mampu menjaga kadar gula darah dengan baik\n    Menderita diabetes untuk waktu yang lama\n    Memiliki berat badan berlebih\n    Menderitapenyakit ginjal\n\nuntuk pengobatan neuropati diabetik bertujuan untuk meredakan nyeri, serta mengembalikan fungsi normal saraf tubuh. saran saya selama kontrol gula  anda sekaligus mengatakan keluhan yang dirasakan sekarang atau anda bisa membawa  anda kembali ke dokter yang merawat agar mendapatkan pemeriksaan dan pengobatan.Perlu diketahui, neuropati diabetik tidak bisa disembuhkan sepenuhnya. Akan tetapi, perkembangan neuropati diabetik bisa diperlambat dengan menjaga kadar gula darah dalam batas normal. Kadar gula darah yang disarankan adalah 80-130 mg/dL sebelum makan dan kurang dari 180 mg/dL 2 jam setelah makan."
+    },
+    {
+      "tipe": "info",
+      "kalimat": "Obat herbal untuk mengatasi gula darah dan darah tinggi",
+      "result": "Hipertensi dan diabetes adalah 2 jenis penyakit kronis yang sulit untuk disembuhkan total. Namun, kedua penyakit ini bisa sangat dikontrol dengan pengobatan yang tepat. Hanya saja, memang, durasi pengobatan yang panjang, bahkan nyaris seumur hidup, kerap membuat kekhawatiran tersendiri bagi penderitanya.Sejatinya, ketimbang risiko efek sampingnya, pengobatan hipertensi dan diabetes memiliki jauh lebih banyak manfaat. Sebab, jika tidak diobati, kedua penyakit ini bisa memicu komplikasi yang berbahaya, misalnya ke jantung dan pembuluh darah, ginjal, otak dan sistem syaraf, mata, dan beragam sistem organ lainnya.Karenanya, sebaiknya mama Anda tetap rutin menjalani pengobatan atas kedua penyakitnya sebagaimana yang diarahkan oleh dokter. Hindari sembarangan mengubah dosis obat atau menghentikan konsumsinya tanpa arahan langsung dari dokter. Sembari itu, lakukanlah juga upaya berikut:\nJaga pola makan, yakni dengan:\nMemperbanyak konsumsi buah, sayur, biji-bijian utuh, kacang-kacangan, air putih\nMembatasi konsumsi makanan yang mengandung garam, gula sederhana, kolesterol, lemak trans, lemak jenuh, minuman berkafein\nJauhi makanan ultraproses, alkohol\nJaga berat badan ideal\nRutin berolahraga setiap 2-4 kali dalam seminggu, dengan durasi minimal 30 menit\nBijak mengelola stres\nIstirahat cukup\nTidak meminum sembarang obat dan herba lain tanpa saran dokter\nRutin kontrol ke dokter atau dokter penyakit dalam sesuai anjuran"
+    },
+    {
+      "tipe": "info",
+      "kalimat": "Sayuran yang menjadi pantangan pada penderita diabetes",
+      "result": "Salah satu hal yang dilakukan untuk menjaga gula darah juga dengan mengontrol makanan yang akan dikonsumsi. Sayuran merupakan jenis makanan yang penting bagi tubuh, namun beberapa jenis sayuran dapat menjadi pantangan pada penderita diabetes misalnya bila sayuran memiliki kandungan indeks glikemik tinggi, karbohidrat, dan natrium tinggi yang tidak direkomendasikan bagi penderita diabetes. Beberapa sayuran ini misalnya jagung karena memiliki indeks glikemik tinggi, kemudian kacang polong karena karbohidrat tinggi, kentang, labu madu, serta sebaiknya hindari sayuran yang mempunyai kemasan dalam bentuk kaleng dan sebaiknya memilih sayuran yang segar. Sedangkan beberapa sayuran yang aman untuk penderita diabetes antara lain brokoli, tomat, seledri, selada, terong, bayang, pokcoy, kembang kol, wortel, kale, bayam, lobak, selada air serta sayuran hijau."
+    },
+    {
+      "tipe": "info",
+      "kalimat": "Apakah yang dimaksud dengan dekubitus pada diabetes?",
+      "result": "ulkus dekubitus ialah suatu kondisi luka akibat tekanan di kulit karena posisi tubuh yang tidak berganti dalam waktu yang lama. dimana luka akan muncul di area kulit yang paling banyak mendapatkan tekanan seperti tulang ekor, pinggul, tumit dan siku. ulkus ini beresiko pada orang kondisinya menyebabkan gerak tubuh yang terbatas seperti penderita yang berbaring di tempat tidur atau duduk di kursi roda dalam waktu lama.\n\ndimana hal ini terjadi akibat aliran darah ke jaringan di bagian tubuh tersebut menjadi terganggu sehingga jaringan tersebut lama kelamaan mati dan membentuk luka. dimana penderita diabetes memiliki resiko besar untuk memicu ulkus ini akibat kadar gula yang tinggi serta adanya penekanan yang lama. saran saya untuk melakukan konsultasi ke dokter bedah namun sebelum itu konsultasikan dulu ke dokter penyakit dalam agar dapat diatasi diabetesnya dan lukanya bisa diatasi oleh dokter bedah."
+    },
+    {
+      "tipe": "info",
+      "kalimat": "Bagaimanakah cara untuk menghilangkan darah manis itu?",
+      "result": "Istilah darah manis umumnya mengacu kepada kondisi prurigo, dimana seseorang yang sering menggaruk kulit karena munculnya benjolan kecil berwarna merah yang terasa gatal, dan jika terus digaruk makaa dapat berkembang menjadi koreng atau infeksi bakteri.\n\nKondisi ini seringkali dialami pada penderita eksim atau dermatits atopik dan juga yang memiliki jenis kulit kering, dimana umumnya didapat dari keturunan atau bawaan, sehingga akan sangat sulit dihilangkan.\n\nNamun, kondisi tersebut dapat dicegah kekambuhannya dengan rutin menggunakan krim pelembab badan yang mengandung urea atau ceramide, gunakan krim pelembab badan yang mengandung bahan pencerah aman untuk membantu memudarkan bekas kehitaman pada kulit, gunakan sabun untuk kulit sensitif yang mengandung bahan pelembab, dan mencegah garukan pada gigitan nyamuk atau ruam lainnya dengan memastikan kuku selalu pendek dan menggunakan losion calamine atau penanganan gatal pada kulit lainnya seperti pada artikel ini."
+    },
+    {
+      "tipe": "info",
+      "kalimat": "Cara cepat menurunkan kadar gula darah yang mencapai 400",
+      "result": "Diabetes merupakan suatu penyakit yang ditandai dengan tingginya kadar gula (glukosa) dalam darah. Maka dari itu, perlu kehati-hatian dalam konsumsi makanan dan minuman agar kadar gula darah tetap stabil.\nMakanan yang dihindari untuk penderita diabetes yaitu:\n\n    Nasi putih, roti tawar putih, makanan yang terbuat dari tepung terigu.\n    Sayuran yang dimasak dengan tambahan garam, keju, mentega, ataupun saus dalam jumlah banyak.\n    Buah-buahan kaleng yang mengandung banyak gula.\n    Sayuran kaleng yang mengandung garam tinggi.\n    Daging berlemak dankulit ayam.\n    Produk susu tinggi lemak.\n    Makanan yang digoreng (ayam goreng, ikan goreng, pisang goreng atau kentang goreng).\n    Makanan dan minuman mengandung gula tinggi (sirop, dan soda).\n\nMakanan yang dianjurkan untuk penderita diabetes adalah:\n\n    Makanan yang terbuat dari biji-bijian utuh atau karbohidrat komplekspengganti nasi putih (nasi merah, ubi panggang,oatmeal, roti gandum,dan sereal dari biji-bijian utuh).\n    Daging tanpa lemak atau ayam tanpa kulit.\n    Sayuran (brokolidanbayam)diproses dengan dengan direbus, dikukus, dipanggang.\n    Buah-buahansegar.\n    Kacang-kacangan (kacang kedelai).\n    Telur.\n    Produk olahan susu rendah lemak (yoghurt).\n    Berbagai jenis ikan (tuna, salmon, sarden dan makarel, tetapi hindari ikan dengan kadar merkuri tinggi,misalnya ikan tongkol)."
+    },
+    {
+      "tipe": "info",
+      "kalimat": "Penyebab dan cara menghilangkan keringat dingin berlebih pada penderita diabetes",
+      "result": "Kondisi seseorang yang berkeringat berlebihan, dalam artian kuantitas berkeringatnya secara signifikan melebihi orang lain dengan intensitas aktivitas dan suhu ruangan yang serupa, disebut dengan kondisi hiperhidrosis, dan hiperhidrosis memang bisa dipicu oleh kondisi diabetes, disamping sejumlah faktor lainnya.\n\nKaitan antara diabetes dengan kondisi hiperhidrosis disebabkan oleh salah satu komplikasi atau kondisi lanjutan dari tingginya kadar gula darah dalam jangka waktu lama, yakni gangguan sistem saraf, yang dalam hal ini, adalah sistem saraf yang mengatur keringat, sehingga menyebabkan keringat yang diproduksi tubuh orang tua Anda lebih banyak dari semestinya. Adapun selama ini gula darahnya terkontrol, ini memang mengurangi potensi terjadinya komplikasi dari diabetes, tapi tidak menghilangkan kemungkinannya sama sekali. Bila kadar gula darahnya tidak terkontrol, komplikasi ini mungkin muncul lebih awal, dan mungkin melibatkan organ lain sehingga lebih berat, seperti mempengaruhi mata dan ginjal.\n\nTerkait hal ini, tindakan yang dilakukan sudah tepat dengan memperbanyak konsumsi air putih. Selain itu, sebaiknya suhu ruangan di rumah juga disesuaikan, kenakan pakaian yang nyaman dan menyerap keringat serta tidak terlalu tebal, juga kenakan deodoran dengan kandungan antiperspirant. Kemudian, periksakan kondisi  Anda pada dokter saraf untuk dikaji lebih lanjut terkait kondisinya, apakah kondisi hiperhidrosisnya murni disebabkan oleh diabetes atau ada pemicu lain seperti ketidakseimbangan hormon,"
+    },
+    {
+      "tipe": "info",
+      "kalimat": "Penyebab merasa sering haus terus-terusan, apakah ciri diabetes?",
+      "result": "Gejala sering haus yang anda alami belakangan ini dapat dipengaruhi dan disebabkan oleh beberapa kemungkinan penyebab yaitu seperti pada cuaca yang sedang panas, sering berada di ruangan yang panas, mengalami dehidrasi ketika tubuh banyak berkeringat, mengonsumsi makanan tinggi garam, kehamilan, efek samping obat, anemia, atau diabetes.\n\nPenyakit diabetes disebabkan oleh multifaktorial, dimana tidak hanya disebabkan oleh faktor genetik, namun bisa dipengaruhi pula oleh pola hidup yang tidak sehat seperti memiliki berat badan berlebih atau mengalami sindrom metabolik.\n\nDikarenakan kepastian diagnosis penyebab keluhan anda belum dapat ditentukan, maka sebaiknya anda berkonsultasi lebih lanjut dengan dokter penyakit dalam yang lebih ahli dalam bidang tersebut secara langsung atau melalui chat aplikasi Alodokter, agar dapat dilakukan pelacakan penyebab dan dapat dipastikan keamanan kesehatan anda nantinya."
+    },
+    {
+      "tipe": "info",
+      "kalimat": "Obat gatal yang aman untuk penderita diabetes",
+      "result": "Kondisi kulit yang gatal atau yang disebut pruritus memang seringkali terjadi pada penderita diabetes, karena adanya gangguan saraf ataupun karena kondisi kulit yang cenderung kering.\n\nUntuk mengatasinya, maka akan lebih aman untuk rutin mengompres dingin kulit yang gatal, kenakan pakaian dengan bahan yang lembut, hindari menggaruk berlebih kulit yang gatal untuk mencegah infeksi, serta menggunakan krim pelembab khusus penderita diabetes dengan kandungan urea, ceramide, atau panthenol secara rutin, sehingga dapat membantu mencegah timbulnya keluhan gatal pada kulit di kemudian hari.\n\nJika belum kunjung membaik, maka  anda juga dapat mengonsumsi obat antihistamin tertentu yang sudah dipastikan tidak memiliki interaksi antar obat dengan obat glibenclamide yang sedang  anda konsumsi.\n\nNamun, konsumsi obat tersebut hanyalah untuk sementara waktu, dimana jika keluhan gatal tidak kunjung membaik, maka sebaiknya konsultasikan  anda dengan dokter kulit agar dapat ditentukan penanganan yang tepat."
+    },
+    {
+      "tipe": "info",
+      "kalimat": "Apa akibatnya jika kadar gula darah wanita 50 tahun tinggi?",
+      "result": "Kadar gula darah yang tinggi dapat menjadi tanda dari hiperglikemia. Hiperglikemia merupakan salah satu tanda dari diabetes. Kondisi yang menyebabkan hiperglikemia antara lain karena konsumsi gula terlalu tinggi, produksi gula tubuh berlebihan, hingga mengalami gangguan proses perubahan gula di dalam tubuh. Selain karena diabetes, kondisi lain yang dapat menyebabkan hiperglikemia seperti gangguan hormon, jarang olahraga, sedang infeksi, penggunaan obat-obatan seperti kortikosteroid, dan sebagainya.\n\nRisiko hiperglikemia meningkat bila terdapat riwayat diabetes di keluarga, berat badan berlebih, tekanan darah tinggi, kolesterol tinggi dan sebagainya. Gejala hiperglikemia terlihat bila kadar gula meningkat signifikan antara lain sering buang air kecil, mudah haus, sakit kepala, pandangan kabur, berat badan turun, luka sulit sembuh dan sebagainya. Untuk menentukan adanya hiperglikemia diperlukan pemeriksaan dokter salah satunya denganpemeriksaankadar gula darah.Sebaiknya bila terdapat hiperglikemia, perlu kontrol dokter agar mendapatkan penanganan. Serta sebaiknya melakukan penanganan mandiri untuk menurunkan kadar gula darah yaitu dengan olahraga rutin, konsumsi makanan berserat tinggi, mengurangi konsumsi makanan tinggi karbohidrat, banyak minum air putih, istirahat cukup. Sedangkan bila hiperglikemia tidak diobati maka dapat menyebabkan komplikasi akibat kadar gula darah yang tinggi seperti stroke, perlemakan hati, kerusakan saraf, masalah pada ginjal, gangguan mata, hingga mudah infeksi. Maka sebaiknya bila telah mengalami kadar gula darah tinggi sebaiknya harus dikontrol"
+    },
+    {
+      "tipe": "info",
+      "kalimat": "Bagaimana ciri-ciri luka diabetes basah dan cara merawatnya?",
+      "result": "Pada penderita diabetes yang tidak mengonsumsi obat antidiabetes secara rutin, maka dapat memperparah penyakit diabetes yang dialami, dimana dapat pula berpengaruh terhadap terjadinya gangguan saraf dan kelancaran peredaran darah.\n\nKondisi inilah yang seringkali membuat kaki penderita diabetes mengalami kekurangan sensitivitas pada kulitnya, sehingga dapat mudah mengalami luka yang tidak disadari serta akan sulit untuk sembuh karena kurang lancarnya peredaran darah dan oksigen dalam proses penyembuhan luka.\n\nJika tidak segera ditangani dengan tepat, yaitu dengan perawatan luka yang tepat, pemberian obat antibiotik, dan konsumsi obat antidiabetes, maka luka tersebut dapat menyebar ke jaringan yang lebih dalam lagi dimana disebut dengan ulkus diabetikum, dan lama-kelamaan dapat menyebabkan komplikasi penyebaran infeksi ke seluruh tubuh yang dapat mengakibatkan sepsis dan kematian"
+    },
+    {
+      "tipe": "info",
+      "kalimat": "Bolehkah minum susu diabetes pada lansia yg tidak memgalami diabetes?",
+      "result": "Susu diabetes umumnya memiliki kandungan susu yang rendah lemak dan rendah gula, namun tinggi protein, kalsium, dan vitamin D, yang diperuntukkan pada penderita diabetes untuk membantu menunjang kesehatannya sehari-hari tanpa memperburuk kondisi penyakit diabetesnya.\n\nDikarenakan tidak terdapat kandungan yang berbahaya di dalam susu diabetes, maka  anda atau orang lain yang tidak menderita diabetes boleh saja mengonsumsi susu khusus diabetes, dan justru akan lebih sehat karena konsumsi gula dan lemak dalam jumlah terbatas yang dapat pula mencegah terjadinya penyakit kolesterol tinggi, diabetes, penyakit jantung, dan stroke yang sering dialami oleh orang lanjut usia.\n\nSelain itu, tetap ayah dan  anda juga tetap perlu menerapkan pola hidup sehat dengan rutin berolahraga, jaga berat badan ideal atau turunkan berat badan jika berlebih, cukupi kebutuhan air putih minimal 1.5-2 liter per hari, tidur cukup minimal 7 jam setiap malamnya, kelola stres dengan baik, rutin memeriksakan tekanan darah dan gula darah, serta hindari merokok dan konsumsi kafein berlebih."
+    },
+    {
+      "tipe": "info",
+      "kalimat": "Apa saja makanan untuk penderita gula darah tinggi?",
+      "result": "gula darah tinggi atau hipoglikemia merupakan suatu kondisi naiknya kadar gula atau glukosa di dalam darah. kadar gula darah yang tinggi bisa membahaykan kesehatan terutama pada penderita diabetes. siapaun bisa mengalami gula darah tinggi bahakan pada orang yang tidak menderita diabetes sekalipun. kondisi ini dapat terjadi pada orang memiliki gangguan kesehatan seperti gangguan metabolisme, gangguan hormon, infeksi parah, stres berat dan kerusakan pankreas. pada penderita diabetes kadar gula darah tinggi disebabkan karena tidak mendapatkan pengobatan diabetes dan faktro lainnya seperti tidak berolahraga, konsumsi tinggigula dan banyak konsumsi karbohidrat.\n\nseperti saya sebutkan diatas untuk penderita kadar gula darah tinggi batasi konsumsi gula rendah dan batasi atau kurangi konsumsi karbohidrat. sebaiknya perbanyak konsumsi air putih atau minuman sehat seperi infused water, jus buah dan sayur tanpa tambahan gula atau minuman elektrolit dengan rendah gula hindari konsumsi minuman soda dan alkohol"
+    },
+    {
+      "tipe": "info",
+      "kalimat": "Amankah konsumsi madu untuk penyembuhan penyakit diabetes?",
+      "result": "Hingga saat ini tidak ada penelitian yang menyebutkan madu dapat digunakan sebagai obat untuk menyembuhkan diabetes maka sebaiknya tidak menggunakan madu secara sembarangan. Terlebih madu juga mengandung karbohidrat dimana karbohidrat tersebut tetap berkontrsi terhadap kenaikan kadar gula darah. Madu mengandung karbohidrat jenis sukrosa yang dapat mempengaruhi kadar gula darah sama seperti jenis gula lain misalnya gula pasir yang terbuat dari tebu. Sehingga baik menggunakan madu atau gula sebagai pemanis tetap dapat meningkatkan kadar gula darah.\n\nMaka dari itu bila ingin mengonsumsi madu bukan sebagai obat diabetes, namun dengan konsumsi madu digunakan sebagai pengganti gula dalam hal pemanis. Konsumsi madu pun tidak boleh berlebihan. Hal tersebut disebabkan karena madu mempunyai rasa lebih manis dibandingkan dengan gula maka sebaiknya tidak mengonsumsi berlebihan. Pada pengidap diabetes tetap dianjurkan untuk mengontrol gaya hidup serta berkonsultasi ke dokter agar dapat memperoleh penanganan yang sesuai."
+    },
+    {
+      "tipe": "info",
+      "kalimat": "Apakah ada beras khusus untuk penderita diabetes?",
+      "result": "Pada penderita diabetes mengalami peningkatan kadar gula darah sehingga perlu melakukan perubahan gaya hidup sehingga gula darah menjadi terkontrol dan menghindari komplikasi diabetes. Penderita diabetes selain harus melakukan perubahan gaya hidup salah satunya mengatur pola makan. Pada penderita diabetes, sebaiknya memilih makanan yang mengandung indeks glikemik yang lebih rendah. Indeks glikemik merupakan suatu indikator dimana makanan mempengaruhi peningkatan gula darah. Skala indeks glikemik berada pada angka 1–100 dimana semakin tinggi angka akan semakin cepat meningkatkankadar gula darah.\n\nMakanan dengan indeks glikemik tinggi mempunyai kandungankarbohidratyang dicerna cepat oleh tubuh, sehingga gula darah lebih cepat naik. Salah satu makanan yang tergolong indeks glikemik tinggi yaitu nasi putih. Sedangkan beras merah dan beras hitam keduanya mempunyai indeks glikemik yang lebih rendah dibandingkan dengan nasi putih. Pada beras merah, indeks glikemiknya yaitu 50 yang berarti baik dikonsumsi untuk penderita diabetes, pun dengan beras hitam memiliki indeks glikemik yang lebih rendah dari beras merah yaitu 42.3 sehingga baik juga dikonsumsi penderita diabetes. Namun beras hitam lebih sulit didapatkan. Maka bila ingin mengganti nasi dengan kedua beras tersebut dapat dilakukan untuk penderita diabetes, dengandapat menyesuaikan seperti mana yang lebih mudah didapatkan dan sebagainya."
+    },
+    {
+      "tipe": "info",
+      "kalimat": "Apakah kadar gula beras merah lebih baik dari beras putih untuk penderita diabetes?",
+      "result": "Nasi putih memang memiliki indeks glikemik yang lebih tinggi dibandingkan dengan nasi merah, dimana nasi putih termasuk ke dalam kelompok makanan dengan indeks glikemik tinggi, sedangkan nasi merah termasuk ke kelompok yang sedang-rendah.\n\nPada penderita diabetes, memang sangat disarankan untuk mengonsumsi makanan yang memiliki indeks glikemik sedang atau rendah, karena makanan dengan indeks glikemik yang tinggi dapat menyebabkan kadar gula darah dalam tubuh meningkat dengan lebih cepat dan lebih tinggi jika dibandingkan dengan makanan dengan indeks glikemik yang lebih rendah.\n\nIndeks glikemik memang dapat saja digunakan untuk membantu memilih makanan untuk penderita diabetes, akan tetapi, penggunaannya tetap masih sangat terbatas untuk diaplikasikan sehari-hari karena beberapa hal seperti :\n\n    tidak semua makanan yang ada memiliki indeks glikemiknya masing-masing\n    tidak diketahuinya indeks glikemik pada makanan yang mengandung karbohidrat hanya dalam jumlah sedikit\n    tidak mengelompokkan makanan berdasarkan kandungan nutrisi yang ada di dalam suatu makanan, sangat mungkin makanan yang memiliki indeks glikemik rendah ternyata tinggi kalori karena kandungan lain seperti misalnya tinggi akan lemak jenuh\n\nOleh karena itu, meskipun memiliki penyakit diabetes, sangat disarankan untuk makan dengan porsi secukupnya dan mengandung nutrisi yang cukup serta seimbang. Bila ingin membatasi asupan makanan yang tinggi akan karbohidrat, sangat disarankan dikonsultasikan terlebih dahulu dengan dokter yang selama ini menangani  anda atau dengan dokter spesialis gizi klinik agar tidak menjalani pola diet yang salah yang dapat berakibat buruk bagi pasien sendiri."
+    },
+    {
+      "tipe": "info",
+      "kalimat": "Tips memilih susu bagi penderita diabetes sebagai tambahan nutrisi",
+      "result": "Diabetes yang tidak terkontrol seringnya akan membuat penderitanya menjadi lebih cepat lapar. Jika nafsu makan  Anda justru berkurang, biasanya hal ini disebabkan oleh faktor lain, seperti stres, infeksi, gangguan pencernaan, fluktuasi hormonal, efek samping pengobatan, dan lain sebagainya.\n\nPenanganan atas nafsu makan yang menurun pada penderita diabetes bisa dilakukan dengan cara berikut:\n\n    Berikan  Anda makanan dan minuman yang mengandung rendah kalori, rendah lemak, rendah indeks glikemik, serta mengandung tinggi serat, karbohidrat kompleks, dan antioksidan --- contohnya buah-buahan, sayur-sayuran, biji-bijian utuh, oat, susu rendah lemak dan rendah gula (misalnya susu kedelai, almond milk, flax milk)\n    Berikan  Anda makan dengan porsi kecil tetapi sering\n    Beri beliau banyak minum, terutama air putih\n    Minta beliau banyak beristirahat, rutin berolahraga, dan tenangkan pikiranya\n    Dampingi beliau menjalani pengobatan dan kontrol rutin sesuai saran dokter atau dokter penyakit dalam"
+    },
+    {
+      "tipe": "info",
+      "kalimat": "Obat untuk mengatasi kesemutan dan kebas pada penderita diabetes",
+      "result": "keluhan kesemutan pada penderita diabetes disebut dengan neuropati diabetik yaitu gangguan saraf akibat penyakit diabetes yang ditandai dengan kesemutan, nyeri atau mati rasa. umumnya paling sering mengenai saraf kaki. pada penderita diabetes ketika kadar gula darah tinggi melemahkan dinding pembuluh darah yang memberi asupan oksigen dan nutrisi untuk sel saraf. akibatnya terjadi kerusakan dan gangguan pada fungsi saraf. namun kondisi yang dialami  anda tidak selalu akibat diabetes bisa pula memang adanya gangguan pada saraf itu sendiri karena penggunaan tangan aktivitas berulang yang disebut penyakit ini berupa carpal tunnel syndrome.\n\nuntuk penangnan kesemutan ini memang sebaiknya sesuai penyebab yang mendasarinya jadi sebaiknya menemui dokter secara langsung agar diberikan penangnan yang tepat. untuk dirumah ada beberapa tips untuk mengurangi keluhan seperti :\n\n    mengoleskan krim capsaicin pada bagian kesemutan\n    atau konsumsi vitamin dengan kandungan B1,B6 dan B12\n    kontrol kadar gula darah dengan rutin cek gula darah dan konsumsi obat sesuai anjuran dokter"
+    },
+    {
+      "tipe": "info",
+      "kalimat": "Tanda dan gejala penyakit diabetes yang semakin parah",
+      "result": "diabetes ialah suatu penyakit kronis yang ditandai dengan tingginya kadar gula dalam darah. dimana diabetes ada dua jenis yaitu diabetes 1 dan 2. umumnya paling sering terjadi diabetes tipe 2 dimana gejala yang dialami diabates tipe 2 banyak penderita tidak menyadari ia menderita selama bertahun-tahun karena gejala cenderung tidak spesifik. gejala diabetes yang dialami berupa :\nrasa haus atau sangat lapar\nsering buang air kecil terutama pada malam hari\npenurunan berat badan tanpa sebab yang jelas\ngatal-gatal pada kulit\nbercak-bercak hitam di kulit\ndan lainnya\n parahnya penyakit ditandai dengan kadar gula darah yang makin tinggi dan terjadinya komplikasi seperti luka borok pada kaki yang tidak sembuh atau dinamakan ulkus diabetikum, adanya gangguan saraf berupa neuropati diabetik dan lainnya. jadi gejala dialami  anda umum dialami pada penderita diabetes. sebaiknya untuk kontrol rutin kadar gula darah serta konsumsi obat sesuai anjuran dokter dan kontrol ulang sesuai anjuran dokter yang menangani agar gula darah terkontrol dan komplikasi bisa di cegah."
+    },
+    {
+      "tipe": "info",
+      "kalimat": "Cara mengatasi penyakit gula basah di kaki",
+      "result": "Kondisi luka pada kaki penderita diabetes dapat disebut dengan ulkus diabetikum, dimana seringkali dapat mengalami infeksi bakteri yang sulit sembuh, karena aliran darah dan oksigen pada penderita diabetes yang tidak lancar pada kaki.\n\nUntuk mengatasinya, maka penyakit diabetes itu sendiri perlu dikontrol terlebih dahulu dengan obat antidiabetes hingga gula darahnya normal. Secara berkesinambungan, luka pada kaki juga perlu diatasi dengan perawatan luka yang tepat seperti pada artikel ini, serta pemberian antibiotik pada kondisi luka yang basah dan kemungkinan mengalami infeksi.\n\nDikarenakan perawatan luka terkadang memerlukan alat yang steril dan pemberian antibiotik pun memerlukan peresepan dokter, maka sebaiknya anda memeriksan orang tua anda ke dokter secara langsung, agar dapat ditentukan penanganan yang tepat ke depannya, dikarenakan jika tidak tertangani dengan tepat, infeksi pada kaki orang tua anda bisa berakibat terhadap komplikasi seperti sepsis atau menyebarnya infeksi bakteri ke seluruh tubuh yang dapat menyebabkan kematian."
+    },
+    {
+      "tipe": "info",
+      "kalimat": "Bagaimana cara menurunkan kadar gula dengan cepar dan alami?",
+      "result": "Gula darah sewaktu normalnya adalah dibawah 200 mg/dL, dimana pada hasil gula darah anda yang jauh melebihi kadar normal tersebut, maka sudah bisa dicurigai mengarah kepada penyakit diabetes terutama jika memiliki keturunan keluarga dengan riwayat penyakit diabetes, yang perlu dipastikan kembali dengan serangkaian pemeriksaan gula darah lainnya.\n\nSementara ini anda bisa saja menerapkan pola hidup sehat terlebih dahulu seperti dengan menurunkan berat badan jika berlebih, menghindari makanan tinggi gula, garam, dan lemak, olahraga rutin 3-5 kali seminggu, cukupi kebutuhan air putih minimal 1.5 liter per hari, tidur cukup dan teratur, serta kelola stres dengan baik.\n\nAnda juga bisa membantu menurunkan gula darah dengan mengonsumsi air rebusan ginseng dan kayu manis, atau mengonsumsi jus bawang putih dan lidah buaya, untuk menunjang penurunan gula darah.\n\nNamun, jika nantinya dengan beberapa cara mandiri tersebut, gula darah anda masih juga belum dapat turun, maka menandakan bahwa anda membutuhkan obat penurun gula darah atau obat antidiabetes, yang perlu dikonsumsi secara rutin, untuk mencegah komplikasi diabetes seperti gagal ginjal, stroke, dan serangan jantung."
+    },
+    {
+      "tipe": "info",
+      "kalimat": "Apa saja komplikasi dari penyakit diabetes melitus?",
+      "result": "Diabetes adalah penyakit yang terjadi ketika metabolisme glukosa terganggu akibat ketidakmampuan tubuh memproduksi hormon insulin yang cukup, atau resistensi tubuh terhadap kerja hormon insulin yang diproduksinya sendiri. Kondisi ini bisa memicu beragam gejala mengganggu, seperti mudah lapar, mudah haus, sering buang air kecil, mudah mengalami infeksi, mudah lelah, sering kesemutan, dan sebagainya.\n\nSejauh ini, diabetes belum bisa disembuhkan total. Namun, penyakit ini bisa dikontrol sehingga tidak timbul komplikasi yang berbahaya. Adapun komplikasi yang dimaksud adalah gangguan ginjal (nefropati diabetikum), gangguan syaraf (neuropati diabetikum), gangguan penglihatan (retinopati), gangguan imunitas (infeksi jamur berulang), penyakit Alzheimer, depresi, dan sebagainya."
+    },
+    {
+      "tipe": "info",
+      "kalimat": "Bagaimana perawatan luka diabetes dirumah pada lansia?",
+      "result": "Pada penderita diabetes, maka dapat pula mengalami gangguan saraf seperti neuropati diabetik yang dapat menyebabkan kaki menjadi mati rasa terhadap sentuhan, sehingga membuatnya tidak dapat mengenali benda tajam yang melukai kakinya, sehingga dapat dibiarkan dalam waktu yang lama dan menyebabkan infeksi yang memang sulit sembuh pada penderita diabetes, sehingga berisiko berkembang ke jaringan kulit yang lebih dalam lagi nantinya, dimana dapat disebut dengan ulkus diabetikum.\n\nUntuk mengatasinya, maka anda dapat melakukan perawatan luka di rumah dengan penggantian perban luka minimal 1 kali sehari, pembersihan luka dengan kasa steril dan cairan infus NaCl, kemudian oleskan salep antibiotik, tempelkan sofratul, dan tutup dengan kasa steril dan perban.\n\nPenanganan infeksi luka pada penderita diabetes terkadang perlu dilakukan dengan pemantauan dokter di atau dokter bedah secara berkala jika memang luka tampak dalam dan besar atau terdapat jaringan mati hitam pada luka, dan juga jika tidak membaik dengan perawatan luka secara mandiri di rumah."
+    },
+    {
+      "tipe": "info",
+      "kalimat": "Pemilihan beras hitam dan beras merah yang baik digunakan penderita diabetes",
+      "result": "Pada penderita diabetes, dianjurkan untuk mengontrol gaya hidup sehat sehingga dapat membantu dalam mengontrol kadar gula darah salah satunya dalam pemilihan makanan. Sebaiknya pada penderita diabetes memilih makanan yang memiliki kadar indeks glikemik yang lebih rendah (kurang dari 55). Pada makanan dengan indeks glikemik rendah memiliki kandungan karbohidrat yang dicerna lebih lama oleh tubuh maka tidak menimbulkan kenaikan kadar gula darah secara drastis.\n\nBeberapa makanan yang memiliki indeks glikemik rendah terutama yang berasal dari buah, sayur, biji-bijiam, kacang, susu rendah lemak dan lain-lain. Namun perlu diingat bahwa indeks glikemik tersebut dapat berubah bergantung dari cara pengolahan makanan, penggabungan makanan dengan indeks glikemik yang tinggi, serta tingkat kematangan.\n\nMengenai mana yang lebih baik antara beras merah dan hitam keduanya memiliki kelebihan dan kekurangan. Pada beras merah mempunyai indeks glikemik 50 yang baik dikonsumsi untuk penderita diabetes, begitu pula beras hitam memiliki indeks glikemik lebih rendah yaitu42.3. Namun beras hitam lebih sulit utnuk didapatkan. Sehingga keduanya dapat dikonsumsi oleh penderita diabetes."
+    },
+    {
+      "tipe": "info",
+      "kalimat": "Rekomendasi susu rendah lemak untuk penderita diabetes",
+      "result": "Merek susu yang Anda sebutkan merupakan produk susu rendah gula atau menggunakan pengganti gula yang diformulasikan untuk penderita diabetes. Merek ini memiliki berbagai jenis produk dan varian; ada yang berupa susu, biskuit, pemanis buatan, dll, dan salah satu varian susu nya ada yang rendah lemak juga. Selain itu dipasaran juga beredar susu rendah lemak tanpa gula merek lainnya yang setara dengan merek yang Anda sebutkan. Masing-masing merek ini memiliki kekurangan dan kelebihannya masing-masing, jadi pemilihannya tergantung selera orang yang mengonsumsinya.\n\nUntuk mengetahui jenis susu apa yang paling sesuai dengan kebutuhan ayah Anda, berikut ini adalah beberapa hal yang perlu diperhatikan:\n\n    Tujuan pemberian susu. Bila pasien kekurangan nutrisi karena dibatasi makannya, mungkin sebaiknya pertimbangkan untuk memberi susu full cream rendah gula, supaya kebutuhan nutrisi ayahanda tetap terpenuhi tanpa menyebabkan kenaikan kadar gula darah. Namun bila kebutuhan nutrisi pasien dapat dipenuhi dari makanan sehari-hari, maka sesungguhnya susu tidak diperlukan.\n    Kondisi pasien; contohnya, pasien yang intoleransi laktosa atau alergi terhadap susu sapi sebaiknya tidak diberikan suplemen berupa susu, baik rendah lemak atau tidak, apapun mereknya\n    Selera pasien, supaya susu yang disediakan memang dikonsumsi olehnya agar dapat diperoleh manfaatnya.\n    Ketersediaan dan keterjangkauan susu. Produk terbaik di dunia sekalipun tidak akan bermanfaat bila pasien kesulitan untuk mendapatnyannya (misalnya hanya diproduksi dan dijual di luar negeri dengan harga sangat mahal.\n    Bila Anda kesulitan untuk menentukan susu yang paling cocok untuk ayahnya, Anda dapat kembali berkonsultasi ke dokter yang menangani masalah diabetes ayahnda agar dapat direkomendasikan produk yang dapat Anda akses dengan mudah."
+    },
+    {
+      "tipe": "info",
+      "kalimat": "Obat yang dapat digunakan untuk menurunkan kadar gula darah",
+      "result": "Pada kemungkinan kadar gula darah sewaktu yang baru dialami hingga mencapai 300 mg/dL dimana normalnya adalah 200 mg/dL, maka dikhawatirkan dapat mengarah kepada kondisi diabetes melitus tipe 2, yang bisa saja disertai gejala seperti sering haus, sering lapar, dan sering BAK, namun ada juga yang tidak mengalami gejala apapun.\n\nNamun penegakkan diagnosis tersebut perlu diikuti dengan pemeriksaan penunjang lainnya seperti pemeriksaan gula darah puasa, gula darah 2 jam setelah makan, dan HbA1c, untuk dapat menentukan pilihan pengobatan yang tepat pada kondisi  anda.\n\nOleh karena itu, sebaiknya periksakan  anda dengan dokter penyakit dalam, agar dapat dilakukan pemeriksaan menyeluruh dan penanganan yang tepat. Jika gula darah yang tinggi tersebut tidak diobati, maka dalam jangka waktu yang lama dapat berkembang menjadi komplikasi seperti gagal ginjal, stroke, gangguan saraf, atau gangguan penglihatan."
+    },
+    {
+      "tipe": "info",
+      "kalimat": "penderita diabetes konsumsi kudapan tape ketan?",
+      "result": "Tape adalah makanan yang diperoleh dari fermentasiseperti singkong dan ketan yang dibantu dengan bakteri yang baik untuk usus. Hasil fermentasi dapat menyebabkan produksi probiotik maupun alkohol. Tape ketan merupakan makanan yang tergolong ke dalam indeks glikemik yang rendah.Penderita diabetes sebaiknya mengonsumsi makanan yang mempunyaiindeks glikemikyang rendah. Indeks glikemik tersebut merupakan angka yang memperlihatkan potensi peningkatan gula darah dari karbohidrat.\n\nNamun perlu diingat bahwa yang menentukan apakah makanan baik atau tidak untuk dikonsumsi selain zat gizi juga jumlah serta cara pengolahannya. Maka dari itu bila ingin mengonsumsinya sebaiknya tidak terlalu banyak karena potensi alkohol yang terkandung, selain itu tape sebaiknya tidak diolah menjadi makanan atau minuman yang ditambah dengan gula. Lalu juga dibarengi dengan kontrol kadar gula darah, melakuakn aktivitas fisik, olahraga teratur, dan sebagianya."
+    },
+    {
+      "tipe": "info",
+      "kalimat": "Penjelasan tentang insulin-independent diabetes melitus",
+      "result": "Diabetes melitus merupakan kondisi di mana terjadinya gangguan pada metabolisme maupun produksi hormon insulin sehingga terjadi peningkatan kadar glukosa darah. Kondisi ini dapat menimbulkan gejala seperti mudah haus, mudah lapar, maupun mudah BAK. Diabetes melitus terbagi menjadi berbagai jenis, salah satunyainsulin-dependentdiabetes melitus, di mana hal tersebut disebabkan oleh tubuh yang tidak mampu memproduksi hormon insulin yang cukup akibat hilangnya sel beta pankreas yang dapat memproduksi insulin tersebut.\n\nPada penderita insulin-independent diabetes melitus, pasien membutuhkan terapi insulin untuk mengontrol diabetes melitus tersebut. Apabila diabetes melitus tidak terkontrol, maka terdapat risiko terjadinya berbagai komplikasi, salah satunya adalah diabetic ketoacidosis, dimana terjadi penumpukan zat sisa keton di dalam tubuh sehingga suasana tubuh menjadi lebih asam. Hal ini dapat menimbulkan gejala seperti sesak napas, dehidrasi, lemas dan lelah, penurunan kesadaran, sampai risiko kematian.\n\nOleh karena itu, kontrol gula darah dengan insulin perlu dilakukan dengan baik pada penderita insulin-dependent diabetes melitus untuk mencegah terjadinya komplikasi tersebut. Selain itu, konsumsilah obat sesuai dengan petunjuk dokter, mengonsumsi makanan sesuai dengan diet yang dianjurkan, rutin berolahraga, dan kontrol berkala secara rutin ke dokter.Dokter akan melakukan evaluasi lebih lanjut terkait dengan kondisi Anda dan memberikan terapi yang sesuai."
+    },
+    {
+      "tipe": "info",
+      "kalimat": "Apa yang dimaksud ketones pada hasil permeriksaan gula darah",
+      "result": "Keton merupakansatu parameter pemeriksaan dapat dideteksi dalam pemeriksaan urin. Keton adalah hasil dari metabolisme lemak. Pada orang normal, keton tidak terdideteksi dalam urin karena semua hasil metabolisme lemak dipecah. Namun pada kondisi kelaparan berat, muntah hebat, dimana kekurangan karbohidrat sebagai sumber energi, maka cadangan lemak dalam tubuh akan digunakan sebagai sumber energi dan kemudian akan dipecah. Pada pemecahan tersebut akan menghasilkan keton akibatmetabolisme lemak.\n\nPemeriksaan keton perlu dilakukan pada seseorang yang mengalami diabetes melitus terutama bila datang dalam kondisi lemas atau penurunan kesadaran. Pada pasien hiperglikemia terutama pada gula darah terlalu tinggi di atas 300 maka perlu dilanjutkan dengan pemeriksaan keton.\n\nBila pada hasil pemeriksaan urin ditemukan hasil positif serta disertai dengan gula darah tinggi, maka kemungkinan terdapat kondisi ketoasidosis diabetes.\n\nKetoasidosis adalah komplikasi diabetes dan merupakan kondisi darurat serta perlu segera ditangani. Kemungkinan maksud dari hasil lab tersebut perlu dilanjutkan dengan pemeriksaan keton untuk memastikan apakah terjadi asidosis atau tidak. Sebaiknya segera melakukan pemeriksaan ke dokter."
+    },
+    {
+      "tipe": "info",
+      "kalimat": "Pengobatan untuk mengatasi kadar gula darah tinggi",
+      "result": "Pengobatannya meliputi satu atau kombinasi obat anti diabetes, dan jika belum berhasil, dapat ditingkatkan menjadi pengobatan suntikan insulin yang perlu dilakukan beberapa kali sehari seumur hidup. Gula darah orang tua anda nantinya dapat menjadi normal kembali, namun kemungkinan besar hanya dapat normal dengan pengobatan diabetes secara rutin.\n\nJika tidak dikontrol dengan obat, diabetes dapat menimbulkan komplikasi seperti penyakit jantung, stroke, gagal ginjal, kebutaan, luka yang sulit sembuh, dan gangguan saraf. Maka dari itu, sebaiknya orang tua anda memeriksakan diri kembali dengan dokter penyakit dalam dan rutin kontrol setiap bulannya, agar dapat diberikan pengobatan yang sesuai dengan kondisi orang tua anda, sehingga dapat mencegah timbulnya komplikasi dari diabetes itu sendiri."
+    },
+    {
+      "tipe": "info",
+      "kalimat": "Penyebab badan kaku semua saat demam menggigil",
+      "result": "Demam, menggigil, hingga tubuh terasa kaku mungkin pemicunya adalah suatu infeksi. Infeksi ini bisa membuat tubuh mengalami peradangan, hingga suhu tubuhnya meningkat. Karena itu juga, tubuh bisa banyak berkeringat, membuat banyak cairan dan elektrolit yang hilang, lantas inilah yang bisa membuat tubuh seakan kaku. Kaku yang Anda rasakan bisa juga merupakan imbas dari kontraksi otot saat demam. Lebih spesifik, beberapa jenis infeksi, misalnya meningitis, tetanus, chikungunya, leptospirosis, dan sebagainya, juga rentan membuat tubuh terasa kaku.\n\nDi samping infeksi, ada banyak lagi faktor lain yang juga bisa memicu keluhan Anda, contohnya gangguan autoimun, keganasan, stres berat, kurang olahraga, kelelahan beraktifitas, hipertiroidisme, dan sebagainya."
+    },
+    {
+      "tipe": "info",
+      "kalimat": "Cara untuk mengatasi demam dalam waktu 1 hari",
+      "result": "demam dikatakan bila suhu tubuh diatas 37,5 derajat. ukur suhu dengan termometer bukan dengan tangan ya. demam dapat terjadi akibat sistem imun tubuh sedang melawan infeksi seperti virus, bakteri, jamur atau parasit. selain akibat infeksi demam juga dapat terjadi akibat kekurangan cairan, paparan panas serta efek samping vaksin. demam merupakan suatu gejala dari suatu penyakit. yang pada umumnya demam bisa ditangani dirumah dan bisa membaik dengan sendirinya.\n\nada beberapa tips yang bisa anda lakukan seperti :\n\n    konsumsi air putih yang banyak\n    konsumsi makanan bergizi dan sehat\n    istirahat yang cukup\n    kompres hangat pada bagian lipatan tubuh seperti leher dan ketiak\n    konsumsi obat penurun demam seperti paracetamol dapat anda konsumsi per 4-6 jam dalam sehari"
+    },
+    {
+      "tipe": "info",
+      "kalimat": "Bagaimana cara menghilangkan rasa pahit di mulut saat sedang demam?",
+      "result": "Panas badan naik turun disertai mulut pahit dan hilang nafsu makan mungkin pemicunya ialah infeksi, misalnya infeksi di rongga mulut, infeksi tenggorokan, infeksi saluran pencernaan, infeksi saluran pernapasan, dan infeksi di sistem organ lainnya. Ada banyak jenis infeksi yang gejalanya seperti ini, beberapa yang tersering ialah demam tifoid, hepatitis, COVID-19, influenza, demam Dengue, dan sebagainya.\n\nSelain infeksi, serangkaian keluhan yang Anda alami mungkin juga muncul karena refluks asam lambung, gangguan autoimun, fluktuasi hormon, gangguan psikis, pengaruh obat, abses gigi, impaksi gigi, dan gangguan medis lainnya.\n\nAgar keluhan membaik, silakan Anda periksalah dulu ke dokter terdekat. Sembari itu, cobalah Anda lakukan dulu:\n\n    Minum paracetamol supaya demam mereda\n    Rajin menyikat gigi dan melakukan flossing\n    Jangan lupa bersihkan lidah dan berkumur dengan larutan garam hangat setiap menjelang tidur\n    Tetap makan walau sedikit-sedikit asalkan sering\n    Kurangi asupan makanan yang terlalu pedas, berminyak, atau mengandung banyak gas\n    Perbanyak istirahat dan minum air putih hangat\n    Tenangkan pikiran dan jangan terburu meminum obat lain kecuali atas resep dokter"
+    },
+    {
+      "tipe": "info",
+      "kalimat": "Cara mengatasi kaki dingin setelah demam pada anak",
+      "result": "demam merupakan suatu kondisi dimana suhu tubuh diatas 37,5 derajat. demam terjadi akibat sistem imun tubuh sedang melawan infeksi baik disebabkan karena virus, bakteri, jamur maupun parasit. selain karena infeksi, demam juga dapat disebabkan karena dehidrasi dan efek samping vaksin. demam merupakan suatu gejala dari penyakit. menegakan diagnosis penyebab demam ialah dengan melakukan pemeriksaan lebih lanjut salah satunya cek darah. untuk kondisi anak bunda belum dapat dipastikan akibat bakteri atau tidak karena tidak melakukan cek darah. kemungkinan yang di maksud ialah akibat infeksi, namun penyebab infeksinya belum diketahu"
+    },
+    {
+      "tipe": "info",
+      "kalimat": "Apakah boleh mandi malam hari saat demam?",
+      "result": "Pada saat sedang sakit seperti demam, maka seseorang boleh saja mandi asalkan dengan menggunakan air hangat, untuk mencegah tubuh menjadi menggigil dimana pada saat demam tubuh memang dapat lebih mudah kedinginan.\n\nOleh karena itu, tidak masalah jika anda ingin mandi pada malam hari saat sedang demam atau ketika tubuh sedang merasa sakit, namun anda perlu menyesuaikan suhu air yang akan anda gunakan agar tubuh tidak menjadi menggigil nantinya.\n\nSetelahnya, gunakan pakaian yang tidak terlalu tebal dan hindari selimut tebal untuk mencegah keparahan demam, dengan menyesuaikan suhu ruangan pada kipas angin atau AC agar tidak terlalu dingin.\n\nSelain itu, cukupi asupan air mineral minimal 2 liter per hari, untuk membantu meredakan demam, dan jika tidak kunjung membaik maka anda dapat mengonsumsi obat pereda demam seperti paracetamol atau berobat secara langsung ke dokter jika demam sudah melebihi 3-5 hari."
+    },
+    {
+      "tipe": "info",
+      "kalimat": "Makanan yang bisa digunakan untuk penurun demam",
+      "result": "dapat dilakukan dengan penanganan mandiri misalnya konsumsi air putih cukup serta makanan tidak ada makanan khusus yang perlu dikonsumsi. Yang penting untuk dikonsumsi yaitu makanan bergizi untuk meningkatkan imun tubuh misalnya banyak buah dan sayur. Selain itu juga dapat mengonsumsi pereda demam misalnya paracetamol. Bila demam tidak kunjung membaik, lebih dari 3 hari, keluhan penyerta demam bertambah berat, dan sebagainya maka sebaiknya memeriksakan ke dokter."
+    },
+    {
+      "tipe": "info",
+      "kalimat": "apa itu demam",
+      "result": "Demam merupakan suatu kondisi dimana terjadi peningkatan suhu tubuh lebih dari normal. Suhu tubuh normal yaitu antara 36.5 hingga 37.5 derajat celcius. Umumnya demam terjadi karena penyakit atau kondisitertentudi dalam tubuh.Demam dapat muncul sebagai reaksi imun tubuh yang umumnya terjadi untuk melawan infeksi yang disebabkan mikroorganisme. Demam umumnya dapat terjadi pada penderita radang tenggorokan, infeksi saluran kemih, dan sebagainya. Selain itu demam juga dapat muncul misalnya setelah vaksinasi, mengalami paparan cuaca panas lama dan sebagainya."
+    },
+    {
+      "tipe": "info",
+      "kalimat": "apa itu sakit demam",
+      "result": "Demam merupakan suatu kondisi dimana terjadi peningkatan suhu tubuh lebih dari normal. Suhu tubuh normal yaitu antara 36.5 hingga 37.5 derajat celcius. Umumnya demam terjadi karena penyakit atau kondisitertentudi dalam tubuh.Demam dapat muncul sebagai reaksi imun tubuh yang umumnya terjadi untuk melawan infeksi yang disebabkan mikroorganisme. Demam umumnya dapat terjadi pada penderita radang tenggorokan, infeksi saluran kemih, dan sebagainya. Selain itu demam juga dapat muncul misalnya setelah vaksinasi, mengalami paparan cuaca panas lama dan sebagainya."
+    }
+  ]
+}

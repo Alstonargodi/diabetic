@@ -11,7 +11,7 @@ import com.example.td_test_2.SearchActivity
 import com.example.td_test_2.SearchResultsAdapter
 import com.example.td_test_2.database.sqldb.DatabaseTable
 import com.example.td_test_2.databinding.ItemChatBinding
-import com.example.td_test_2.chat.tfidfmain.TfIdfHelper
+import com.example.td_test_2.chat.tfidfmain.TfIdfMain
 
 class ChatAdapter(
     private val mContext : Context,
@@ -73,7 +73,7 @@ class ChatAdapter(
         mCursor = newCursor
         if (mContext.javaClass == SearchActivity::class.java) {
             Log.d("SEARCHRESULTSADAPTER", "Calculating Tf x Idf")
-            offset = TfIdfHelper.calcTfIdf(mContext, mCursor)
+            offset = TfIdfMain.calcTfIdf(mContext, mCursor)
             Log.d("search_rvadapter", offset.toString())
         }
         notifyDataSetChanged()

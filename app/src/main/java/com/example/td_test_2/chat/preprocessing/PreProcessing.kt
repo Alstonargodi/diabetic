@@ -21,7 +21,7 @@ object PreProcessing {
         //todo removeline
         var removeLine = removeLineBreaks(capitalRemoval.toString())
 
-        Log.d("time_pre", PerformanceTime.TimeElapsed().toString())
+        Log.d("calctime_preprocessing", PerformanceTime.TimeElapsed().toString())
         return  removeLine
     }
 
@@ -34,6 +34,7 @@ object PreProcessing {
         tokens = tokens.filter {
             it.trim().isNotEmpty() and it.trim().isNotBlank()
         }
+        Log.d("calctime_tokenisation", PerformanceTime.TimeElapsed().toString())
         return tokens
     }
 
@@ -42,7 +43,7 @@ object PreProcessing {
         setence.forEach {
             setenceList.add(it.toLowerCase())
         }
-        Timeidf.setT3(Calendar.getInstance().timeInMillis)
+        Log.d("calctime_capitalremoval", PerformanceTime.TimeElapsed().toString())
         return setenceList
     }
 
@@ -59,7 +60,7 @@ object PreProcessing {
     }
 
     fun removeLineBreaks( setence : String ) : String {
-        return setence
+        val cleaning = setence
             .replace("\n", " " )
             .replace("\r", " " )
             .replace("?", " " )
@@ -69,5 +70,7 @@ object PreProcessing {
             .replace("  ", " " )
             .replaceFirst(" ","")
             .replaceAfterLast(" ","")
+        Log.d("calctime_capitalremoval", PerformanceTime.TimeElapsed().toString())
+        return cleaning
     }
 }

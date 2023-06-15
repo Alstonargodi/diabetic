@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">td-test-2</string>
+    <string name="pesanhasil_klasifikasi">hasil klasifikasi berdasarkan riwayat kesehatan anda menunjukan bahwa %1$s \n\ndetail terkait \n%2$s</string>
 </resources>

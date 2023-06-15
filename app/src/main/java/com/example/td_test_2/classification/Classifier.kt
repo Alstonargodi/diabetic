@@ -1,11 +1,12 @@
 import android.util.Log
+import com.example.fts_tes.Utils.PerformanceTime
 import com.example.td_test_2.classification.data.Input
 import kotlin.math.ln
 
 class Classifier<data : Any> {
     private var inputs : MutableList<Input<data>> = mutableListOf()
 
-    //meghitung prioritas
+    //meghitung priob
     private val logPrior : Map<data,Double> by lazy {
         inputs.map {
             it.category
@@ -48,6 +49,8 @@ class Classifier<data : Any> {
         input : String
     ): Map<data,Double>{
         val mapPredict = mutableMapOf<String,Map<data,Int>>()
+
+        //todo 2.4 menghitung jumlah kategori
         for (w in input.split("").distinct().toList()){
             val categoryCounter = mutableMapOf<data,Int>()
             for(i in inputs){
@@ -67,19 +70,26 @@ class Classifier<data : Any> {
                 mapPredict[w] = categoryCounter
             }
         }
+        Log.d("calctime_nb_categorical", PerformanceTime.TimeElapsed().toString())
 
         val resultMap = mutableMapOf<data,Double>()
+
+        //todo 2.5 menghitung probilitas
         for(key in mapPredict){
             for ((cat,count) in key.value){
                 val math = ln((count.toDouble() + 1.0) / (featureCounter.getOrDefault(cat,0).toDouble() + allWordsCount.toDouble()))
                 resultMap.merge(cat,math,Double::plus)
             }
         }
+        Log.d("calctime_nb_prob", PerformanceTime.TimeElapsed().toString())
 
+        //todo 2.5 normalisasi hasil perhitungan
         val maps = mutableListOf<Map<data,Double>>()
         maps.add(logPrior)
         maps.add(resultMap)
-        return normalize(sumMaps(maps))
+        val normalise = normalize(sumMaps(maps))
+        Log.d("calctime_nb_end", PerformanceTime.TimeElapsed().toString())
+        return normalise
     }
 
     private fun sumMaps(

@@ -6,6 +6,7 @@ import android.util.Log
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.td_test_2.chat.preprocessing.PreProcessing
 import com.example.td_test_2.classification.data.Input
 import com.example.td_test_2.database.Repository
 import com.example.td_test_2.database.entity.WordEntity
@@ -22,7 +23,6 @@ class SearchActivity : AppCompatActivity() {
 //    private var mAsyncTask: SearchTask? = null
     private var mQuery = ""
     private var mToast: Toast? = null
-    private var cleanText = ""
 
     private val classifier = Classifier<String>()
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -35,15 +35,18 @@ class SearchActivity : AppCompatActivity() {
         binding.btSearchAction.setOnClickListener {
             var predict2 = "prediksi riwayat kesahatan saya memiliki hamil 6 glukosa 148 darah 72 ketebalan 35 insulin 0 berat 33.6 pedigree 0.627 umur 50"
             var predict = "prediksi riwayat kesahatan saya memiliki hamil 0 glukosa 340 darah 72 ketebalan 35 insulin 5 berat 53.6 pedigree 0.687 umur 55"
-            var query = predict2
+            var query = "apa itu diabetes"
 
             //TODO 1.1 Preprocessing Kalimat
 //            query = query.replace("[,]","")
-            cleanText = query
             mQuery = query
+            var cleanText = PreProcessing.preprocessingKalimat(
+                this,
+                query
+            )
 
             //TODO 1.2 Calculate
-            calculate(query)
+            calculate(cleanText)
         }
         initializeNb()
         val linearLayoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
@@ -104,7 +107,7 @@ class SearchActivity : AppCompatActivity() {
     }
 
     private fun predictPreprocessing(): Map<String,String>{
-        var predictText = cleanText
+        var predictText = "cleanText"
             .replace("saya","")
             .replace("memiliki","")
 

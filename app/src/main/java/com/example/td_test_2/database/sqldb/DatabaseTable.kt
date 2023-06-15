@@ -9,7 +9,7 @@ import android.database.sqlite.SQLiteOpenHelper
 import android.database.sqlite.SQLiteQueryBuilder
 import android.util.Log
 import com.example.fts_tes.Utils.PerformanceTime
-import com.example.td_test_2.chat.tfidfmain.TfIdfHelper
+import com.example.td_test_2.chat.tfidfmain.TfIdfMain
 import java.io.BufferedReader
 import java.io.InputStreamReader
 import java.text.SimpleDateFormat
@@ -294,7 +294,6 @@ class DatabaseTable private constructor(context: Context) {
         // End date detection
         Log.d("DATE MATCHER:", query)
 
-        PerformanceTime.setT2(Calendar.getInstance().timeInMillis)
         val selectionArgs = arrayOfNulls<String>(1)
         var terms = query.trim { it <= ' ' }
             .replace("[\\/\\-.]".toRegex(), "-").split("[- +]+".toRegex())
@@ -319,9 +318,6 @@ class DatabaseTable private constructor(context: Context) {
 //            Log.d("SYNONYM", "Ended search for synonyms")
 //            Log.d("SEARCH TERMS A SYNONYMS", Arrays.toString(terms))
 //        }
-
-        PerformanceTime.setT3(Calendar.getInstance().timeInMillis)
-
 //        if (use4gram) {
 //            Log.d("SEARCH", "Using 4gram!")
 //            // Start 4gram
@@ -340,14 +336,16 @@ class DatabaseTable private constructor(context: Context) {
 //            // End 4gram
 //        }
 
-        PerformanceTime.setT4(Calendar.getInstance().timeInMillis)
-
+        //todo 1.3 start query berdsarkan terms
         for (term in terms) {
             Log.d("TERM", "\"" + term + "\"")
         }
-        // Setting the new search terms in the tfidf helper
         Log.d("Setting terms for tfidf", Arrays.toString(terms))
-        TfIdfHelper.setSearchTerms(terms)
+
+
+        //todo 1.4 setting terms dokumen
+        TfIdfMain.setSearchTerms(terms)
+        Log.d("calctime_setterms", PerformanceTime.TimeElapsed().toString())
         var args: String = ""
         for (i in terms.indices step 1) {
             args += terms[i]
@@ -356,11 +354,9 @@ class DatabaseTable private constructor(context: Context) {
             }
         }
         selectionArgs[0] = args
-        Log.d("SELECTION ARGS", Arrays.toString(selectionArgs))
 
         val selection = FTS_VIRTUAL_TABLE + " MATCH ? COLLATE NOCASE"
 
-        Log.d("searchtask_date_selection","$selection $selectionArgs $columns")
         return query(selection, selectionArgs)
     }
 
@@ -397,6 +393,7 @@ class DatabaseTable private constructor(context: Context) {
         }
 
     fun getDocumentFrequency(word: String): Long {
+        //todo 1.10 query bedasarkan terms
         val res = DatabaseUtils.queryNumEntries(
             mDatabaseOpenHelper.mDatabase,
             FTS_VIRTUAL_TABLE,
@@ -415,14 +412,17 @@ class DatabaseTable private constructor(context: Context) {
         selection: String,
         selectionArgs: Array<String?>,
     ): Cursor? {
-        Log.d("DATABASETABLE_selection", selection.toString())
+
         val builder = SQLiteQueryBuilder()
         builder.tables = FTS_VIRTUAL_TABLE
         val mColumns = arrayOf(MATCHINFO, "*")
+
+        //todo 1.5 query dari database
         val cursor = builder.query(
             mDatabaseOpenHelper.readableDatabase,
             mColumns, selection, selectionArgs, null, null, null
         )
+        Log.d("calctime_query", PerformanceTime.TimeElapsed().toString())
 //        if (cursor == null) {
 //            return null
 //        } else if (!cursor.moveToFirst()) {
@@ -430,7 +430,6 @@ class DatabaseTable private constructor(context: Context) {
 //            return null
 //        }
 
-        Log.d("DATABASETABLE", cursor.columnNames.toString())
         return cursor
     }
 
