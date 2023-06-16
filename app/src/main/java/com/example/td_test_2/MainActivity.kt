@@ -1,5 +1,6 @@
 package com.example.td_test_2
 
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
@@ -10,6 +11,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.ad_rf.dbconfig.diabetes.PimaEntity
 import com.example.td_test_2.chat.preprocessing.PreProcessing
 import com.example.td_test_2.chat.preprocessing.Utils
 import com.example.td_test_2.database.Repository
@@ -22,7 +24,10 @@ import com.example.td_test_2.databinding.ActivitySearchBinding
 import com.example.td_test_2.presentasion.ChatActivity
 import org.json.JSONException
 import org.xml.sax.Parser
+import randomforest.Input
+import java.io.FileOutputStream
 import java.io.IOException
+import java.io.OutputStreamWriter
 
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
@@ -62,7 +67,8 @@ class MainActivity : AppCompatActivity() {
                 startActivity(intent)
             }
             btnTest.setOnClickListener {
-                runtest()
+//                runtest()
+                testingRf()
             }
             btnSchat.setOnClickListener {
                 startActivity(Intent(this@MainActivity,ChatActivity::class.java))
@@ -152,5 +158,38 @@ class MainActivity : AppCompatActivity() {
 //                Log.d("chat_help", answer)
 //            }
 //        }
+    }
+
+    fun testingRf(){
+            var data = PimaEntity(
+                1,
+                "6",
+                "148",
+                "72",
+                "35",
+                "0",
+                "33.6",
+                "0.627",
+                "50",
+                ""
+            )
+
+        baseContext.deleteFile("amytextfile.txt")
+        val fileOutputStream: FileOutputStream = openFileOutput("amytextfile.txt", Context.MODE_PRIVATE)
+        val outputWriter = OutputStreamWriter(fileOutputStream)
+        outputWriter.write((
+                "${data.pregnan},"+
+                        "${data.glucose},"+
+                        "${data.bloodPressure},"+
+                        "${data.skinThich},"+
+                        "${data.insulin},"+
+                        "${data.bmi},"+
+                        "${data.pedigree},"+
+                        "${data.age},"
+                )
+        )
+        outputWriter.close()
+        var result = Input.main(this,"test",10)
+        Log.d("testingInput",result)
     }
 }

@@ -1,11 +1,16 @@
 package com.example.td_test_2.presentasion
 
 import Classifier
+import android.content.Context
 import android.database.Cursor
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.text.Layout
 import android.util.Log
+import android.view.ViewGroup
+import android.view.ViewGroup.LayoutParams
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.example.fts_tes.Utils.PerformanceTime
 import com.example.fts_tes.Utils.PerformanceTime.StartTimer
 import com.example.fts_tes.Utils.PerformanceTime.TimeElapsed
@@ -26,6 +31,8 @@ import com.example.td_test_2.database.room.DbConfig
 import com.xwray.groupie.GroupAdapter
 import com.xwray.groupie.GroupieViewHolder
 import patternmatching.BooyerMoore
+import java.io.FileOutputStream
+import java.io.OutputStreamWriter
 import java.util.Calendar
 import java.util.HashMap
 
@@ -57,7 +64,7 @@ class ChatActivity : AppCompatActivity() {
             var predictNewLow = "prediksi riwayat kesahatan saya memiliki hamil 0 glukosa 90 tekanandarah 52 ketebalankulit 35 insulin 5 beratbadan 53.6 pedigree 0.687 umur 55"
             var predictNoShort = "hamil 1 glukosa 85 tekanandarah 66 ketebalankulit 29 insulin 0 beratbadan 26.6 pedigree 0.351 umur 31"
             var predictYesShort = "hamil 0 glukosa 248 tekanandarah 72 ketebalankulit 35 insulin 0 beratbadan 80.6 pedigree 0.627 umur 50"
-            var info = "Apa itu sakit Diabetes ?"
+            var info = "Apa itu Diabetes ?"
             var info2 = "bagaimana gejala diabetes ?"
             var info3 = "Apa penyebab diabetes?"
 
@@ -114,17 +121,37 @@ class ChatActivity : AppCompatActivity() {
         mAdapter?.swapCursor(searchDb)
         mAdapter!!.onItemDetailCallback(object : SearchResultsAdapter.OnDetailItemCallback{
             override fun onDetailCallback(data: WordEntity) {
-//                var test = data.sentence.toRegex()
-//                if (test.containsMatchIn(text)){
-//                    Log.d("chat",data.sentence)
-//                }
-
-                setenceSelect(
-                    data.type,
-                    text,
-                    data.sentence,
-                    data.result
-                )
+                var pattern = data.sentence.toRegex()
+                var result = data.result.toLowerCase()
+                if (result.contains(text) || pattern.containsMatchIn(text) && data.type == "info"){
+                    setenceSelect(
+                        data.type,
+                        text,
+                        data.sentence,
+                        data.result
+                    )
+                }else if(result.contains(text)){
+                    setenceSelect(
+                        data.type,
+                        text,
+                        data.sentence,
+                        data.result
+                    )
+                }else if(data.type == "predict"){
+                    setenceSelect(
+                        data.type,
+                        text,
+                        data.sentence,
+                        data.result
+                    )
+                }else if (data.type == "reminder"){
+                    setenceSelect(
+                        data.type,
+                        text,
+                        data.sentence,
+                        data.result
+                    )
+                }
             }
         })
     }
@@ -155,9 +182,22 @@ class ChatActivity : AppCompatActivity() {
                     pedigree = preprocessing["pedigree"].toString(),
                     age = preprocessing["umur"].toString()
                 )
+                //todo 3.1 klasifikasi RF
+                predictRf(
+                    pregnan = preprocessing["hamil"].toString(),
+                    glucose = preprocessing["glukosa"].toString(),
+                    bloodPressure = preprocessing["tekanandarah"].toString(),
+                    skin = preprocessing["ketebalankulit"].toString(),
+                    insulin = preprocessing["insulin"].toString(),
+                    bmi = preprocessing["beratbadan"].toString(),
+                    pedigree = preprocessing["pedigree"].toString(),
+                    age = preprocessing["umur"].toString()
+                )
             }
             "reminder"->{
+                //todo set alarm
                 Log.d("chat_reminder", answer)
+                replyMessage(answer)
             }
             "help"->{
                 replyMessage(answer)
@@ -234,7 +274,48 @@ class ChatActivity : AppCompatActivity() {
         }
 
         var message = getString(R.string.pesanhasil_klasifikasi, decission, result)
-        replyMessage(message)
+        replyMessage("hasil naive bayes $message")
+    }
+
+    private fun predictRf(
+        pregnan : String,
+        glucose : String,
+        bloodPressure : String,
+        skin : String,
+        insulin : String,
+        bmi : String,
+        pedigree : String,
+        age : String,
+    ){
+
+        baseContext.deleteFile("amytextfile.txt")
+        val fileOutputStream: FileOutputStream = openFileOutput("amytextfile.txt", Context.MODE_PRIVATE)
+        val outputWriter = OutputStreamWriter(fileOutputStream)
+        outputWriter.write((
+                "${pregnan},"+
+                        "${glucose},"+
+                        "${bloodPressure},"+
+                        "${skin},"+
+                        "${insulin},"+
+                        "${bmi},"+
+                        "${pedigree},"+
+                        "${age},"
+                )
+        )
+        outputWriter.close()
+        var result = randomforest.Input.main(this,"input",10)
+        var decission = ""
+        var hashresult = predictPreprocessing(result)
+        if (hashresult["hasil"] == "1"){
+            decission = "terkena diabetes"
+        }else{
+            decission = "tidak terkena diabetes"
+        }
+
+        var message = getString(R.string.pesanhasil_klasifikasi, decission, result)
+        replyMessage("hasil random forest $message")
+
+
     }
 
     //mengirimkan jawaban
