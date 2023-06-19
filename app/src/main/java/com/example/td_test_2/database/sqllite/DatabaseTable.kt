@@ -1,4 +1,4 @@
-package com.example.td_test_2.database.sqldb
+package com.example.td_test_2.database.sqllite
 
 import android.content.ContentValues
 import android.content.Context

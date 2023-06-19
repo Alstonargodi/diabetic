@@ -4,7 +4,7 @@ import android.content.Context
 import android.database.Cursor
 import android.util.Log
 import com.example.fts_tes.Utils.PerformanceTime
-import com.example.td_test_2.database.sqldb.DatabaseTable
+import com.example.td_test_2.database.sqllite.DatabaseTable
 import java.util.Arrays
 import java.util.TreeMap
 

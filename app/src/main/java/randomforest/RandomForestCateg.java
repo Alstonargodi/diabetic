@@ -47,6 +47,8 @@ public class RandomForestCateg {
     private ArrayList<ArrayList<String>> testdata;
     /** This holds all of the predictions of trees in a Forest */
     private ArrayList<ArrayList<String>> Prediction;
+
+    public static String timeCompute = "";
     /**
      * This hold the genres of attributes in the forest
      *
@@ -215,6 +217,8 @@ public class RandomForestCateg {
 //        System.out.println("Total Cases : "+test.size());
 //        System.out.println("Total CorrectPredicitions  : "+correctness);
 //        System.out.println("Forest Accuracy :"+(correctness*100/test.size())+"%");
+
+        timeCompute = TimeElapsed(time_o);
 
         String result = "hasil "+ getMostly(Val) +
                 "\njumlah kasus " + test.size() +

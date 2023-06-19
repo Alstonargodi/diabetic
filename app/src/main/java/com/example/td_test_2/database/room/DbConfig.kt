@@ -7,7 +7,10 @@ import androidx.room.Room
 import androidx.room.RoomDatabase
 import androidx.sqlite.db.SupportSQLiteDatabase
 import com.example.ad_rf.dbconfig.diabetes.PimaEntity
+import com.example.td_test_2.database.entity.testing.TestingRf
 import com.example.td_test_2.database.entity.WordEntity
+import com.example.td_test_2.database.entity.testing.TestingDf
+import com.example.td_test_2.database.entity.testing.TestingNv
 import com.example.td_test_2.database.room.dao.WordDao
 import com.example.td_test_2.database.room.json.Loadjson
 import org.json.JSONException
@@ -16,7 +19,10 @@ import java.util.concurrent.Executors
 @Database(
     entities = [
         WordEntity::class,
-        PimaEntity::class
+        PimaEntity::class,
+        TestingRf::class,
+        TestingDf::class,
+        TestingNv::class
     ],
     version = 3,
     exportSchema = false

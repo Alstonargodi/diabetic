@@ -1,11 +1,12 @@
-package com.example.td_test_2
+package com.example.td_test_2.presentasion.viewdataactivity
 import android.database.Cursor
 import android.os.AsyncTask
 import android.os.Bundle
 import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.td_test_2.database.sqldb.DatabaseTable
+import com.example.td_test_2.SearchResultsAdapter
+import com.example.td_test_2.database.sqllite.DatabaseTable
 import com.example.td_test_2.databinding.ActivityViewDataBinding
 
 class ViewDataActivity : AppCompatActivity() {

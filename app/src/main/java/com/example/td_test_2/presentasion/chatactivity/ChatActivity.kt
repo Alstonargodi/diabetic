@@ -1,40 +1,37 @@
-package com.example.td_test_2.presentasion
+package com.example.td_test_2.presentasion.chatactivity
 
 import Classifier
 import android.content.Context
-import android.database.Cursor
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.text.Layout
 import android.util.Log
-import android.view.ViewGroup
-import android.view.ViewGroup.LayoutParams
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
-import com.example.fts_tes.Utils.PerformanceTime
+import androidx.work.Data
+import androidx.work.PeriodicWorkRequest
+import androidx.work.WorkManager
 import com.example.fts_tes.Utils.PerformanceTime.StartTimer
 import com.example.fts_tes.Utils.PerformanceTime.TimeElapsed
 import com.example.fts_tes.Utils.Timeidf
-import com.example.td_ad.presentasion.adapter.ChatAdapter
-import com.example.td_ad.presentasion.adapter.ReceiveMessageItem
-import com.example.td_ad.presentasion.adapter.SendMessageItem
+import com.example.td_test_2.presentasion.chatactivity.adapter.ReceiveMessageItem
+import com.example.td_test_2.presentasion.chatactivity.adapter.SendMessageItem
 import com.example.td_test_2.R
 import com.example.td_test_2.SearchResultsAdapter
-import com.example.td_test_2.database.sqldb.DatabaseTable
+import com.example.td_test_2.database.sqllite.DatabaseTable
 import com.example.td_test_2.database.entity.Message
 import com.example.td_test_2.databinding.ActivityChatBinding
 import com.example.td_test_2.chat.preprocessing.PreProcessing.preprocessingKalimat
-import com.example.td_test_2.classification.data.Input
+import com.example.td_test_2.naivebayes.data.Input
 import com.example.td_test_2.database.Repository
 import com.example.td_test_2.database.entity.WordEntity
 import com.example.td_test_2.database.room.DbConfig
+import com.example.td_test_2.reminder.TaskReminder
+import com.example.td_test_2.reminder.TaskReminder.Companion.NOTIFICATION_Channel_ID
 import com.xwray.groupie.GroupAdapter
 import com.xwray.groupie.GroupieViewHolder
-import patternmatching.BooyerMoore
 import java.io.FileOutputStream
 import java.io.OutputStreamWriter
-import java.util.Calendar
 import java.util.HashMap
+import java.util.concurrent.TimeUnit
 
 class ChatActivity : AppCompatActivity() {
     private val messageAdapter = GroupAdapter<GroupieViewHolder>()
@@ -64,12 +61,13 @@ class ChatActivity : AppCompatActivity() {
             var predictNewLow = "prediksi riwayat kesahatan saya memiliki hamil 0 glukosa 90 tekanandarah 52 ketebalankulit 35 insulin 5 beratbadan 53.6 pedigree 0.687 umur 55"
             var predictNoShort = "hamil 1 glukosa 85 tekanandarah 66 ketebalankulit 29 insulin 0 beratbadan 26.6 pedigree 0.351 umur 31"
             var predictYesShort = "hamil 0 glukosa 248 tekanandarah 72 ketebalankulit 35 insulin 0 beratbadan 80.6 pedigree 0.627 umur 50"
+            var predictYesShort2 = "glukosa 250 tekanandarah 72 ketebalankulit 35 insulin 0 beratbadan 80.6 pedigree 0.627 umur 50 hamil 0 "
             var info = "Apa itu Diabetes ?"
             var info2 = "bagaimana gejala diabetes ?"
             var info3 = "Apa penyebab diabetes?"
 
             //input kalimat
-            var inputText = info
+            var inputText = predictNo
 
             //todo 1.1 preprocessing kalimat
             StartTimer()
@@ -213,14 +211,14 @@ class ChatActivity : AppCompatActivity() {
             .replace("saya","")
             .replace("memiliki","")
 
-        val pattern = Regex("(\\w+) (\\d+)")
+        val pattern = Regex("(\\w+) ([+-]?([0-9]*[.])?[0-9]+)")
 
         val matches = pattern.findAll(predictText)
         val result = matches.map { matchResult ->
             val (word, value) = matchResult.destructured
             Pair(word, value)
         }.toMap()
-
+        Log.d("result_patternpredict", result.toString())
         return result
     }
 
@@ -260,7 +258,7 @@ class ChatActivity : AppCompatActivity() {
         age : String,
     ){
         val inputData = "$pregnan $glucose $bloodPreasure $skin $insulin $bmi $pedigree $age"
-
+        inputData.replace(".","")
         //todo 2.2 start klasifikasi nb
         var predict = classifier.predict(inputData)
         var decission = ""
@@ -314,8 +312,6 @@ class ChatActivity : AppCompatActivity() {
 
         var message = getString(R.string.pesanhasil_klasifikasi, decission, result)
         replyMessage("hasil random forest $message")
-
-
     }
 
     //mengirimkan jawaban
@@ -329,5 +325,24 @@ class ChatActivity : AppCompatActivity() {
         val receiveItem = ReceiveMessageItem(receive)
         messageAdapter.add(receiveItem)
         Log.d("calctime_replymessage", TimeElapsed().toString())
+    }
+
+    private fun setIntervalTime(intervalTime : Long, activated : Boolean){
+        val workManager = WorkManager.getInstance(this)
+        val notificationBuilder = Data.Builder()
+            .putString(NOTIFICATION_Channel_ID,"TaskReminderBroadcast")
+            .build()
+        val periodicAlarm = PeriodicWorkRequest.Builder(
+            TaskReminder::class.java,
+            intervalTime,
+            TimeUnit.MILLISECONDS
+        ).setInputData(notificationBuilder).build()
+
+        if(activated){
+            workManager.enqueue(periodicAlarm)
+        }else{
+            workManager.pruneWork()
+            workManager.cancelAllWork()
+        }
     }
 }

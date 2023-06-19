@@ -1,6 +1,6 @@
 import android.util.Log
 import com.example.fts_tes.Utils.PerformanceTime
-import com.example.td_test_2.classification.data.Input
+import com.example.td_test_2.naivebayes.data.Input
 import kotlin.math.ln
 
 class Classifier<data : Any> {
@@ -37,7 +37,6 @@ class Classifier<data : Any> {
     //memasukan data train ke dalam list inputs
     fun train(input : Input<data>){
         inputs.add(input)
-        Log.d("datatrain",inputs[0].toString())
     }
 
     fun train(inputs : MutableList<Input<data>>){

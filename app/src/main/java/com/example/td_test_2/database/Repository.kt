@@ -1,10 +1,8 @@
 package com.example.td_test_2.database
 
 import androidx.lifecycle.LiveData
-import androidx.room.Insert
-import androidx.room.OnConflictStrategy
-import androidx.room.Query
 import com.example.ad_rf.dbconfig.diabetes.PimaEntity
+import com.example.td_test_2.database.entity.testing.TestingRf
 import com.example.td_test_2.database.entity.WordEntity
 import com.example.td_test_2.database.room.DbConfig
 
@@ -20,4 +18,14 @@ class Repository (
     fun insertPimaData(data : PimaEntity){dao.insertPimaData(data)  }
 
     fun readPimaData(): LiveData<List<PimaEntity>> = dao.readPimaData()
+
+    fun insertTestingRfResult(data : TestingRf){ dao.insertTestingRfResult(data)}
+
+    fun readTestingRfResult(): LiveData<List<TestingRf>> = dao.readTestingRfResult()
+
+    fun deleteTestingRfResult(){ dao.deleteTestingRfResult()}
+
+
+
+
 }

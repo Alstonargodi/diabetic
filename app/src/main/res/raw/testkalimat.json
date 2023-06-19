@@ -119,6 +119,21 @@
       "type": "info",
       "sentence": "Penyebab dan cara menghilangkan keringat dingin berlebih pada penderita diabetes",
       "result": "Kondisi seseorang yang berkeringat berlebihan, dalam artian kuantitas berkeringatnya secara signifikan melebihi orang lain dengan intensitas aktivitas dan suhu ruangan yang serupa, disebut dengan kondisi hiperhidrosis, dan hiperhidrosis memang bisa dipicu oleh kondisi diabetes, disamping sejumlah faktor lainnya.\n\nKaitan antara diabetes dengan kondisi hiperhidrosis disebabkan oleh salah satu komplikasi atau kondisi lanjutan dari tingginya kadar gula darah dalam jangka waktu lama, yakni gangguan sistem saraf, yang dalam hal ini, adalah sistem saraf yang mengatur keringat, sehingga menyebabkan keringat yang diproduksi tubuh orang tua Anda lebih banyak dari semestinya. Adapun selama ini gula darahnya terkontrol, ini memang mengurangi potensi terjadinya komplikasi dari diabetes, tapi tidak menghilangkan kemungkinannya sama sekali. Bila kadar gula darahnya tidak terkontrol, komplikasi ini mungkin muncul lebih awal, dan mungkin melibatkan organ lain sehingga lebih berat, seperti mempengaruhi mata dan ginjal.\n\nTerkait hal ini, tindakan yang dilakukan sudah tepat dengan memperbanyak konsumsi air putih. Selain itu, sebaiknya suhu ruangan di rumah juga disesuaikan, kenakan pakaian yang nyaman dan menyerap keringat serta tidak terlalu tebal, juga kenakan deodoran dengan kandungan antiperspirant. Kemudian, periksakan kondisi ibu Anda pada dokter saraf untuk dikaji lebih lanjut terkait kondisinya, apakah kondisi hiperhidrosisnya murni disebabkan oleh diabetes atau ada pemicu lain seperti ketidakseimbangan hormon,"
+    },
+    {
+      "type": "info",
+      "sentence": "Apa itu diabetes",
+      "result": "berikut ini contoh kalimat prediksi [ pattern ]"
+    },
+    {
+      "type": "predict",
+      "sentence": "prediksi riwayat kesahatan saya memiliki hamil 0 glukosa 90 tekanandarah 52 ketebalankulit 35 insulin 5 beratbadan 53.6 pedigree 0.687 umur 55",
+      "result": ""
+    },
+    {
+      "type": "info",
+      "sentence": "apa itu demam",
+      "result": ""
     }
   ]
 }

@@ -10,10 +10,14 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.fts_tes.Utils.PerformanceTime
-import com.example.td_test_2.database.sqldb.DatabaseTable
-import com.example.td_test_2.presentasion.ChatActivity
+import com.example.td_test_2.database.sqllite.DatabaseTable
+import com.example.td_test_2.presentasion.chatactivity.ChatActivity
 import com.example.td_test_2.chat.tfidfmain.TfIdfMain
 import com.example.td_test_2.database.entity.WordEntity
+import com.example.td_test_2.presentasion.mainactivity.MainActivity
+import com.example.td_test_2.presentasion.searchactivity.SearchActivity
+import java.io.FileOutputStream
+import java.io.OutputStreamWriter
 
 class SearchResultsAdapter(private val mContext: Context) :
     RecyclerView.Adapter<SearchResultsAdapter.ResultViewHolder>() {
@@ -48,17 +52,19 @@ class SearchResultsAdapter(private val mContext: Context) :
             mCursor!!.getString(mCursor!!.getColumnIndex(DatabaseTable.COL_PATTERN))
         @SuppressLint("Range") val response =
             mCursor!!.getString(mCursor!!.getColumnIndex(DatabaseTable.COL_ANSWER))
-        @SuppressLint("Range") val date =
-            mCursor!!.getString(mCursor!!.getColumnIndex(DatabaseTable.COL_DATE))
+
         var pos: String? = ""
         if (offset != null) pos = Integer.toString(position + 0)
         holder.doctorName.text = type
         holder.hospitalName.text = pattern
         holder.displayTranscript.text = response
-        holder.displayDate.text = date
         holder.displayIndex.text = pos
-        Log.d("chat", type)
 
+        Log.d("chat", type)
+        val fileOutputStream: FileOutputStream = mContext.openFileOutput("testingidf.txt", Context.MODE_PRIVATE)
+        val outputWriter = OutputStreamWriter(fileOutputStream)
+        outputWriter.write(("$type"))
+        outputWriter.close()
         //todo 1.16 mengembalikan hasil query berupa kesamaan dokumen
         if (mContext.javaClass == ChatActivity::class.java || mContext.javaClass == SearchActivity::class.java || mContext.javaClass == MainActivity::class.java) {
             itemCallback.onDetailCallback(
@@ -93,19 +99,19 @@ class SearchResultsAdapter(private val mContext: Context) :
         var doctorName: TextView
         var hospitalName: TextView
         var displayTranscript: TextView
-        var displayDate: TextView
         var displayIndex: TextView
 
         init {
             doctorName = itemView.findViewById(R.id.tv_display_doctor_name)
             hospitalName = itemView.findViewById(R.id.tv_display_hospital_name)
             displayTranscript = itemView.findViewById(R.id.tv_display_transcript)
-            displayDate = itemView.findViewById(R.id.tv_display_date)
             displayIndex = itemView.findViewById(R.id.tv_display_result_index)
         }
     }
 
     interface OnDetailItemCallback{
         fun onDetailCallback(data : WordEntity)
+
+
     }
 }

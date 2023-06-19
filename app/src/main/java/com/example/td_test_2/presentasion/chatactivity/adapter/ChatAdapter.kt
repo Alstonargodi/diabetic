@@ -1,4 +1,4 @@
-package com.example.td_ad.presentasion.adapter
+package com.example.td_test_2.presentasion.chatactivity.adapter
 
 import android.annotation.SuppressLint
 import android.content.Context
@@ -7,9 +7,9 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.example.td_test_2.SearchActivity
+import com.example.td_test_2.presentasion.searchactivity.SearchActivity
 import com.example.td_test_2.SearchResultsAdapter
-import com.example.td_test_2.database.sqldb.DatabaseTable
+import com.example.td_test_2.database.sqllite.DatabaseTable
 import com.example.td_test_2.databinding.ItemChatBinding
 import com.example.td_test_2.chat.tfidfmain.TfIdfMain
 

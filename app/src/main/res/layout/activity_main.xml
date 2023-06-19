@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".MainActivity">
+    tools:context=".presentasion.mainactivity.MainActivity">
 
     <Button
         android:id="@+id/bt_enter_data"
@@ -54,10 +54,24 @@
         android:layout_marginEnd="16dp"
         android:text="chat" />
 
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:text="Random Forest" />
+
+    <TextView
+        android:id="@+id/tvPredict"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:text="TextView" />
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rv_test"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="500dp"
         android:layout_marginStart="10dp"
         android:layout_marginEnd="10dp" />
 </LinearLayout>

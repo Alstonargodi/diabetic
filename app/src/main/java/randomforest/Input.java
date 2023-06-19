@@ -12,6 +12,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 public class Input {
+    public static String timeCompute = "";
 
     public static String main(
             Context context,
@@ -82,6 +83,7 @@ public class Input {
                 Test
         );
         result = RFC.Start();
+        timeCompute = RFC.timeCompute;
 
         return result;
     }
