@@ -58,14 +58,28 @@
         android:id="@+id/textView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="10dp"
+        android:layout_margin="5dp"
         android:text="Random Forest" />
 
     <TextView
         android:id="@+id/tvPredict"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="10dp"
+        android:layout_margin="5dp"
+        android:text="TextView" />
+
+    <TextView
+        android:id="@+id/textView3"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="5dp"
+        android:text="Naive Bayes" />
+
+    <TextView
+        android:id="@+id/tv_result_nb"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="5dp"
         android:text="TextView" />
 
     <androidx.recyclerview.widget.RecyclerView

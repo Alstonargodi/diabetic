@@ -26,6 +26,7 @@ import com.example.td_test_2.database.entity.WordEntity
 import com.example.td_test_2.database.room.DbConfig
 import com.example.td_test_2.reminder.TaskReminder
 import com.example.td_test_2.reminder.TaskReminder.Companion.NOTIFICATION_Channel_ID
+import com.example.td_test_2.utils.UtilsSetences
 import com.xwray.groupie.GroupAdapter
 import com.xwray.groupie.GroupieViewHolder
 import java.io.FileOutputStream
@@ -59,7 +60,7 @@ class ChatActivity : AppCompatActivity() {
             var predictNewHigh = "prediksi riwayat kesahatan saya memiliki hamil 0 glukosa 340 tekanandarah 72 ketebalankulit 35 insulin 5 beratbadan 53.6 pedigree 0.687 umur 55"
             var predictNo = "prediksi riwayat kesahatan saya memiliki hamil 1 glukosa 85 tekanandarah 66 ketebalankulit 29 insulin 0 beratbadan 26.6 pedigree 0.351 umur 31"
             var predictNewLow = "prediksi riwayat kesahatan saya memiliki hamil 0 glukosa 90 tekanandarah 52 ketebalankulit 35 insulin 5 beratbadan 53.6 pedigree 0.687 umur 55"
-            var predictNoShort = "hamil 1 glukosa 85 tekanandarah 66 ketebalankulit 29 insulin 0 beratbadan 26.6 pedigree 0.351 umur 31"
+            var predictNoShort = "hamil 0 glukosa 85 tekanandarah 66 ketebalankulit 29 insulin 0 beratbadan 26.6 pedigree 0.351 umur 31"
             var predictYesShort = "hamil 0 glukosa 248 tekanandarah 72 ketebalankulit 35 insulin 0 beratbadan 80.6 pedigree 0.627 umur 50"
             var predictYesShort2 = "glukosa 250 tekanandarah 72 ketebalankulit 35 insulin 0 beratbadan 80.6 pedigree 0.627 umur 50 hamil 0 "
             var info = "Apa itu Diabetes ?"
@@ -67,8 +68,14 @@ class ChatActivity : AppCompatActivity() {
             var info3 = "Apa penyebab diabetes?"
 
             //input kalimat
-            var inputText = predictNo
+            var inputText = binding.etInsertChat.text.toString()
 
+            val message = Message(
+                setences = inputText,
+                sender = "me"
+            )
+            val sendMessageItem = SendMessageItem(message)
+            messageAdapter.add(sendMessageItem)
             //todo 1.1 preprocessing kalimat
             StartTimer()
             var cleanText = preprocessingKalimat(
@@ -79,14 +86,7 @@ class ChatActivity : AppCompatActivity() {
             Log.d("proses",Timeidf.toastMessageNb)
             //todo 1.2 query kalimat
             queryDatabase(cleanText)
-            val message = Message(
-                setences = inputText,
-                sender = "me"
-            )
-            val sendMessageItem = SendMessageItem(message)
-            messageAdapter.add(sendMessageItem)
             binding.etInsertChat.text.clear()
-
         }
         initPredictionDataset()
         binding.rvChat.layoutManager = LinearLayoutManager(this)
@@ -225,23 +225,18 @@ class ChatActivity : AppCompatActivity() {
     //inisialisasi dataset untuk prediksi
     private fun initPredictionDataset(){
         //todo 2.3 init data latih nb
-        repository.readPimaData().observe(this){
-            it.forEach {
-                classifier.apply {
-                    train(
-                        Input(
-                            "${it.pregnan}" +
-                                    "${it.glucose}" +
-                                    "${it.bloodPressure}" +
-                                    "${it.skinThich}" +
-                                    "${it.insulin}" +
-                                    "${it.bmi}" +
-                                    "${it.pedigree}" +
-                                    "${it.age}",
-                            it.outcome
-                        )
-                    )
-                }
+        UtilsSetences.csvToString2(
+            this,
+            "pimall.csv",
+        ).forEach { datapoint->
+            classifier.apply {
+                var input = datapoint.values.toString().replace(" ","")
+                train(com.example.td_test_2.naivebayes.data.Input(
+                    input,
+                    datapoint.point
+                )
+                )
+                Log.d("NBdata", input)
             }
         }
     }
@@ -258,7 +253,7 @@ class ChatActivity : AppCompatActivity() {
         age : String,
     ){
         val inputData = "$pregnan $glucose $bloodPreasure $skin $insulin $bmi $pedigree $age"
-        inputData.replace(".","")
+
         //todo 2.2 start klasifikasi nb
         var predict = classifier.predict(inputData)
         var decission = ""

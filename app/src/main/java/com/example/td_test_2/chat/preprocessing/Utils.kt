@@ -30,28 +30,4 @@ object Utils {
         }
     }
 
-    fun csvToString2(
-        context : Context,
-        path : String,
-        hasId : Boolean
-    ): List<DataPointMg> {
-        val shift = 0
-        BufferedReader(InputStreamReader(context.assets.open(path))).use { value ->
-
-            val dataInput : MutableList<DataPointMg> = arrayListOf()
-            var input = value.readLine()
-            val attributes = input.split(",".toRegex()).toTypedArray()
-
-            while (value.readLine().also { input = it } != null){
-                val sample = input!!.split(",".toRegex()).toTypedArray()
-
-                val value = HashMap<String,Any?>()
-                for (i in shift until sample.size )
-                    value[attributes[i]] = sample[i]
-
-                dataInput.add(DataPointMg(sample[sample.size],value))
-            }
-            return dataInput
-        }
-    }
 }

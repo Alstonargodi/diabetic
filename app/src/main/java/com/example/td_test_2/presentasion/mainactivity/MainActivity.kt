@@ -1,5 +1,6 @@
 package com.example.td_test_2.presentasion.mainactivity
 
+import Classifier
 import android.annotation.SuppressLint
 import android.content.Context
 import android.content.Intent
@@ -8,12 +9,12 @@ import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.ad_rf.dbconfig.diabetes.PimaEntity
 import com.example.td_test_2.SearchResultsAdapter
 import com.example.td_test_2.chat.preprocessing.PreProcessing
+import com.example.td_test_2.chat.preprocessing.Utils
 import com.example.td_test_2.chat.tfidfmain.TfIdfMain
 import com.example.td_test_2.database.Repository
+import com.example.td_test_2.database.entity.testing.TestingNv
 import com.example.td_test_2.database.entity.testing.TestingRf
 import com.example.td_test_2.database.room.DbConfig
 import com.example.td_test_2.database.room.json.Loadjson
@@ -25,6 +26,7 @@ import com.example.td_test_2.presentasion.mainactivity.adapter.TestingResultAdap
 import com.example.td_test_2.presentasion.searchactivity.SearchActivity
 import com.example.td_test_2.presentasion.viewdataactivity.ViewDataActivity
 import com.example.td_test_2.utils.UtilsSetences
+import com.example.td_test_2.utils.UtilsSetences.csvToString2
 import org.json.JSONException
 import randomforest.Input
 import java.io.FileOutputStream
@@ -47,6 +49,7 @@ class MainActivity : AppCompatActivity() {
     private var mCursor: Cursor? = null
     private var offset: IntArray? = null
     private var timeCompute = ""
+    private var classifier = Classifier<String>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -76,11 +79,13 @@ class MainActivity : AppCompatActivity() {
 //                testingTfIdf()
 //                testingRf()
                 repository.deleteTestingRfResult()
+//                repository.deleteTestingNvResult()
                 readCsv()
             }
             btnSchat.setOnClickListener {
                 startActivity(Intent(this@MainActivity, ChatActivity::class.java))
             }
+            readAccuracy()
         }
     }
 
@@ -118,7 +123,11 @@ class MainActivity : AppCompatActivity() {
         responseTest : String
     ){
         var testList = arrayListOf<String>()
-        testList.add(text)
+        var cleanText = PreProcessing.preprocessingKalimat(
+            this,
+            text
+        )
+        testList.add(cleanText)
         for(i in 0 until testList.size){
             mAdapter = SearchResultsAdapter(this)
             val searchDb = DatabaseTable.getInstance(baseContext)?.getWordMatches(
@@ -152,61 +161,33 @@ class MainActivity : AppCompatActivity() {
     private fun swapCursor(newCursor: Cursor?) {
         offset = null
         mCursor = newCursor
-        Log.d("SEARCHRESULTSADAPTER", "Calculating Tf x Idf")
+
         //todo 1.7 proses perhitungan TFIDF
         offset = TfIdfMain.calcTfIdf(this, mCursor)
         timeCompute = Input.timeCompute
 
     }
 
-    private fun showTestResult(
-        result: List<String>,
-    ){
-        trainingAdapter = TestingResultAdapter(result)
-        binding.rvTest.layoutManager = LinearLayoutManager(this)
-        binding.rvTest.adapter = trainingAdapter
-    }
-
-    fun testingRf(){
-            var data = PimaEntity(
-                1,
-                "6",
-                "148",
-                "72",
-                "35",
-                "0",
-                "33.6",
-                "0.627",
-                "50",
-                ""
-            )
-
-        baseContext.deleteFile("amytextfile.txt")
-        val fileOutputStream: FileOutputStream = openFileOutput("amytextfile.txt", Context.MODE_PRIVATE)
-        val outputWriter = OutputStreamWriter(fileOutputStream)
-        outputWriter.write((
-                "${data.pregnan},"+
-                        "${data.glucose},"+
-                        "${data.bloodPressure},"+
-                        "${data.skinThich},"+
-                        "${data.insulin},"+
-                        "${data.bmi},"+
-                        "${data.pedigree},"+
-                        "${data.age},"
-                )
-        )
-        outputWriter.close()
-        var result = Input.main(this,"test",10)
-        Log.d("testingInput",result)
-    }
-
-
     private fun readCsv(){
         val dataInput = UtilsSetences.csvToStringI(
             this,
-            "testing/pimakalimat_test_10.csv"
+            "testing/pimakalimat_test_40.csv"
         )
-        Log.d("testdata", dataInput.toString())
+        csvToString2(
+            this,
+            "pima/pima_train_30nr.csv",
+        ).forEach { datapoint->
+            classifier.apply {
+                var input = datapoint.values.toString().replace(" ","")
+                train(com.example.td_test_2.naivebayes.data.Input(
+                    input,
+                    datapoint.point
+                )
+                )
+                Log.d("NBdata", input)
+            }
+        }
+
         dataInput.forEach {
             readDatabase(it.features,it.label)
         }
@@ -236,15 +217,7 @@ class MainActivity : AppCompatActivity() {
             }
             @SuppressLint("Range") val type = mCursor!!.getString(mCursor!!.getColumnIndex(DatabaseTable.COL_TIPE))
             @SuppressLint("Range") val response = mCursor!!.getString(mCursor!!.getColumnIndex(DatabaseTable.COL_ANSWER))
-            Log.d("AA${type}",setence.toString())
-//            Log.d("AA${type}", if(type == typeTest) "true" else "false")
-//            Log.d("AA${type}", if(response == responseTest) "true" else "false")
-//            var result = "Q:${setence[i]} " +
-//                    "\ntypecorrect: ${if(type == typeTest) "true" else "false"} " +
-//                    "\nresponsecorrect: ${if(response == responseTest) "true" else "false"} " +
-//                    "\nreseponse" +
-//                    "\n$responseTest"
-//            resultList.add(result)
+//            Log.d("AA${type}",setence.toString())
             if (type == "predict"){
                var preprocessing =  predictPreprocessing(setence.toString())
                 predictRf(
@@ -258,6 +231,17 @@ class MainActivity : AppCompatActivity() {
                     age = preprocessing["umur"].toString(),
                     label = label
                 )
+//                predictNb(
+//                    pregnan = preprocessing["hamil"].toString(),
+//                    glucose = preprocessing["glukosa"].toString(),
+//                    bloodPreasure = preprocessing["tekanandarah"].toString(),
+//                    skin = preprocessing["ketebalankulit"].toString(),
+//                    insulin = preprocessing["insulin"].toString(),
+//                    bmi = preprocessing["beratbadan"].toString(),
+//                    pedigree = preprocessing["pedigree"].toString(),
+//                    age = preprocessing["umur"].toString(),
+//                    label = label
+//                )
             }
         }
     }
@@ -303,7 +287,7 @@ class MainActivity : AppCompatActivity() {
         val outputWriter = OutputStreamWriter(fileOutputStream)
         outputWriter.write((question))
         outputWriter.close()
-        var result = Input.main(this,"input",15)
+        var result = Input.main(this,"input",30)
         var hashresult = predictPreprocessing(result)
 
         var cfLabel = if (label == "0") "truenegatif" else "truepositif"
@@ -314,7 +298,7 @@ class MainActivity : AppCompatActivity() {
         else
             cfLabel
 
-        insertTestingResult(
+        insertTestingRf(
             input = question,
             cfLabel,
             cfValue,
@@ -322,10 +306,42 @@ class MainActivity : AppCompatActivity() {
         )
 
         Log.d("predict_rf $cfLabel",cfValue)
-
     }
 
-    private fun insertTestingResult(
+    private fun predictNb(
+        pregnan : String,
+        glucose : String,
+        bloodPreasure : String,
+        skin : String,
+        insulin : String,
+        bmi : String,
+        pedigree : String,
+        age : String,
+        label : String,
+    ){
+        val inputData = "$pregnan $glucose $bloodPreasure $skin $insulin $bmi $pedigree $age"
+        //todo 2.2 start klasifikasi nb
+        var predict = classifier.predict(inputData)
+        val high = predict.maxBy { it.value }.key
+
+        var cfLabel = if (label == "0") "truenegatif" else "truepositif"
+        var cfValue = if(high != label && high == "1")
+            "falsepositif"
+        else if (high != label && high == "0")
+            "falsenegatif"
+        else
+            cfLabel
+
+        insertTestingNb(
+            inputData,
+            cfLabel,
+            cfValue,
+            high
+        )
+    }
+
+
+    private fun insertTestingRf(
         input : String,
         label : String,
         predictResult : String,
@@ -342,6 +358,26 @@ class MainActivity : AppCompatActivity() {
         )
         readAccuracy()
     }
+
+    private fun insertTestingNb(
+        input : String,
+        label : String,
+        predictResult : String,
+        output : String,
+    ){
+        repository.insertTestingNvResult(
+            TestingNv(
+                input,
+                label,
+                predictResult,
+                output,
+                timeCompute
+            )
+        )
+        readAccuracy()
+    }
+
+
 
     private fun readAccuracy(){
         repository.readTestingRfResult().observe(this){
@@ -364,9 +400,34 @@ class MainActivity : AppCompatActivity() {
                         "precission = ${format.format(precission)} \n" +
                         "recall = ${format.format(recall)} \n" +
                         "specify = ${format.format(specifiy)} \n" +
-                        "f1score = ${format.format(F1score)}" +
-                        "waktu komputasi = $timeCompute"
+                        "f1score = ${format.format(F1score)} \n" +
+                        "tp: $tp fp: $fp tn: $tn fn: $fn"
             binding.tvPredict.text = cfResult
         }
+        repository.readTestingNvResult().observe(this){
+            val tp = it.count { it.predictResult == "truepositif" }
+            val fp = it.count { it.predictResult == "falsepositif" }
+            val tn = it.count { it.predictResult == "truenegatif" }
+            val fn = it.count { it.predictResult == "falsenegatif" }
+
+            Log.d("acc","$tp $fp $tn $fn")
+            var accuracy = (tp + tn).toDouble() / (tp + tn + fp + fn).toDouble()
+            var precission = (tp).toDouble() / (tp + fp).toDouble()
+            var recall = (tp).toDouble() / (tp + fn).toDouble()
+            var specifiy = (tn).toDouble() / (tn + tp).toDouble()
+            var F1score = 2*(recall*precission / recall+precission)
+
+            val format: NumberFormat = NumberFormat.getPercentInstance(Locale.US)
+
+            val cfResult =
+                "accuracy = ${format.format(accuracy)} \n" +
+                        "precission = ${format.format(precission)} \n" +
+                        "recall = ${format.format(recall)} \n" +
+                        "specify = ${format.format(specifiy)} \n" +
+                        "f1score = ${format.format(F1score)} \n" +
+                        "tp: $tp fp: $fp tn: $tn fn: $fn"
+            binding.tvResultNb.text = cfResult
+        }
     }
+
 }

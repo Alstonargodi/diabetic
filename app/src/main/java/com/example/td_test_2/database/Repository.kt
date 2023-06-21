@@ -4,6 +4,7 @@ import androidx.lifecycle.LiveData
 import com.example.ad_rf.dbconfig.diabetes.PimaEntity
 import com.example.td_test_2.database.entity.testing.TestingRf
 import com.example.td_test_2.database.entity.WordEntity
+import com.example.td_test_2.database.entity.testing.TestingNv
 import com.example.td_test_2.database.room.DbConfig
 
 class Repository (
@@ -25,7 +26,11 @@ class Repository (
 
     fun deleteTestingRfResult(){ dao.deleteTestingRfResult()}
 
+    fun insertTestingNvResult(data : TestingNv){ dao.insertTestingNvResult(data)}
 
+    fun readTestingNvResult(): LiveData<List<TestingNv>> = dao.readTestingNvResult()
+
+    fun deleteTestingNvResult(){ dao.deleteTestingNvResult()}
 
 
 }

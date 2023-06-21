@@ -8,6 +8,8 @@ import androidx.room.Query
 import com.example.ad_rf.dbconfig.diabetes.PimaEntity
 import com.example.td_test_2.database.entity.testing.TestingRf
 import com.example.td_test_2.database.entity.WordEntity
+import com.example.td_test_2.database.entity.testing.TestingNv
+
 @Dao
 interface WordDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
@@ -31,4 +33,12 @@ interface WordDao {
     @Query("delete from testingRfTable")
     fun deleteTestingRfResult()
 
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    fun insertTestingNvResult(data : TestingNv)
+
+    @Query("select * from testingNvTable")
+    fun readTestingNvResult(): LiveData<List<TestingNv>>
+
+    @Query("delete from testingNvTable")
+    fun deleteTestingNvResult()
 }

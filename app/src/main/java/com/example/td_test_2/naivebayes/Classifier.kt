@@ -39,9 +39,9 @@ class Classifier<data : Any> {
         inputs.add(input)
     }
 
-    fun train(inputs : MutableList<Input<data>>){
-        this.inputs = inputs
-    }
+//    fun train(inputs : MutableList<Input<data>>){
+//        this.inputs = inputs
+//    }
 
     //TODO 2.2 PREDIKSI DATA BARU
     fun predict(

@@ -4,5 +4,5 @@ data class Input<C>(
     val text : String,
     val category : C
 ){
-    val features = text.split("").distinct().toList()
+    val features = text.split("").toList()
 }
