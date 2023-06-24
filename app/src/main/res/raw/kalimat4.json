@@ -427,17 +427,17 @@
     },
     {
       "tipe": "reminder",
-      "kalimat": "Jaga kebersihan gigi dengan menyikat gigi setelah makan pada pukul 08.30 pagi dan 20.30 malam.",
+      "kalimat": "minum air sebelum makan pukul 20.00",
       "result": "setalarm"
     },
     {
       "tipe": "reminder",
-      "kalimat": "Batasi konsumsi makanan manis pada pukul 10.00 pagi.",
+      "kalimat": "olahraga pada pukul 8 pagi besok !",
       "result": "setalarm"
     },
     {
       "tipe": "reminder",
-      "kalimat": "Periksa kadar kolesterol Anda secara teratur pada pukul 09.30 pagi.",
+      "kalimat": "minum air sebelum makan pukul 20.00",
       "result": "setalarm"
     },
     {

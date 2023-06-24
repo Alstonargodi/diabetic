@@ -5,15 +5,20 @@ import android.annotation.SuppressLint
 import android.content.Context
 import android.content.Intent
 import android.database.Cursor
+import android.os.Build
 import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
+import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
+import androidx.work.Data
+import androidx.work.PeriodicWorkRequest
+import androidx.work.WorkManager
 import com.example.td_test_2.SearchResultsAdapter
 import com.example.td_test_2.chat.preprocessing.PreProcessing
-import com.example.td_test_2.chat.preprocessing.Utils
 import com.example.td_test_2.chat.tfidfmain.TfIdfMain
 import com.example.td_test_2.database.Repository
+import com.example.td_test_2.database.entity.task.TaskEntity
 import com.example.td_test_2.database.entity.testing.TestingNv
 import com.example.td_test_2.database.entity.testing.TestingRf
 import com.example.td_test_2.database.room.DbConfig
@@ -25,6 +30,8 @@ import com.example.td_test_2.presentasion.enterdataactivity.EnterDataActivity
 import com.example.td_test_2.presentasion.mainactivity.adapter.TestingResultAdapter
 import com.example.td_test_2.presentasion.searchactivity.SearchActivity
 import com.example.td_test_2.presentasion.viewdataactivity.ViewDataActivity
+import com.example.td_test_2.reminder.TaskReminder
+import com.example.td_test_2.reminder.TaskReminder.Companion.NOTIFICATION_Channel_ID
 import com.example.td_test_2.utils.UtilsSetences
 import com.example.td_test_2.utils.UtilsSetences.csvToString2
 import org.json.JSONException
@@ -33,7 +40,9 @@ import java.io.FileOutputStream
 import java.io.IOException
 import java.io.OutputStreamWriter
 import java.text.NumberFormat
+import java.time.LocalDateTime
 import java.util.Locale
+import java.util.concurrent.TimeUnit
 
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
@@ -51,15 +60,12 @@ class MainActivity : AppCompatActivity() {
     private var timeCompute = ""
     private var classifier = Classifier<String>()
 
+    @RequiresApi(Build.VERSION_CODES.O)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
 
         repository = Repository(DbConfig.setDatabase(this))
-
-        repository.readPimaData().observe(this){
-            Log.d("data",it.toString())
-        }
 
         setContentView(binding.root)
         binding.apply {
@@ -79,11 +85,14 @@ class MainActivity : AppCompatActivity() {
 //                testingTfIdf()
 //                testingRf()
                 repository.deleteTestingRfResult()
-//                repository.deleteTestingNvResult()
-                readCsv()
+                repository.deleteTestingNvResult()
+                testClassification()
             }
             btnSchat.setOnClickListener {
                 startActivity(Intent(this@MainActivity, ChatActivity::class.java))
+            }
+            btnSetreminder.setOnClickListener {
+                insertDate()
             }
             readAccuracy()
         }
@@ -168,10 +177,10 @@ class MainActivity : AppCompatActivity() {
 
     }
 
-    private fun readCsv(){
+    private fun testClassification(){
         val dataInput = UtilsSetences.csvToStringI(
             this,
-            "testing/pimakalimat_test_40.csv"
+            "testing/pimakalimat_test_10.csv"
         )
         csvToString2(
             this,
@@ -182,7 +191,7 @@ class MainActivity : AppCompatActivity() {
                 train(com.example.td_test_2.naivebayes.data.Input(
                     input,
                     datapoint.point
-                )
+                    )
                 )
                 Log.d("NBdata", input)
             }
@@ -217,7 +226,6 @@ class MainActivity : AppCompatActivity() {
             }
             @SuppressLint("Range") val type = mCursor!!.getString(mCursor!!.getColumnIndex(DatabaseTable.COL_TIPE))
             @SuppressLint("Range") val response = mCursor!!.getString(mCursor!!.getColumnIndex(DatabaseTable.COL_ANSWER))
-//            Log.d("AA${type}",setence.toString())
             if (type == "predict"){
                var preprocessing =  predictPreprocessing(setence.toString())
                 predictRf(
@@ -231,17 +239,17 @@ class MainActivity : AppCompatActivity() {
                     age = preprocessing["umur"].toString(),
                     label = label
                 )
-//                predictNb(
-//                    pregnan = preprocessing["hamil"].toString(),
-//                    glucose = preprocessing["glukosa"].toString(),
-//                    bloodPreasure = preprocessing["tekanandarah"].toString(),
-//                    skin = preprocessing["ketebalankulit"].toString(),
-//                    insulin = preprocessing["insulin"].toString(),
-//                    bmi = preprocessing["beratbadan"].toString(),
-//                    pedigree = preprocessing["pedigree"].toString(),
-//                    age = preprocessing["umur"].toString(),
-//                    label = label
-//                )
+                predictNb(
+                    pregnan = preprocessing["hamil"].toString(),
+                    glucose = preprocessing["glukosa"].toString(),
+                    bloodPreasure = preprocessing["tekanandarah"].toString(),
+                    skin = preprocessing["ketebalankulit"].toString(),
+                    insulin = preprocessing["insulin"].toString(),
+                    bmi = preprocessing["beratbadan"].toString(),
+                    pedigree = preprocessing["pedigree"].toString(),
+                    age = preprocessing["umur"].toString(),
+                    label = label
+                )
             }
         }
     }
@@ -287,7 +295,7 @@ class MainActivity : AppCompatActivity() {
         val outputWriter = OutputStreamWriter(fileOutputStream)
         outputWriter.write((question))
         outputWriter.close()
-        var result = Input.main(this,"input",30)
+        var result = Input.main(this,"input",5)
         var hashresult = predictPreprocessing(result)
 
         var cfLabel = if (label == "0") "truenegatif" else "truepositif"
@@ -377,8 +385,6 @@ class MainActivity : AppCompatActivity() {
         readAccuracy()
     }
 
-
-
     private fun readAccuracy(){
         repository.readTestingRfResult().observe(this){
             val tp = it.count { it.predictResult == "truepositif" }
@@ -430,4 +436,43 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
+    @RequiresApi(Build.VERSION_CODES.O)
+    private fun insertDate(){
+        val date = LocalDateTime.now().dayOfMonth
+        val month = LocalDateTime.now().month.value
+        val year = LocalDateTime.now().year
+
+        repository.insertTodoList(
+            TaskEntity(
+                0,
+                "test",
+                2L,
+                "24",
+                year,
+                month,
+                date,
+                "4",
+                "2",
+                false,
+                false
+            )
+        )
+        setIntervalTime( 900000,true)
+    }
+    private fun setIntervalTime(
+        intervalTime : Long,
+        activated : Boolean
+    ){
+        val workManager = WorkManager.getInstance(this)
+        val notificationBuilder = Data.Builder()
+            .putString(NOTIFICATION_Channel_ID,"TaskReminderBroadcast")
+            .build()
+        val periodicAlarm = PeriodicWorkRequest.Builder(
+            TaskReminder::class.java,
+            intervalTime,
+            TimeUnit.MILLISECONDS
+        ).setInputData(notificationBuilder).build()
+
+        workManager.enqueue(periodicAlarm)
+    }
 }

@@ -1,6 +1,6 @@
 package com.example.td_test_2.presentasion.chatactivity.adapter
 
-import com.example.td_test_2.database.entity.Message
+import com.example.td_test_2.database.entity.message.Message
 import com.example.td_test_2.R
 import com.example.td_test_2.databinding.ItemReceiveBinding
 import com.example.td_test_2.databinding.ItemSendMsgBinding

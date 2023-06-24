@@ -64,6 +64,7 @@ object PreProcessing {
             .replace("\n", " " )
             .replace("\r", " " )
             .replace("?", " " )
+            .replace("!", " " )
             .replace(",", " " )
             .replace("[", " " )
             .replace("]", " " )

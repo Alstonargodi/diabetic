@@ -13,7 +13,7 @@ import com.example.fts_tes.Utils.PerformanceTime
 import com.example.td_test_2.database.sqllite.DatabaseTable
 import com.example.td_test_2.presentasion.chatactivity.ChatActivity
 import com.example.td_test_2.chat.tfidfmain.TfIdfMain
-import com.example.td_test_2.database.entity.WordEntity
+import com.example.td_test_2.database.entity.words.WordEntity
 import com.example.td_test_2.presentasion.mainactivity.MainActivity
 import com.example.td_test_2.presentasion.searchactivity.SearchActivity
 import java.io.FileOutputStream
@@ -75,6 +75,7 @@ class SearchResultsAdapter(private val mContext: Context) :
                     response
                 )
             )
+
         }
     }
 

@@ -2,33 +2,35 @@ package com.example.td_test_2.presentasion.chatactivity
 
 import Classifier
 import android.content.Context
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.view.View
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.work.Data
 import androidx.work.PeriodicWorkRequest
 import androidx.work.WorkManager
 import com.example.fts_tes.Utils.PerformanceTime.StartTimer
 import com.example.fts_tes.Utils.PerformanceTime.TimeElapsed
-import com.example.fts_tes.Utils.Timeidf
 import com.example.td_test_2.presentasion.chatactivity.adapter.ReceiveMessageItem
 import com.example.td_test_2.presentasion.chatactivity.adapter.SendMessageItem
 import com.example.td_test_2.R
 import com.example.td_test_2.SearchResultsAdapter
 import com.example.td_test_2.database.sqllite.DatabaseTable
-import com.example.td_test_2.database.entity.Message
+import com.example.td_test_2.database.entity.message.Message
 import com.example.td_test_2.databinding.ActivityChatBinding
 import com.example.td_test_2.chat.preprocessing.PreProcessing.preprocessingKalimat
-import com.example.td_test_2.naivebayes.data.Input
 import com.example.td_test_2.database.Repository
-import com.example.td_test_2.database.entity.WordEntity
+import com.example.td_test_2.database.entity.words.WordEntity
 import com.example.td_test_2.database.room.DbConfig
+import com.example.td_test_2.presentasion.mainactivity.MainActivity
 import com.example.td_test_2.reminder.TaskReminder
 import com.example.td_test_2.reminder.TaskReminder.Companion.NOTIFICATION_Channel_ID
 import com.example.td_test_2.utils.UtilsSetences
 import com.xwray.groupie.GroupAdapter
 import com.xwray.groupie.GroupieViewHolder
+import patternmatching.boyerMooreHorspoolSearch
 import java.io.FileOutputStream
 import java.io.OutputStreamWriter
 import java.util.HashMap
@@ -41,7 +43,6 @@ class ChatActivity : AppCompatActivity() {
     private val classifier = Classifier<String>()
 
     private lateinit var binding : ActivityChatBinding
-    private var time_o = 0L
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -52,10 +53,14 @@ class ChatActivity : AppCompatActivity() {
         //todo init reply
         replyMessage("Halo !")
         binding.rvChat.adapter = messageAdapter
+        binding.btnMenu.setOnClickListener {
+            startActivity(Intent(this,MainActivity::class.java))
+        }
         binding.btnInsert.setOnClickListener {
-
+            binding.progressBar.visibility = View.VISIBLE
             //kalimat tester
-            var reminder = "alarm atur pemberian buah setiap hari pada pukul 6 pagi"
+            var reminder = "minum air putih sebelum tidur pukul 20.00"
+            var reminderShort = "olahraga pada pukul 8 pagi besok !"
             var predictYes = "prediksi riwayat kesahatan saya memiliki hamil 6 glukosa 148 tekanandarah 72 ketebalankulit 35 insulin 0 beratbadan 33.6 pedigree 0.627 umur 50"
             var predictNewHigh = "prediksi riwayat kesahatan saya memiliki hamil 0 glukosa 340 tekanandarah 72 ketebalankulit 35 insulin 5 beratbadan 53.6 pedigree 0.687 umur 55"
             var predictNo = "prediksi riwayat kesahatan saya memiliki hamil 1 glukosa 85 tekanandarah 66 ketebalankulit 29 insulin 0 beratbadan 26.6 pedigree 0.351 umur 31"
@@ -63,12 +68,14 @@ class ChatActivity : AppCompatActivity() {
             var predictNoShort = "hamil 0 glukosa 85 tekanandarah 66 ketebalankulit 29 insulin 0 beratbadan 26.6 pedigree 0.351 umur 31"
             var predictYesShort = "hamil 0 glukosa 248 tekanandarah 72 ketebalankulit 35 insulin 0 beratbadan 80.6 pedigree 0.627 umur 50"
             var predictYesShort2 = "glukosa 250 tekanandarah 72 ketebalankulit 35 insulin 0 beratbadan 80.6 pedigree 0.627 umur 50 hamil 0 "
-            var info = "Apa itu Diabetes ?"
+            var predicyes3 = "glukosa 197 tekanandarah 74 ketebalankulit 45 insulin 0 beratbadan 43.6 pedigree 0.627 umur 54 hamil 0"
+            var info = "Apa itu Diabetes?"
             var info2 = "bagaimana gejala diabetes ?"
             var info3 = "Apa penyebab diabetes?"
+            var info4 = "apa itu stroke?"
 
             //input kalimat
-            var inputText = binding.etInsertChat.text.toString()
+            var inputText = info
 
             val message = Message(
                 setences = inputText,
@@ -82,8 +89,6 @@ class ChatActivity : AppCompatActivity() {
                 this,
                 inputText
             )
-
-            Log.d("proses",Timeidf.toastMessageNb)
             //todo 1.2 query kalimat
             queryDatabase(cleanText)
             binding.etInsertChat.text.clear()
@@ -103,13 +108,13 @@ class ChatActivity : AppCompatActivity() {
 
     //mencari kesamaan kalimat dalam database
     private fun queryDatabase(
-        text : String
+        questionInput : String
     ){
         var queryList = arrayListOf<WordEntity>()
         var hashList = HashMap<String,String>()
         //todo 1.3 start query
         val searchDb = DatabaseTable.getInstance(baseContext)?.getWordMatches(
-            text,
+            questionInput,
             null,
             true,
             true,
@@ -117,39 +122,44 @@ class ChatActivity : AppCompatActivity() {
         )
         //todo 1.6 mengambil data bedasarkan query dan proses tfidf
         mAdapter?.swapCursor(searchDb)
+        if(searchDb?.count == 0){
+            replyMessage("maaf respon tidak dapat ditemukan coba masukan kembali")
+        }
         mAdapter!!.onItemDetailCallback(object : SearchResultsAdapter.OnDetailItemCallback{
             override fun onDetailCallback(data: WordEntity) {
                 var pattern = data.sentence.toRegex()
-                var result = data.result.toLowerCase()
-                if (result.contains(text) || pattern.containsMatchIn(text) && data.type == "info"){
+                var result = data.result.toLowerCase().toRegex()
+                var match = boyerMooreHorspoolSearch(data.sentence,questionInput)
+                if (match == -1 || pattern.containsMatchIn(questionInput) || result.containsMatchIn(questionInput)){
                     setenceSelect(
                         data.type,
-                        text,
+                        questionInput,
                         data.sentence,
                         data.result
                     )
-                }else if(result.contains(text)){
+                }else if ( data.type == "predict"){
                     setenceSelect(
                         data.type,
-                        text,
+                        questionInput,
                         data.sentence,
                         data.result
                     )
-                }else if(data.type == "predict"){
+                }else if ( data.type == "help"){
                     setenceSelect(
                         data.type,
-                        text,
+                        questionInput,
                         data.sentence,
                         data.result
                     )
-                }else if (data.type == "reminder"){
+                }else if ( data.type == "reminder"){
                     setenceSelect(
                         data.type,
-                        text,
+                        questionInput,
                         data.sentence,
                         data.result
                     )
                 }
+
             }
         })
     }
@@ -194,8 +204,9 @@ class ChatActivity : AppCompatActivity() {
             }
             "reminder"->{
                 //todo set alarm
+                var setence = "Mengatur pengingat \n$answer pada pukul 18.00"
                 Log.d("chat_reminder", answer)
-                replyMessage(answer)
+                replyMessage(setence)
             }
             "help"->{
                 replyMessage(answer)
@@ -266,7 +277,7 @@ class ChatActivity : AppCompatActivity() {
             decission = "tidak terkena diabetes"
         }
 
-        var message = getString(R.string.pesanhasil_klasifikasi, decission, result)
+        var message = getString(R.string.pesanhasil_klasifikasi, decission,"")
         replyMessage("hasil naive bayes $message")
     }
 
@@ -296,7 +307,7 @@ class ChatActivity : AppCompatActivity() {
                 )
         )
         outputWriter.close()
-        var result = randomforest.Input.main(this,"input",10)
+        var result = randomforest.Input.main(this,"input",5)
         var decission = ""
         var hashresult = predictPreprocessing(result)
         if (hashresult["hasil"] == "1"){
@@ -305,7 +316,7 @@ class ChatActivity : AppCompatActivity() {
             decission = "tidak terkena diabetes"
         }
 
-        var message = getString(R.string.pesanhasil_klasifikasi, decission, result)
+        var message = getString(R.string.pesanhasil_klasifikasi, decission,"")
         replyMessage("hasil random forest $message")
     }
 
@@ -313,13 +324,14 @@ class ChatActivity : AppCompatActivity() {
     private fun replyMessage(
         sentence : String
     ){
+        var setence = if(sentence == "Halo !") "Halo! \n selamat datang di aplikasi diabetic" else "$sentence\n\nwaktu komputasi ${TimeElapsed().toString()}"
         val receive = Message(
-            setences = "$sentence\n\nwaktu komptuasi ${TimeElapsed().toString()}",
+            setences = setence,
             sender = "me",
         )
+        binding.progressBar.visibility = View.GONE
         val receiveItem = ReceiveMessageItem(receive)
         messageAdapter.add(receiveItem)
-        Log.d("calctime_replymessage", TimeElapsed().toString())
     }
 
     private fun setIntervalTime(intervalTime : Long, activated : Boolean){

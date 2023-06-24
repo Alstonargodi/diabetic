@@ -1,4 +1,4 @@
-package com.example.td_test_2.database.entity
+package com.example.td_test_2.database.entity.message
 
 data class Message(
     val setences : String = "",

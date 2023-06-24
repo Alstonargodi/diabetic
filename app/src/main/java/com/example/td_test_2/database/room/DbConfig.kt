@@ -8,9 +8,11 @@ import androidx.room.RoomDatabase
 import androidx.sqlite.db.SupportSQLiteDatabase
 import com.example.ad_rf.dbconfig.diabetes.PimaEntity
 import com.example.td_test_2.database.entity.testing.TestingRf
-import com.example.td_test_2.database.entity.WordEntity
+import com.example.td_test_2.database.entity.words.WordEntity
+import com.example.td_test_2.database.entity.task.TaskEntity
 import com.example.td_test_2.database.entity.testing.TestingDf
 import com.example.td_test_2.database.entity.testing.TestingNv
+import com.example.td_test_2.database.room.dao.TaskDao
 import com.example.td_test_2.database.room.dao.WordDao
 import com.example.td_test_2.database.room.json.Loadjson
 import org.json.JSONException
@@ -22,7 +24,8 @@ import java.util.concurrent.Executors
         PimaEntity::class,
         TestingRf::class,
         TestingDf::class,
-        TestingNv::class
+        TestingNv::class,
+        TaskEntity::class
     ],
     version = 3,
     exportSchema = false
@@ -30,6 +33,7 @@ import java.util.concurrent.Executors
 
 abstract class DbConfig : RoomDatabase(){
     abstract fun wordDao(): WordDao
+    abstract fun taskDao(): TaskDao
 
     companion object {
         @Volatile

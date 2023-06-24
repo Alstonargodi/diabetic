@@ -27,7 +27,7 @@ public class Input {
         String traindata,testdata;
         ArrayList<ArrayList<String>> Test = new ArrayList<>();
 
-        String traincsv = "pima/pima_train_40nr.csv";
+        String traincsv = "pima/pima_train_10nr.csv";
         String testcsv = "testpim_3_nrandom_nohead.csv";
         String testinput = "amytextfile.txt";
 

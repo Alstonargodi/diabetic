@@ -7,18 +7,24 @@ import android.content.Context
 import android.content.Intent
 import android.os.Build
 import android.preference.PreferenceManager
+import androidx.annotation.RequiresApi
 import androidx.core.app.NotificationCompat
 import androidx.core.content.ContextCompat
 import androidx.work.Worker
 import androidx.work.WorkerParameters
 import com.example.td_test_2.R
+import com.example.td_test_2.database.Repository
+import com.example.td_test_2.database.room.DbConfig
 import com.example.td_test_2.presentasion.mainactivity.MainActivity
 
 class TaskReminder(
     val context : Context,
-    var Task : String,
     params : WorkerParameters,
 ) : Worker(context,params){
+    private val repo = Repository(DbConfig.setDatabase(context))
+    @RequiresApi(Build.VERSION_CODES.O)
+    private val todayTask = repo.readTodayTask()
+
     private val pendingIntent: PendingIntent = PendingIntent.getActivity(
         context,
         NOTIFICATION_ID,
@@ -26,6 +32,7 @@ class TaskReminder(
         PendingIntent.FLAG_IMMUTABLE
     )
 
+    @RequiresApi(Build.VERSION_CODES.O)
     override fun doWork(): Result {
         //TODO 14
         val notificationPreference = PreferenceManager.getDefaultSharedPreferences(applicationContext)
@@ -37,8 +44,14 @@ class TaskReminder(
             val notificationManager = applicationContext
                 .getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
 
-            val task = Task
-            notificationStyle.addLine(task)
+            todayTask.forEach { todoLocal ->
+                val task = String.format(
+                    notificationFormat,
+                    todoLocal.startTime,
+                    todoLocal.endTime,
+                    todoLocal.title)
+                notificationStyle.addLine(task)
+            }
 
             val notificationBuilder : NotificationCompat.Builder = NotificationCompat.Builder(applicationContext)
                 .setContentIntent(pendingIntent)

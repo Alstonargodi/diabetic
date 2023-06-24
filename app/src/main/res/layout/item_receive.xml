@@ -8,7 +8,7 @@
     <data>
         <variable
             name="message"
-            type="com.example.td_test_2.database.entity.Message" />
+            type="com.example.td_test_2.database.entity.message.Message" />
     </data>
 
 

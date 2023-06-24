@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">td-test-2</string>
+    <string name="app_name">diabetic</string>
     <string name="pesanhasil_klasifikasi">berdasarkan riwayat kesehatan anda menunjukan bahwa %1$s \n\ndetail terkait \n%2$s</string>
 
     <string name="pref_key_notify">key_notification</string>
