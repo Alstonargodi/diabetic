@@ -19,4 +19,7 @@ abstract class TaskDao {
 
     @Query("delete from TodoTable where title like :name ")
     abstract fun deleteTodoTask(name : String)
+
+    @Query("delete from TodoTable")
+    abstract fun deleteTask()
 }

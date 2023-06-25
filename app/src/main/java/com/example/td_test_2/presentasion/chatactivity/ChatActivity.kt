@@ -3,10 +3,12 @@ package com.example.td_test_2.presentasion.chatactivity
 import Classifier
 import android.content.Context
 import android.content.Intent
+import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.view.View
+import androidx.annotation.RequiresApi
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.work.Data
 import androidx.work.PeriodicWorkRequest
@@ -22,18 +24,24 @@ import com.example.td_test_2.database.entity.message.Message
 import com.example.td_test_2.databinding.ActivityChatBinding
 import com.example.td_test_2.chat.preprocessing.PreProcessing.preprocessingKalimat
 import com.example.td_test_2.database.Repository
+import com.example.td_test_2.database.entity.task.TaskEntity
 import com.example.td_test_2.database.entity.words.WordEntity
 import com.example.td_test_2.database.room.DbConfig
 import com.example.td_test_2.presentasion.mainactivity.MainActivity
 import com.example.td_test_2.reminder.TaskReminder
 import com.example.td_test_2.reminder.TaskReminder.Companion.NOTIFICATION_Channel_ID
+import com.example.td_test_2.reminder.TaskReminderBroadcast
 import com.example.td_test_2.utils.UtilsSetences
 import com.xwray.groupie.GroupAdapter
 import com.xwray.groupie.GroupieViewHolder
 import patternmatching.boyerMooreHorspoolSearch
 import java.io.FileOutputStream
 import java.io.OutputStreamWriter
-import java.util.HashMap
+import java.text.ParseException
+import java.text.SimpleDateFormat
+import java.time.LocalDateTime
+import java.util.Locale
+
 import java.util.concurrent.TimeUnit
 
 class ChatActivity : AppCompatActivity() {
@@ -41,7 +49,6 @@ class ChatActivity : AppCompatActivity() {
     private var mAdapter: SearchResultsAdapter? = null
     private lateinit var repository: Repository
     private val classifier = Classifier<String>()
-
     private lateinit var binding : ActivityChatBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -59,7 +66,7 @@ class ChatActivity : AppCompatActivity() {
         binding.btnInsert.setOnClickListener {
             binding.progressBar.visibility = View.VISIBLE
             //kalimat tester
-            var reminder = "minum air putih sebelum tidur pukul 20.00"
+            var reminder = "makan buah pukul 20.00"
             var reminderShort = "olahraga pada pukul 8 pagi besok !"
             var predictYes = "prediksi riwayat kesahatan saya memiliki hamil 6 glukosa 148 tekanandarah 72 ketebalankulit 35 insulin 0 beratbadan 33.6 pedigree 0.627 umur 50"
             var predictNewHigh = "prediksi riwayat kesahatan saya memiliki hamil 0 glukosa 340 tekanandarah 72 ketebalankulit 35 insulin 5 beratbadan 53.6 pedigree 0.687 umur 55"
@@ -75,7 +82,7 @@ class ChatActivity : AppCompatActivity() {
             var info4 = "apa itu stroke?"
 
             //input kalimat
-            var inputText = info
+            var inputText = "cancel alarm"
 
             val message = Message(
                 setences = inputText,
@@ -90,7 +97,15 @@ class ChatActivity : AppCompatActivity() {
                 inputText
             )
             //todo 1.2 query kalimat
-            queryDatabase(cleanText)
+            if(inputText === "cancel alarm"){
+               replyMessage("menghapus alarm")
+                removeReminder()
+            }else if(inputText == "bantuan"){
+                val message = "berikut ini bantuan untuk kata kunci chat"
+                replyMessage(message)
+            }else{
+                queryDatabase(cleanText)
+            }
             binding.etInsertChat.text.clear()
         }
         initPredictionDataset()
@@ -126,11 +141,12 @@ class ChatActivity : AppCompatActivity() {
             replyMessage("maaf respon tidak dapat ditemukan coba masukan kembali")
         }
         mAdapter!!.onItemDetailCallback(object : SearchResultsAdapter.OnDetailItemCallback{
+            @RequiresApi(Build.VERSION_CODES.O)
             override fun onDetailCallback(data: WordEntity) {
                 var pattern = data.sentence.toRegex()
                 var result = data.result.toLowerCase().toRegex()
                 var match = boyerMooreHorspoolSearch(data.sentence,questionInput)
-                if (match == -1 || pattern.containsMatchIn(questionInput) || result.containsMatchIn(questionInput)){
+                if (match == 0 || pattern.containsMatchIn(questionInput) || result.containsMatchIn(questionInput)){
                     setenceSelect(
                         data.type,
                         questionInput,
@@ -159,12 +175,12 @@ class ChatActivity : AppCompatActivity() {
                         data.result
                     )
                 }
-
             }
         })
     }
 
     //memilah kalimat hasil tfidf berdasarkan tipe
+    @RequiresApi(Build.VERSION_CODES.O)
     private fun setenceSelect(
         type : String,
         question : String,
@@ -178,6 +194,7 @@ class ChatActivity : AppCompatActivity() {
                 replyMessage(message)
             }
             "predict"->{
+                binding.progressBar.visibility = View.VISIBLE
                 var preprocessing = predictPreprocessing(question)
                 //todo 2.1 klasifikasi nb
                 predictNb(
@@ -204,8 +221,9 @@ class ChatActivity : AppCompatActivity() {
             }
             "reminder"->{
                 //todo set alarm
-                var setence = "Mengatur pengingat \n$answer pada pukul 18.00"
-                Log.d("chat_reminder", answer)
+                var pre = reminderPreprocessing(question)
+                var setence = "Mengatur pengingat \n$answer pada pukul ${pre["pukul"].toString()}"
+                setReminder(pre["pukul"].toString(),question)
                 replyMessage(setence)
             }
             "help"->{
@@ -230,6 +248,21 @@ class ChatActivity : AppCompatActivity() {
             Pair(word, value)
         }.toMap()
         Log.d("result_patternpredict", result.toString())
+        return result
+    }
+
+    private fun reminderPreprocessing(
+        reminder : String
+    ): Map<String,String>{
+        var reminderText = reminder
+        val pattern = Regex("(\\w+) ([+-]?([0-9]*[.])?[0-9]+)")
+
+        val matches = pattern.findAll(reminderText)
+        val result = matches.map { matchResult ->
+            val (word, value) = matchResult.destructured
+            Pair(word, value)
+        }.toMap()
+        Log.d("reminder_preprocess", result.toString())
         return result
     }
 
@@ -334,22 +367,36 @@ class ChatActivity : AppCompatActivity() {
         messageAdapter.add(receiveItem)
     }
 
-    private fun setIntervalTime(intervalTime : Long, activated : Boolean){
-        val workManager = WorkManager.getInstance(this)
-        val notificationBuilder = Data.Builder()
-            .putString(NOTIFICATION_Channel_ID,"TaskReminderBroadcast")
-            .build()
-        val periodicAlarm = PeriodicWorkRequest.Builder(
-            TaskReminder::class.java,
-            intervalTime,
-            TimeUnit.MILLISECONDS
-        ).setInputData(notificationBuilder).build()
-
-        if(activated){
-            workManager.enqueue(periodicAlarm)
-        }else{
-            workManager.pruneWork()
-            workManager.cancelAllWork()
-        }
+    @RequiresApi(Build.VERSION_CODES.O)
+    private fun setReminder(
+        time : String,
+        description : String
+    ){
+        TaskReminderBroadcast().setDailyReminder(this,200)
+        val date = LocalDateTime.now().dayOfMonth
+        val month = LocalDateTime.now().month.value
+        val year = LocalDateTime.now().year
+        repository.deleteTodoTask(description)
+        repository.insertTodoList(
+            TaskEntity(
+                0,
+                description,
+                2L,
+                "24",
+                year,
+                month,
+                date,
+                time,
+                "2",
+                false,
+                false
+            )
+        )
     }
+
+    private fun removeReminder(){
+        repository.deleteTask()
+        TaskReminderBroadcast().cancelAlarm(this)
+    }
+
 }

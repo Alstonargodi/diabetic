@@ -57,5 +57,7 @@ class Repository (
         taskDao.deleteTodoTask(name)
     }
 
-
+    fun deleteTask(){
+        taskDao.deleteTask()
+    }
 }

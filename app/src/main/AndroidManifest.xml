@@ -22,6 +22,10 @@
         <activity
             android:name=".presentasion.mainactivity.MainActivity"
             android:exported="false" />
+        <receiver
+            android:name=".reminder.TaskReminderBroadcast"
+            android:enabled="true"
+            android:exported="true" />
         <activity
             android:name=".presentasion.searchactivity.SearchActivity"
             android:exported="false" />
