@@ -8,7 +8,7 @@
     {
       "tipe": "info",
       "kalimat": "bagaimana pola hidup sehat agar terhindar diabetes",
-      "result": "olahraga"
+      "result": "rajin berolahraga dan konsumsi makanan sehat"
     },
     {
       "tipe": "help",
@@ -23,6 +23,26 @@
     {
       "tipe": "info",
       "kalimat": "Apa itu sakit diabetes?",
+      "result": "Diabetes adalah kondisi medis yang ditandai dengan tingginya kadar gula (glukosa) dalam darah."
+    },
+    {
+      "tipe": "info",
+      "kalimat": "Apa itu diabetes?",
+      "result": "Diabetes adalah kondisi medis yang ditandai dengan tingginya kadar gula (glukosa) dalam darah."
+    },
+    {
+      "tipe": "info",
+      "kalimat": "Apa diabetes?",
+      "result": "Diabetes adalah kondisi medis yang ditandai dengan tingginya kadar gula (glukosa) dalam darah."
+    },
+    {
+      "tipe": "info",
+      "kalimat": "diabetes?",
+      "result": "Diabetes adalah kondisi medis yang ditandai dengan tingginya kadar gula (glukosa) dalam darah."
+    },
+    {
+      "tipe": "info",
+      "kalimat": "diabetes",
       "result": "Diabetes adalah kondisi medis yang ditandai dengan tingginya kadar gula (glukosa) dalam darah."
     },
     {
@@ -557,6 +577,11 @@
     },
     {
       "tipe": "info",
+      "kalimat": "penyebab diabetes?",
+      "result": "Diabetes bisa disebabkan oleh faktor genetik, gaya hidup tidak sehat, kelebihan berat badan, resistensi insulin, atau kombinasi dari faktor-faktor tersebut."
+    },
+    {
+      "tipe": "info",
       "kalimat": "Apa perbedaan antara diabetes tipe 1 dan tipe 2?",
       "result": "Diabetes tipe 1 disebabkan oleh ketidakmampuan pankreas untuk memproduksi insulin, sedangkan diabetes tipe 2 melibatkan resistensi insulin dan produksi insulin yang tidak cukup."
     },
@@ -573,6 +598,21 @@
     {
       "tipe": "info",
       "kalimat": "Apa gejala umum diabetes?",
+      "result": "Gejala diabetes meliputi sering buang air kecil, haus berlebihan, penurunan berat badan yang tidak dijelaskan, kelelahan, penglihatan kabur, dan luka yang sulit sembuh."
+    },
+    {
+      "tipe": "info",
+      "kalimat": "Apa gejala diabetes?",
+      "result": "Gejala diabetes meliputi sering buang air kecil, haus berlebihan, penurunan berat badan yang tidak dijelaskan, kelelahan, penglihatan kabur, dan luka yang sulit sembuh."
+    },
+    {
+      "tipe": "info",
+      "kalimat": "gejala umum diabetes?",
+      "result": "Gejala diabetes meliputi sering buang air kecil, haus berlebihan, penurunan berat badan yang tidak dijelaskan, kelelahan, penglihatan kabur, dan luka yang sulit sembuh."
+    },
+    {
+      "tipe": "info",
+      "kalimat": "gejala diabetes?",
       "result": "Gejala diabetes meliputi sering buang air kecil, haus berlebihan, penurunan berat badan yang tidak dijelaskan, kelelahan, penglihatan kabur, dan luka yang sulit sembuh."
     },
     {

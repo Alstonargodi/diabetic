@@ -13,9 +13,13 @@ abstract class TaskDao {
     abstract fun insertTodoList(data : TaskEntity)
 
     @Query("select * from todotable where dateDay =:date and isComplete =0 order by dateDueMillis asc")
-    abstract fun readTodayTask(
+    abstract fun readTodayListTask(
         date: Int,
     ): List<TaskEntity>
+
+    @Query("select * from todotable")
+    abstract fun readTodayTask(
+    ): LiveData<List<TaskEntity>>
 
     @Query("delete from TodoTable where title like :name ")
     abstract fun deleteTodoTask(name : String)

@@ -23,7 +23,7 @@ class TaskReminder(
 ) : Worker(context,params){
     private val repo = Repository(DbConfig.setDatabase(context))
     @RequiresApi(Build.VERSION_CODES.O)
-    private val todayTask = repo.readTodayTask()
+    private val todayTask = repo.readTodayTaskList()
 
     private val pendingIntent: PendingIntent = PendingIntent.getActivity(
         context,

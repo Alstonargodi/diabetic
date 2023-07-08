@@ -16,7 +16,6 @@ import com.example.td_test_2.database.Repository
 import com.example.td_test_2.database.entity.task.TaskEntity
 import com.example.td_test_2.database.room.DbConfig
 import com.example.td_test_2.presentasion.mainactivity.MainActivity
-import com.example.td_test_2.reminder.TaskReminder.Companion.ID_REPEATING
 import java.util.Calendar
 import java.util.concurrent.Executors
 
@@ -24,7 +23,7 @@ class TaskReminderBroadcast() : BroadcastReceiver() {
     @RequiresApi(Build.VERSION_CODES.O)
     override fun onReceive(context: Context, intent: Intent) {
         Executors.newSingleThreadExecutor().execute {
-            val task = Repository(DbConfig.setDatabase(context)).readTodayTask()
+            val task = Repository(DbConfig.setDatabase(context)).readTodayTaskList()
             if (task.isNotEmpty()) {
                 showAlarmNotification(context, task)
             }

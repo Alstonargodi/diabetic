@@ -3,9 +3,6 @@ package com.example.td_test_2.database
 import android.os.Build
 import androidx.annotation.RequiresApi
 import androidx.lifecycle.LiveData
-import androidx.room.Insert
-import androidx.room.OnConflictStrategy
-import androidx.room.Query
 import com.example.ad_rf.dbconfig.diabetes.PimaEntity
 import com.example.td_test_2.database.entity.task.TaskEntity
 import com.example.td_test_2.database.entity.testing.TestingRf
@@ -50,8 +47,12 @@ class Repository (
     }
 
     @RequiresApi(Build.VERSION_CODES.O)
-    fun readTodayTask(): List<TaskEntity> =
-        taskDao.readTodayTask(date)
+    fun readTodayTaskList(): List<TaskEntity> =
+        taskDao.readTodayListTask(date)
+
+    @RequiresApi(Build.VERSION_CODES.O)
+    fun readTodayTask(): LiveData<List<TaskEntity>> =
+        taskDao.readTodayTask()
 
     fun deleteTodoTask(name : String){
         taskDao.deleteTodoTask(name)

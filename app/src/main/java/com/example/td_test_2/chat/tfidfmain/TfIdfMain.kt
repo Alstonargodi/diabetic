@@ -55,14 +55,11 @@ object TfIdfMain {
         val documentFrequency = LongArray(searchTerms.size)
         val querySpaceVector = DoubleArray(searchTerms.size)
 
-        // document frequecny terms
         //todo 1.9 mencari terms dari database
         for (i in searchTerms.indices) {
             documentFrequency[i] = DatabaseTable.getInstance(context)?.getDocumentFrequency(
                 searchTerms[i]
             )!!
-            Log.d("searchTerms",documentFrequency[i].toString())
-
 
             if (documentFrequency[i] > 0) querySpaceVector[i] =
                 Math.log(totalDocs.toDouble() / documentFrequency[i]) else querySpaceVector[i] = 0.0
@@ -85,7 +82,6 @@ object TfIdfMain {
                 val tf = shortened[i * 3 + 2]
                 Log.d("TF-IDF $i TF", tf.toString())
 
-
                 //TODO 1.13 Inverted document frequency
                 var idf = 0.0
                 if (documentFrequency[i] > 0) idf =
@@ -107,7 +103,13 @@ object TfIdfMain {
 
         //indeks perhitungan
         Log.d("TF-IDF INDEXES", Arrays.toString(result))
-        Log.d("TF-IDF VALUES", values.toString())
+        Log.d("TF-IDF VALUES", "${Arrays.toString(result)} == $values")
+        
+        values.forEach {value ->
+            result.forEach { key->
+                Log.d("TF-IDF VALUES ${key}", "${key} == $value")
+            }
+        }
 
         return result
     }

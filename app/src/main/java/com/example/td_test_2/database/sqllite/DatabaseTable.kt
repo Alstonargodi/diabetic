@@ -433,8 +433,5 @@ class DatabaseTable private constructor(context: Context) {
         return cursor
     }
 
-    fun onDestroy() {
-        mDatabaseOpenHelper.close()
-    }
 
 }

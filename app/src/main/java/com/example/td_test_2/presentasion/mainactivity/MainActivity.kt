@@ -25,6 +25,7 @@ import com.example.td_test_2.database.room.DbConfig
 import com.example.td_test_2.database.room.json.Loadjson
 import com.example.td_test_2.database.sqllite.DatabaseTable
 import com.example.td_test_2.databinding.ActivityMainBinding
+import com.example.td_test_2.presentasion.testingalgorithmactivity.TestingAlgorithmActivity
 import com.example.td_test_2.presentasion.chatactivity.ChatActivity
 import com.example.td_test_2.presentasion.enterdataactivity.EnterDataActivity
 import com.example.td_test_2.presentasion.mainactivity.adapter.TestingResultAdapter
@@ -39,10 +40,7 @@ import randomforest.Input
 import java.io.FileOutputStream
 import java.io.IOException
 import java.io.OutputStreamWriter
-import java.sql.Date
 import java.text.NumberFormat
-import java.text.ParseException
-import java.text.SimpleDateFormat
 import java.time.LocalDateTime
 import java.util.Locale
 import java.util.concurrent.TimeUnit
@@ -87,9 +85,10 @@ class MainActivity : AppCompatActivity() {
             btnTest.setOnClickListener {
 //                testingTfIdf()
 //                testingRf()
-                repository.deleteTestingRfResult()
-                repository.deleteTestingNvResult()
-                testClassification()
+//                repository.deleteTestingRfResult()
+//                repository.deleteTestingNvResult()
+//                testClassification()
+                startActivity(Intent(this@MainActivity, TestingAlgorithmActivity::class.java))
             }
             btnSchat.setOnClickListener {
                 startActivity(Intent(this@MainActivity, ChatActivity::class.java))
@@ -298,7 +297,12 @@ class MainActivity : AppCompatActivity() {
         val outputWriter = OutputStreamWriter(fileOutputStream)
         outputWriter.write((question))
         outputWriter.close()
-        var result = Input.main(this,"input",5)
+        var result = Input.main(
+            this,
+            "input",
+            "pima/pima_train_10nr.csv",
+            5
+        )
         var hashresult = predictPreprocessing(result)
 
         var cfLabel = if (label == "0") "truenegatif" else "truepositif"

@@ -1,6 +1,7 @@
 import android.util.Log
 import com.example.fts_tes.Utils.PerformanceTime
 import com.example.td_test_2.naivebayes.data.Input
+import kotlin.math.exp
 import kotlin.math.ln
 
 class Classifier<data : Any> {
@@ -15,12 +16,12 @@ class Classifier<data : Any> {
         }
     }
 
-    //menghitung jumlah kalimat
+    //menghitung keseluruhan jumlah fitur dalam dataset
     private val allWordsCount by lazy { inputs.asSequence().flatMap {
         it.features.asSequence()
     }.distinct().count() }
 
-    //menghitugn jumlah fitur
+    //menghitung jumlah fitur
     private val featureCounter by lazy {
         val feat = mutableMapOf<data,Int>()
         for (a in inputs)
@@ -29,7 +30,6 @@ class Classifier<data : Any> {
                 a.features.size,
                 Int::plus
             )
-        Log.d("feat",feat.toString())
         feat
     }
 
@@ -72,7 +72,6 @@ class Classifier<data : Any> {
         Log.d("calctime_nb_categorical", PerformanceTime.TimeElapsed().toString())
 
         val resultMap = mutableMapOf<data,Double>()
-
         //todo 2.5 menghitung probilitas
         for(key in mapPredict){
             for ((cat,count) in key.value){
@@ -92,7 +91,7 @@ class Classifier<data : Any> {
     }
 
     private fun sumMaps(
-            maps : List<Map<data,Double>>
+        maps : List<Map<data,Double>>
     ): Map<data,Double>{
         val sum = mutableMapOf<data,Double>()
         for (map in maps){
@@ -112,7 +111,7 @@ class Classifier<data : Any> {
             it.value
         }.value
         val values = suggestions.mapValues {
-            Math.exp(it.value - max)
+            exp(it.value - max)
         }
         val norm = values.values.sum()
         return values.mapValues {

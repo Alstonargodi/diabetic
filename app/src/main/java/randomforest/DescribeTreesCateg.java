@@ -9,23 +9,18 @@ import java.io.InputStreamReader;
 import java.util.ArrayList;
 
 public class DescribeTreesCateg {
-    //method to take the txt fle as input and pass those values to random forests
+
     BufferedReader BR = null;
     String path;
     public DescribeTreesCateg(String path){
         this.path=path;
     }
     public ArrayList<ArrayList<String>> CreateInputCateg(String path, Context context){
-
         ArrayList<ArrayList<String>> DataInput = new ArrayList<ArrayList<String>>();
 
         try {
 
             String sCurrentLine;
-
-//            InputStream inputStream = context.openFileInput("amytextfile.txt");
-//            InputStreamReader inputStreamReader = new InputStreamReader(inputStream);
-//            BufferedReader bufferedReader = new BufferedReader(inputStreamReader);
 
             BR = new BufferedReader(new InputStreamReader(context.getAssets().open(path)));
             while ((sCurrentLine = BR.readLine()) != null) {
@@ -42,7 +37,7 @@ public class DescribeTreesCateg {
                         }ArrayList<String> DataPoint=new ArrayList<String>();
                         for(i=0;i<Sp.size()-1;i++){
                             DataPoint.add(sCurrentLine.substring(Sp.get(i)+1, Sp.get(i+1)).trim());
-                        }DataInput.add(DataPoint);//System.out.println(DataPoint);
+                        }DataInput.add(DataPoint);
                     }
                     else if(sCurrentLine.indexOf(" ")>=0){
                         //has spaces
@@ -53,7 +48,7 @@ public class DescribeTreesCateg {
                         }ArrayList<String> DataPoint=new ArrayList<String>();
                         for(i=0;i<Sp.size()-1;i++){
                             DataPoint.add(sCurrentLine.substring(Sp.get(i), Sp.get(i+1)).trim());
-                        }DataInput.add(DataPoint);//System.out.println(DataPoint);
+                        }DataInput.add(DataPoint);
                     }
                 }
             }System.out.println("Input generated");

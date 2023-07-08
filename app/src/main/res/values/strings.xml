@@ -4,4 +4,6 @@
 
     <string name="pref_key_notify">key_notification</string>
     <string name="notification_format">%3$s | %1$s - %2$s </string>
+    <string name="bantuan">bantuan</string>
+    <string name="menu_chat">silahkan pilih bantuan terkait \n1.informasi \n2.alarm \n3.klasifikasi \n4.lihat daftar kegiatan</string>
 </resources>

@@ -6,13 +6,9 @@ import android.content.Intent
 import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import androidx.annotation.RequiresApi
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.work.Data
-import androidx.work.PeriodicWorkRequest
-import androidx.work.WorkManager
 import com.example.fts_tes.Utils.PerformanceTime.StartTimer
 import com.example.fts_tes.Utils.PerformanceTime.TimeElapsed
 import com.example.td_test_2.presentasion.chatactivity.adapter.ReceiveMessageItem
@@ -28,8 +24,6 @@ import com.example.td_test_2.database.entity.task.TaskEntity
 import com.example.td_test_2.database.entity.words.WordEntity
 import com.example.td_test_2.database.room.DbConfig
 import com.example.td_test_2.presentasion.mainactivity.MainActivity
-import com.example.td_test_2.reminder.TaskReminder
-import com.example.td_test_2.reminder.TaskReminder.Companion.NOTIFICATION_Channel_ID
 import com.example.td_test_2.reminder.TaskReminderBroadcast
 import com.example.td_test_2.utils.UtilsSetences
 import com.xwray.groupie.GroupAdapter
@@ -37,12 +31,7 @@ import com.xwray.groupie.GroupieViewHolder
 import patternmatching.boyerMooreHorspoolSearch
 import java.io.FileOutputStream
 import java.io.OutputStreamWriter
-import java.text.ParseException
-import java.text.SimpleDateFormat
 import java.time.LocalDateTime
-import java.util.Locale
-
-import java.util.concurrent.TimeUnit
 
 class ChatActivity : AppCompatActivity() {
     private val messageAdapter = GroupAdapter<GroupieViewHolder>()
@@ -50,6 +39,12 @@ class ChatActivity : AppCompatActivity() {
     private lateinit var repository: Repository
     private val classifier = Classifier<String>()
     private lateinit var binding : ActivityChatBinding
+
+    private var trainData = "pimall.csv"
+    private var isMenu = false
+    private var setReminder = false
+    private var setClassifier = false
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -66,7 +61,7 @@ class ChatActivity : AppCompatActivity() {
         binding.btnInsert.setOnClickListener {
             binding.progressBar.visibility = View.VISIBLE
             //kalimat tester
-            var reminder = "makan buah pukul 20.00"
+            var reminder = "makan pukul 20.00"
             var reminderShort = "olahraga pada pukul 8 pagi besok !"
             var predictYes = "prediksi riwayat kesahatan saya memiliki hamil 6 glukosa 148 tekanandarah 72 ketebalankulit 35 insulin 0 beratbadan 33.6 pedigree 0.627 umur 50"
             var predictNewHigh = "prediksi riwayat kesahatan saya memiliki hamil 0 glukosa 340 tekanandarah 72 ketebalankulit 35 insulin 5 beratbadan 53.6 pedigree 0.687 umur 55"
@@ -82,7 +77,7 @@ class ChatActivity : AppCompatActivity() {
             var info4 = "apa itu stroke?"
 
             //input kalimat
-            var inputText = "cancel alarm"
+            var inputText = binding.etInsertChat.text.toString()
 
             val message = Message(
                 setences = inputText,
@@ -97,18 +92,18 @@ class ChatActivity : AppCompatActivity() {
                 inputText
             )
             //todo 1.2 query kalimat
-            if(inputText === "cancel alarm"){
-               replyMessage("menghapus alarm")
-                removeReminder()
-            }else if(inputText == "bantuan"){
-                val message = "berikut ini bantuan untuk kata kunci chat"
-                replyMessage(message)
+            if(isMenu){
+                MenuResponse(inputText)
             }else{
                 queryDatabase(cleanText)
             }
+
+            if (setReminder){
+                setReminderClassifer(inputText)
+            }
             binding.etInsertChat.text.clear()
         }
-        initPredictionDataset()
+        initNbTrainData()
         binding.rvChat.layoutManager = LinearLayoutManager(this)
 
         binding.rvSearch.adapter = messageAdapter
@@ -125,8 +120,6 @@ class ChatActivity : AppCompatActivity() {
     private fun queryDatabase(
         questionInput : String
     ){
-        var queryList = arrayListOf<WordEntity>()
-        var hashList = HashMap<String,String>()
         //todo 1.3 start query
         val searchDb = DatabaseTable.getInstance(baseContext)?.getWordMatches(
             questionInput,
@@ -146,35 +139,11 @@ class ChatActivity : AppCompatActivity() {
                 var pattern = data.sentence.toRegex()
                 var result = data.result.toLowerCase().toRegex()
                 var match = boyerMooreHorspoolSearch(data.sentence,questionInput)
-                if (match == 0 || pattern.containsMatchIn(questionInput) || result.containsMatchIn(questionInput)){
-                    setenceSelect(
-                        data.type,
-                        questionInput,
-                        data.sentence,
-                        data.result
-                    )
-                }else if ( data.type == "predict"){
-                    setenceSelect(
-                        data.type,
-                        questionInput,
-                        data.sentence,
-                        data.result
-                    )
-                }else if ( data.type == "help"){
-                    setenceSelect(
-                        data.type,
-                        questionInput,
-                        data.sentence,
-                        data.result
-                    )
-                }else if ( data.type == "reminder"){
-                    setenceSelect(
-                        data.type,
-                        questionInput,
-                        data.sentence,
-                        data.result
-                    )
-                }
+                setenceSelect(
+                    data.type,
+                    questionInput,
+                    data.result
+                )
             }
         })
     }
@@ -184,7 +153,6 @@ class ChatActivity : AppCompatActivity() {
     private fun setenceSelect(
         type : String,
         question : String,
-        patternFound : String,
         answer : String,
     ){
         //todo 1.17 berdasarkan pattern tertinggi kemudian dikategorikan
@@ -209,7 +177,7 @@ class ChatActivity : AppCompatActivity() {
                 )
                 //todo 3.1 klasifikasi RF
                 predictRf(
-                    pregnan = preprocessing["hamil"].toString(),
+                    pregnancies = preprocessing["hamil"].toString(),
                     glucose = preprocessing["glukosa"].toString(),
                     bloodPressure = preprocessing["tekanandarah"].toString(),
                     skin = preprocessing["ketebalankulit"].toString(),
@@ -220,14 +188,16 @@ class ChatActivity : AppCompatActivity() {
                 )
             }
             "reminder"->{
-                //todo set alarm
-                var pre = reminderPreprocessing(question)
-                var setence = "Mengatur pengingat \n$answer pada pukul ${pre["pukul"].toString()}"
-                setReminder(pre["pukul"].toString(),question)
+                var pukul = reminderPreprocessing(question)
+                var setence = "Mengatur pengingat \n$answer pada pukul ${pukul["pukul"].toString()}"
+                setReminder(pukul["pukul"].toString(),question)
                 replyMessage(setence)
             }
             "help"->{
+                val message = getString(R.string.menu_chat)
+                replyMessage(message)
                 replyMessage(answer)
+                isMenu = true
             }
         }
     }
@@ -247,7 +217,6 @@ class ChatActivity : AppCompatActivity() {
             val (word, value) = matchResult.destructured
             Pair(word, value)
         }.toMap()
-        Log.d("result_patternpredict", result.toString())
         return result
     }
 
@@ -262,16 +231,14 @@ class ChatActivity : AppCompatActivity() {
             val (word, value) = matchResult.destructured
             Pair(word, value)
         }.toMap()
-        Log.d("reminder_preprocess", result.toString())
         return result
     }
 
-    //inisialisasi dataset untuk prediksi
-    private fun initPredictionDataset(){
-        //todo 2.3 init data latih nb
+    //todo 2.3 inisialisasi dataset untuk prediksi
+    private fun initNbTrainData(){
         UtilsSetences.csvToString2(
             this,
-            "pimall.csv",
+            trainData,
         ).forEach { datapoint->
             classifier.apply {
                 var input = datapoint.values.toString().replace(" ","")
@@ -280,7 +247,6 @@ class ChatActivity : AppCompatActivity() {
                     datapoint.point
                 )
                 )
-                Log.d("NBdata", input)
             }
         }
     }
@@ -301,13 +267,11 @@ class ChatActivity : AppCompatActivity() {
         //todo 2.2 start klasifikasi nb
         var predict = classifier.predict(inputData)
         var decission = ""
-        var result = "$inputData \n" +
-                "ya ${predict["1"]} \n" +
-                "tidak  ${ predict["0"] }"
-        if (predict["1"]!! >= predict["0"]!!){
-            decission = "terkena diabetes"
+
+        decission = if (predict["1"]!! >= predict["0"]!!){
+            "terkena diabetes"
         }else{
-            decission = "tidak terkena diabetes"
+            "tidak terkena diabetes"
         }
 
         var message = getString(R.string.pesanhasil_klasifikasi, decission,"")
@@ -315,7 +279,7 @@ class ChatActivity : AppCompatActivity() {
     }
 
     private fun predictRf(
-        pregnan : String,
+        pregnancies : String,
         glucose : String,
         bloodPressure : String,
         skin : String,
@@ -329,7 +293,7 @@ class ChatActivity : AppCompatActivity() {
         val fileOutputStream: FileOutputStream = openFileOutput("amytextfile.txt", Context.MODE_PRIVATE)
         val outputWriter = OutputStreamWriter(fileOutputStream)
         outputWriter.write((
-                "${pregnan},"+
+                "${pregnancies},"+
                         "${glucose},"+
                         "${bloodPressure},"+
                         "${skin},"+
@@ -340,11 +304,21 @@ class ChatActivity : AppCompatActivity() {
                 )
         )
         outputWriter.close()
-        var result = randomforest.Input.main(this,"input",5)
+        var result = randomforest.Input.main(
+            this,
+            "input",
+            trainData,
+            5,
+        )
         var decission = ""
         var hashresult = predictPreprocessing(result)
         if (hashresult["hasil"] == "1"){
             decission = "terkena diabetes"
+            replyMessage("apakah anda ingin mengatur perawatan ?" +
+                    "1.ya \n" +
+                    "2.tidak"
+            )
+            setReminder = true
         }else{
             decission = "tidak terkena diabetes"
         }
@@ -394,9 +368,74 @@ class ChatActivity : AppCompatActivity() {
         )
     }
 
+    private fun setReminderClassifer(
+        answer : String
+    ){
+        if (answer == "1"){
+            setReminder = false
+            replyMessage("masukan deksripsi kegiatan")
+        }
+    }
+
     private fun removeReminder(){
+        replyMessage("menghapus alarm")
         repository.deleteTask()
         TaskReminderBroadcast().cancelAlarm(this)
     }
 
+    private fun MenuResponse(
+        inputText : String
+    ){
+        isMenu = true
+        when(inputText){
+            "1"->{
+                val cinformasi = "Apa itu sakit diabetes dan bagaimana gejala diabetes ?"
+                val informasi =
+                    "Informasi terkait diabetes dapat diakses dengan kata kunci info atau memberikan pertanyaan seperti"
+                val message = "berikut ini bantuan untuk kata kunci chat \n" +
+                        "$informasi \n\n$cinformasi \n"
+                replyMessage(message)
+            }
+            "2"->{
+                val cReminder = "makan buah pukul 20.00"
+                val Reminder = "Anda dapat mengatur penjadwalan kegiatan, seperti"
+                val message = "berikut ini bantuan untuk kata kunci chat \n" +
+                        "$Reminder \n\n$cReminder \n"
+                replyMessage(message)
+            }
+            "3"->{
+                val cklasifikasi = "glukosa 248 tekanandarah 74 ketebalankulit 45 insulin 0 beratbadan 43.6 pedigree 0.627 umur 54 hamil 0"
+                val pklasifikasi =
+                    "glukosa [jumlahglukosa] tekanandarah [jumlah tekanan darah] ketebalankulit [ketebalan kulit] insulin [jumlah pemakaian insulin] beratbadan [beratbadan] pedigree [nilai pedigree] umur [umur] hamil [jumlah kehamilan]"
+                val klasifikasi =
+                    "klasifikasi diabetes dapat dilakukan degnan memberikan riwayat keseahtan dengan menggunakan beberapa kata kunci,sebagai contoh"
+                val message = "berikut ini bantuan untuk kata kunci chat \n" +
+                        "$klasifikasi \n\n$pklasifikasi \n\n" +
+                        "$cklasifikasi"
+                replyMessage(message)
+            }
+            "4"->{
+                showActivityList()
+            }
+            "cancel alarm"->{
+                removeReminder()
+                replyMessage("berhasil membatalkan alarm")
+            }
+            else->{
+                replyMessage("tidak ditemukan silahkan masukan kembali")
+            }
+        }
+    }
+
+
+    @RequiresApi(Build.VERSION_CODES.O)
+    private fun showActivityList(){
+        replyMessage("Berikut ini daftar kegiatan:")
+        repository.readTodayTask().observe(this){
+            it.forEach { task->
+                replyMessage("${task.title}")
+            }
+        }
+
+    }
 }

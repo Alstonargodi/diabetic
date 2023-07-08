@@ -17,6 +17,7 @@ public class Input {
     public static String main(
             Context context,
             String type,
+            String testData,
             Integer trees
     ){
         System.out.println("Random-Forest with Categorical support");
@@ -33,7 +34,6 @@ public class Input {
 
 
         if(categ>0){
-//            file:///
             traindata=traincsv;
             testdata=testcsv;
         }else if(categ<0){
@@ -56,9 +56,8 @@ public class Input {
 
         System.out.println("Input generated"+ Train);
         System.out.println("Input generated"+ Test);
-        /*
-         * For class-labels
-         */
+
+        //membaca label
         HashMap<String, Integer> Classes = new HashMap<String, Integer>();
         for(ArrayList<String> dp : Train){
             String clas = dp.get(dp.size()-1);

@@ -14,47 +14,24 @@ public class RandomForestCateg {
     //private static final int NUM_THREADS=1;
 
     public static int C;
-
     public static int M;
-    /** Of the M total attributes, the random forest computation requires a subset of them
-     * to be used and picked via random selection. "Ms" is the number of attributes in this
-     * subset. The formula used to generate Ms was recommended on Breiman's website.
-     */
-    public static int Ms;//recommended by Breiman: =(int)Math.round(Math.log(M)/Math.log(2)+1);
-    /** the collection of the forest's decision trees */
+    public static int Ms;
     private ArrayList<DTreecateg> trees;
-    /** the collection of the forest's decision trees */
     private ArrayList<DTreecateg2> trees2;
-    /** the starting time when timing random forest creation */
     private long time_o;
-    /** the number of trees in this random tree */
     private int numTrees;
-    /** For progress bar display for the creation of this random forest, this is the amount to update by when one tree is completed */
     private double update;
-    /** For progress bar display for the creation of this random forest, this records the total progress */
     private double progress;
-    /** this is an array whose indices represent the forest-wide importance for that given attribute */
     private int[] importances;
-    /** This maps from a data record to an array that records the classifications by the trees where it was a "left out" record (the indices are the class and the values are the counts) */
     private HashMap<int[],int[]> estimateOOB;
-    /** the total forest-wide error */
     private double error;
-    /** the thread pool that controls the generation of the decision trees */
     private ExecutorService treePool;
-    /** the original training data matrix that will be used to generate the random forest classifier */
     private ArrayList<ArrayList<String>> data;
-    /** the data on which produced random forest will be tested*/
     private ArrayList<ArrayList<String>> testdata;
-    /** This holds all of the predictions of trees in a Forest */
     private ArrayList<ArrayList<String>> Prediction;
 
     public static String timeCompute = "";
-    /**
-     * This hold the genres of attributes in the forest
-     *
-     * 1 if categ
-     * 0 if real
-     */
+
     public ArrayList<Integer> TrainAttributes;
     public ArrayList<Integer> TestAttributes;
 
@@ -67,7 +44,6 @@ public class RandomForestCateg {
             ArrayList<ArrayList<String>> train,
             ArrayList<ArrayList<String>> test
     ) {
-        // TODO Auto-generated constructor stub
         StartTimer();
         this.numTrees=numTrees;
         this.data=train;
@@ -92,9 +68,7 @@ public class RandomForestCateg {
 
 
     public String Start() {
-        // TODO Auto-generated method stub
-        System.out.println("Number of threads started : "+NUM_THREADS);
-        System.out.println("Starting trees");
+
         String result = " ";
         treePool=Executors.newFixedThreadPool(NUM_THREADS);
         for (int t=0;t<numTrees;t++){
@@ -196,13 +170,16 @@ public class RandomForestCateg {
         for(ArrayList<String> s:test){
             ActualValues.add(s.get(s.size()-1));
         }int treee=1;
-        System.out.println("Testing forest now ");
 
+        //klasifikasi pohon
         for(DTreecateg2 DTC : trees){
-            DTC.CalculateClasses(train, test, treee);treee++;
+            DTC.CalculateClasses(train, test, treee);
+            treee++;
             if(DTC.predictions!=null)
                 Prediction.add(DTC.predictions);
         }
+
+        //hasil dari kalsifikasi
         for(int i = 0;i<test.size();i++){
             for(int j=0;j<trees.size();j++){
                 Val.add(Prediction.get(j).get(i));

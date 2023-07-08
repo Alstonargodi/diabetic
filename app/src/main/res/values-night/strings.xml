@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="bantuan">bantuan</string>
+    <string name="menu_chat">silahkan pilih bantuan terkait \n1.informasi \n2.alarm \n3.klasifikasi \n4.lihat daftar kegiatan</string>
+</resources>

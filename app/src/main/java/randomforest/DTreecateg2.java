@@ -9,30 +9,23 @@ import java.util.Map.Entry;
 public class DTreecateg2 {
 
     private static final int INDEX_SKIP=3;
-
     private static final int MIN_SIZE_TO_CHECK_EACH=10;
-
     private static final int MIN_NODE_SIZE=5;
-
     private int N;
-
     private int testN;
-
-
     private int correct;
 
-
     private int[] importances;
-
-
     public ArrayList<String> predictions;
-
     private TreeNode root;
-
     private RandomForestCateg forest;
 
-    public DTreecateg2(ArrayList<ArrayList<String>> data, RandomForestCateg forest, int treenum) {
-        // TODO Auto-generated constructor stub
+    public DTreecateg2(
+            ArrayList<ArrayList<String>> data,
+            RandomForestCateg forest,
+            int treenum
+    ) {
+
         this.forest=forest;
         N=data.size();
         importances = new int[RandomForestCateg.M];
@@ -40,52 +33,50 @@ public class DTreecateg2 {
         ArrayList<ArrayList<String>> train = new ArrayList<ArrayList<String>>(N);
         ArrayList<ArrayList<String>> test = new ArrayList<ArrayList<String>>();
 
+        //memulai boostraping dataset
         BootStrapSample(data,train,test,treenum);
         testN=test.size();
         correct=0;
 
+        //membuat pohon keputusan
         root=CreateTree(train,treenum);
         FlushData(root, treenum);
     }
 
-    /**
-     * Create a boostrap sample of a data matrix
-     *
-     * @param data		the data matrix to be sampled
-     * @param train		the bootstrap sample
-     * @param test		the records that are absent in the bootstrap sample
-     */
+
     @SuppressWarnings("unchecked")
-    private void BootStrapSample(ArrayList<ArrayList<String>> data,ArrayList<ArrayList<String>> train,ArrayList<ArrayList<String>> test,int numb){
+    //boostraping dataset
+    private void BootStrapSample(
+            ArrayList<ArrayList<String>> data,
+            ArrayList<ArrayList<String>> train,
+            ArrayList<ArrayList<String>> test,
+            int numb
+    ){
+        //mencari nilai yang sama dengan menggunakan operasi floor jumlah data dikalikan nilai random
         ArrayList<Integer> indices=new ArrayList<Integer>();
-        for (int n=0;n<N;n++)
+        for (int n=0;n<N;n++){
             indices.add((int)Math.floor(Math.random()*N));
+        }
+
+        //
         ArrayList<Boolean> in=new ArrayList<Boolean>();
         for (int n=0;n<N;n++)
-            in.add(false); //have to initialize it first
+            in.add(false);
         for (int num:indices){
             ArrayList<String> k = data.get(num);
             train.add((ArrayList<String>) k.clone());
             in.set(num,true);
-        }//System.out.println("created training-data for tree : "+numb);
+        }
         for (int i=0;i<N;i++)
             if (!in.get(i))
-                test.add(data.get(i));//System.out.println("created testing-data for tree : "+numb);//everywhere its set to false we get those to test data
-
-//		System.out.println("bootstrap N:"+N+" size of bootstrap:"+bootstrap.size());
+                test.add(data.get(i));
     }
 
-    /**
-     * This creates the decision tree according to the specifications of random forest trees.
-     *
-     * @param train		the training data matrix (a bootstrap sample of the original data)
-     * @return			the TreeNode object that stores information about the parent node of the created tree
-     */
+
     private TreeNode CreateTree(ArrayList<ArrayList<String>> train, int ntree){
         TreeNode root=new TreeNode();
         root.label = "|ROOT|";
         root.data=train;
-        //System.out.println("creating ");
         RecursiveSplit(root,ntree);
         return root;
     }
@@ -133,22 +124,19 @@ public class DTreecateg2 {
             return copy;
         }
     }
-    /**
-     * hold the entropy
-     * @author Mohammad
-     *
-     */
+
     private class DoubleWrap{
         public double d;
         public DoubleWrap(double d){
             this.d=d;
         }
     }
-    /**
-     * This method will get the classes and will return the updates
-     *
-     */
-    public ArrayList<String> CalculateClasses(ArrayList<ArrayList<String>> traindata,ArrayList<ArrayList<String>> testdata, int treenumber){
+
+    public ArrayList<String> CalculateClasses(
+            ArrayList<ArrayList<String>> traindata,
+            ArrayList<ArrayList<String>> testdata,
+            int treenumber
+    ){
         ArrayList<String> predicts = new ArrayList<String>();
         for(ArrayList<String> record:testdata){
             String Clas = Evaluate(record, traindata);
@@ -161,26 +149,31 @@ public class DTreecateg2 {
     }
 
 
-    public String Evaluate(ArrayList<String> record, ArrayList<ArrayList<String>> tester){
+    public String Evaluate(
+            ArrayList<String> record,
+            ArrayList<ArrayList<String>> tester
+    ){
         TreeNode evalNode=root;
         while (true) {
             if(evalNode.isLeaf)
                 return evalNode.Class;
             else{
                 if(evalNode.spiltonCateg){
-                    // if its categorical
                     String recordCategory = record.get(evalNode.splitAttributeM);
-                    boolean found=false;String Res = evalNode.Missingdata.get(GetClass(record));
+                    boolean found=false;
+                    String Res = evalNode.Missingdata.get(GetClass(record));
 
                     for(TreeNode child:evalNode.ChildNode){
 
-                        // Check for child with label same the data point
+                        // pencarian child dengan label apakah sama dalam datapoint
                         if(recordCategory.equalsIgnoreCase(child.label)){//what if the category is not present at all
                             evalNode = child;
                             found = true;
                             break;
                         }
-                    }if(!found){
+                    }
+                    //jika tidak ditemukan lanjut pencarian kedalam node child selanjutnya
+                    if(!found){
                         for(TreeNode child:evalNode.ChildNode){
                             if(Res!=null){
                                 if(Res.trim().equalsIgnoreCase(child.label)){
@@ -239,7 +232,6 @@ public class DTreecateg2 {
 
         if (!parent.isLeaf){
 
-
             //-------------------------------Step A
             String Class=CheckIfLeaf(parent.data);
             if (Class != null){
@@ -247,7 +239,6 @@ public class DTreecateg2 {
                 parent.Class=Class;
                 return;
             }
-
 
             //-------------------------------Step B
             int Nsub=parent.data.size();
@@ -298,8 +289,7 @@ public class DTreecateg2 {
                 if (lowestE.d == 0)
                     break;
             }
-            //System.out.println("Adding "+parent.ChildNode.size()+" children at level: "+parent.generation);
-            //-------------------------------Step D
+
             for(TreeNode Child:parent.ChildNode){
                 if(Child.data.size()==1){
                     Child.isLeaf=true;
@@ -323,11 +313,7 @@ public class DTreecateg2 {
             }
         }
     }
-    /**
-     * Given a data matrix, return the most popular Y value (the class)
-     * @param data	The data matrix
-     * @return		The most popular class
-     */
+
     private String GetMajorityClass(ArrayList<ArrayList<String>> data){
         // find the max class for this data.
         ArrayList<String> ToFind = new ArrayList<String>();
