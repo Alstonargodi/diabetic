@@ -14,50 +14,46 @@
         android:layout_height="45dp"
         android:fontFamily="sans-serif-medium"
         android:padding="5dp"
-        android:text="Main"
+        android:text="Menu"
         android:textSize="25sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <Button
-        android:id="@+id/btn_setreminder"
+    <Spinner
+        android:id="@+id/spn_algoritm"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="10dp"
-        android:layout_marginTop="5dp"
-        android:layout_marginEnd="10dp"
-        android:text="reminder" />
+        android:entries="@array/type_algorithm"
+        android:layout_margin="5dp"
+        />
 
     <Button
         android:id="@+id/bt_enter_data"
         android:layout_width="match_parent"
-        android:layout_height="40dp"
-        android:layout_margin="10dp"
-        android:background="#dadada"
-        android:text="Add Data"
-        android:textSize="16sp" />
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:layout_marginEnd="10dp"
+        android:text="tambah"
+        />
 
     <Button
         android:id="@+id/bt_search_data"
         android:layout_width="match_parent"
-        android:layout_height="40dp"
-        android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp"
-        android:background="#dadada"
-        android:text="Search Data"
-        android:textSize="16sp" />
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:layout_marginEnd="10dp"
+        android:text="cari"
+        />
 
     <Button
         android:id="@+id/bt_view_data"
         android:layout_width="match_parent"
-        android:layout_height="40dp"
+        android:layout_height="wrap_content"
         android:layout_marginStart="10dp"
-        android:layout_marginTop="5dp"
         android:layout_marginEnd="10dp"
-        android:background="#dadada"
-        android:text="View Data"
-        android:textSize="16sp" />
+        android:text="lihat data"
+        />
 
     <Button
         android:id="@+id/btn_test"
@@ -65,7 +61,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="10dp"
         android:layout_marginEnd="10dp"
-        android:text="testing data uji" />
+        android:text="Pengujian algoritma" />
 
     <Button
         android:id="@+id/btn_schat"
@@ -73,7 +69,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="10dp"
         android:layout_marginEnd="10dp"
-        android:text="chat" />
+        android:text="Halaman chat" />
 
     <TextView
         android:id="@+id/textView"
@@ -103,10 +99,4 @@
         android:layout_margin="5dp"
         android:text="TextView" />
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rv_test"
-        android:layout_width="match_parent"
-        android:layout_height="500dp"
-        android:layout_marginStart="10dp"
-        android:layout_marginEnd="10dp" />
 </LinearLayout>

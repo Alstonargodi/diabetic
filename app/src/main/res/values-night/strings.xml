@@ -2,4 +2,7 @@
 <resources>
     <string name="bantuan">bantuan</string>
     <string name="menu_chat">silahkan pilih bantuan terkait \n1.informasi \n2.alarm \n3.klasifikasi \n4.lihat daftar kegiatan</string>
+    <string name="reminder">Anda dapat mengatur penjadwalan kegiatan, seperti</string>
+    <string name="messageReminder">berikut ini bantuan untuk kata kunci chat \n</string>
+    <string name="messageKlasifikasi">berikut ini bantuan untuk kata kunci chat \n</string>
 </resources>

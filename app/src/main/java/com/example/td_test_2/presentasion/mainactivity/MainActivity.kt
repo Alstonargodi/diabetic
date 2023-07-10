@@ -8,6 +8,8 @@ import android.database.Cursor
 import android.os.Build
 import android.os.Bundle
 import android.util.Log
+import android.view.View
+import android.widget.AdapterView
 import android.widget.Toast
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
@@ -18,6 +20,7 @@ import com.example.td_test_2.SearchResultsAdapter
 import com.example.td_test_2.chat.preprocessing.PreProcessing
 import com.example.td_test_2.chat.tfidfmain.TfIdfMain
 import com.example.td_test_2.database.Repository
+import com.example.td_test_2.database.entity.algorithm.Algortihm
 import com.example.td_test_2.database.entity.task.TaskEntity
 import com.example.td_test_2.database.entity.testing.TestingNv
 import com.example.td_test_2.database.entity.testing.TestingRf
@@ -69,6 +72,8 @@ class MainActivity : AppCompatActivity() {
         repository = Repository(DbConfig.setDatabase(this))
 
         setContentView(binding.root)
+        readAccuracy()
+
         binding.apply {
             btEnterData.setOnClickListener {
                 val intent = Intent(this@MainActivity, EnterDataActivity::class.java)
@@ -93,10 +98,37 @@ class MainActivity : AppCompatActivity() {
             btnSchat.setOnClickListener {
                 startActivity(Intent(this@MainActivity, ChatActivity::class.java))
             }
-            btnSetreminder.setOnClickListener {
-                insertDate()
+            spnAlgoritm.onItemSelectedListener = object : AdapterView.OnItemClickListener,AdapterView.OnItemSelectedListener{
+                override fun onItemClick(
+                    parent: AdapterView<*>?,
+                    view: View?,
+                    position: Int,
+                    id: Long
+                ) {}
+
+                override fun onItemSelected(
+                    parent: AdapterView<*>?,
+                    view: View?,
+                    position: Int,
+                    id: Long
+                ) {
+                    when(parent?.getItemAtPosition(position)){
+                        "keduaalgoritma"-> {
+                            insertAlgorithm(0)
+                        }
+                        "randomforest"->{
+                            insertAlgorithm(1)
+                        }
+                        "naivebayes"->{
+                            insertAlgorithm(2)
+                        }
+                    }
+                }
+
+                override fun onNothingSelected(parent: AdapterView<*>?) {
+                    insertAlgorithm(0)
+                }
             }
-            readAccuracy()
         }
     }
 
@@ -143,10 +175,6 @@ class MainActivity : AppCompatActivity() {
             mAdapter = SearchResultsAdapter(this)
             val searchDb = DatabaseTable.getInstance(baseContext)?.getWordMatches(
                 testList[i],
-                null,
-                true,
-                true,
-                true
             )
             swapCursor(searchDb)
             if (offset != null) {
@@ -154,8 +182,12 @@ class MainActivity : AppCompatActivity() {
             } else {
                 mCursor!!.moveToPosition(i)
             }
-            @SuppressLint("Range") val type = mCursor!!.getString(mCursor!!.getColumnIndex(DatabaseTable.COL_TIPE))
-            @SuppressLint("Range") val response = mCursor!!.getString(mCursor!!.getColumnIndex(DatabaseTable.COL_ANSWER))
+            @SuppressLint("Range")
+            val type = mCursor!!.getString(mCursor!!.getColumnIndex(DatabaseTable.COL_TIPE))
+
+            @SuppressLint("Range")
+            val response = mCursor!!.getString(mCursor!!.getColumnIndex(DatabaseTable.COL_ANSWER))
+
             Log.d("AA${type}",testList[i])
             Log.d("AA${type}", if(type == typeTest) "true" else "false")
             Log.d("AA${type}", if(response == responseTest) "true" else "false")
@@ -176,7 +208,6 @@ class MainActivity : AppCompatActivity() {
         //todo 1.7 proses perhitungan TFIDF
         offset = TfIdfMain.calcTfIdf(this, mCursor)
         timeCompute = Input.timeCompute
-
     }
 
     private fun testClassification(){
@@ -214,10 +245,6 @@ class MainActivity : AppCompatActivity() {
             mAdapter = SearchResultsAdapter(this)
             val searchDb = DatabaseTable.getInstance(baseContext)?.getWordMatches(
                 setence[i],
-                null,
-                true,
-                true,
-                true
             )
             swapCursor(searchDb)
             position = if (null == mCursor) 0 else mCursor!!.count-1
@@ -481,5 +508,11 @@ class MainActivity : AppCompatActivity() {
         ).setInputData(notificationBuilder).build()
 
         workManager.enqueue(periodicAlarm)
+    }
+
+    private fun insertAlgorithm(choose : Int){
+        repository.insertSelectedAlgorithm(
+            Algortihm(0,choose)
+        )
     }
 }

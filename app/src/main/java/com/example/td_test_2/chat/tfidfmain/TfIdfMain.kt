@@ -104,12 +104,6 @@ object TfIdfMain {
         //indeks perhitungan
         Log.d("TF-IDF INDEXES", Arrays.toString(result))
         Log.d("TF-IDF VALUES", "${Arrays.toString(result)} == $values")
-        
-        values.forEach {value ->
-            result.forEach { key->
-                Log.d("TF-IDF VALUES ${key}", "${key} == $value")
-            }
-        }
 
         return result
     }

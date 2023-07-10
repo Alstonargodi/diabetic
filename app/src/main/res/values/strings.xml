@@ -5,5 +5,20 @@
     <string name="pref_key_notify">key_notification</string>
     <string name="notification_format">%3$s | %1$s - %2$s </string>
     <string name="bantuan">bantuan</string>
-    <string name="menu_chat">silahkan pilih bantuan terkait \n1.informasi \n2.alarm \n3.klasifikasi \n4.lihat daftar kegiatan</string>
+    <string name="menu_chat">silahkan pilih bantuan terkait \n1.informasi \n2.alarm \n3.klasifikasi \n4.lihat daftar kegiatan </string>
+    <string name="cinformasi">Apa itu sakit diabetes dan bagaimana gejala diabetes ?</string>
+    <string name="informasi">Informasi terkait diabetes dapat diakses dengan kata kunci info atau memberikan pertanyaan seperti</string>
+    <string name="messageInfo">berikut ini bantuan untuk kata kunci chat \n</string>
+    <string name="creminder">makan buah pukul 20.00</string>
+    <string name="reminder">Anda dapat mengatur penjadwalan kegiatan, seperti</string>
+    <string name="messageReminder">berikut ini bantuan untuk kata kunci chat \n</string>
+    <string name="cKlasifikasi">glukosa 248 tekanandarah 74 ketebalankulit 45 insulin 0 beratbadan 43.6 pedigree 0.627 umur 54 hamil 0</string>
+    <string name="pKlasifikasi">glukosa [jumlahglukosa] tekanandarah [jumlah tekanan darah] ketebalankulit [ketebalan kulit] insulin [jumlah pemakaian insulin] beratbadan [beratbadan] pedigree [nilai pedigree] umur [umur] hamil [jumlah kehamilan]</string>
+    <string name="klasifikasi">klasifikasi diabetes dapat dilakukan degnan memberikan riwayat keseahtan dengan menggunakan beberapa kata kunci,sebagai contoh</string>
+    <string name="messageKlasifikasi">berikut ini bantuan untuk kata kunci chat \n</string>
+    <string-array name="type_algorithm">
+        <item>keduaalgoritma</item>
+        <item>randomforest</item>
+        <item>naivebayes</item>
+    </string-array>
 </resources>

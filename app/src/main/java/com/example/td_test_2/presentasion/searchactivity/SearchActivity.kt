@@ -61,10 +61,7 @@ class SearchActivity : AppCompatActivity() {
         params : String
     ){
         val cursor = DatabaseTable.getInstance(baseContext)?.getWordMatches(
-            params, null,
-            true,
-            true,
-            true
+            params,
         ) // return null
         mAdapter?.swapCursor(cursor)
         mAdapter!!.onItemDetailCallback(object : SearchResultsAdapter.OnDetailItemCallback {

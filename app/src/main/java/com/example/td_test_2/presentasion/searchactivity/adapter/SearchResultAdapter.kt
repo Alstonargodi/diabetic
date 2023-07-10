@@ -80,7 +80,7 @@ class SearchResultsAdapter(private val mContext: Context) :
     }
 
     override fun getItemCount(): Int {
-        return if (null == mCursor) 0 else mCursor!!.count
+        return if (null == mCursor) 0 else 5
     }
 
     fun swapCursor(newCursor: Cursor?) {

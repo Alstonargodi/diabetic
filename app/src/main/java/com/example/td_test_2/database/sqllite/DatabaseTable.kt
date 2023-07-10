@@ -13,7 +13,6 @@ import com.example.td_test_2.chat.tfidfmain.TfIdfMain
 import java.io.BufferedReader
 import java.io.InputStreamReader
 import java.text.SimpleDateFormat
-import java.util.Arrays
 import java.util.Calendar
 import java.util.Locale
 
@@ -21,9 +20,9 @@ class DatabaseTable private constructor(context: Context) {
     private val mDatabaseOpenHelper: DatabaseOpenHelper
 
     companion object {
-        private val TAG = "AppointmentDatabase"
-        private val DATABASE_NAME = "APPOINTMENT"
-        private val FTS_VIRTUAL_TABLE = "FTS"
+        private val TAG = "KalimatDatabase"
+        private val DATABASE_NAME = "kalimat"
+        private val FTS_VIRTUAL_TABLE = "SenteceTable"
         private val SINOM_TABLE = "SINONIMOS"
         private val SIGLAS_TABLE = "SIGLAS"
         private val DATABASE_VERSION = 1
@@ -44,12 +43,10 @@ class DatabaseTable private constructor(context: Context) {
         val COL_SINOM1 = "SINOM1"
         val COL_SINOM2 = "SINOM2"
 
-        // Columns for table SIGLAS
         val COL_SIGLA = "SIGLA"
         val COL_SIGNIFICADO = "SIGNIFICADO"
         val MATCHINFO = "matchinfo(" + FTS_VIRTUAL_TABLE + ") as " + COL_MATCHINFO
-        val SNIPPET = "snippet(" + FTS_VIRTUAL_TABLE + ") as " + COL_SNIPPET
-        val OFFSETS = "offsets(" + FTS_VIRTUAL_TABLE + ") as " + COL_OFFSETS
+
         fun parseMatchInfoBlob(blob: ByteArray): IntArray {
             val length = blob.size
             val result = IntArray(length / 4)
@@ -72,32 +69,8 @@ class DatabaseTable private constructor(context: Context) {
         }
     }
 
-    // Wrapper method for add entry
     fun addNewEntry(tipe: String, pattern: String, answer: String): Long {
-        Log.d(
-            "CONSULTATION", "\n\n\nHospital: "
-                    + tipe + "\nDoctor: "
-                    + pattern + "\nTranscript:\n\""
-                    + answer + "\""
-        )
         return mDatabaseOpenHelper.addEntry(tipe,pattern,answer)
-    }
-
-    // Wrapper method for add entry with date
-    fun addNewEntryDate(
-        doctor: String,
-        hospital: String,
-        transcript: String,
-        calendar: Calendar
-    ): Long {
-        Log.d(
-            "CONSULTATION", "\n\n\nHospital: "
-                    + hospital + "\nDoctor: "
-                    + doctor + "\nTranscript:\n\""
-                    + transcript + "\n\""
-                    + calendar.toString() + "\""
-        )
-        return mDatabaseOpenHelper.addEntryWithDate(doctor, hospital, transcript, calendar)
     }
 
     init {
@@ -206,13 +179,15 @@ class DatabaseTable private constructor(context: Context) {
             return mDatabase!!.insert(FTS_VIRTUAL_TABLE, null, cv)
         }
 
-        // Function to add 1 entry to the appointment fts table
-        fun addEntry(doctor: String?, hospital: String?, transcript: String?): Long {
+        fun addEntry(
+            tipe: String?,
+            pattern: String?,
+            answer: String?
+        ): Long {
             if (mDatabase == null) {
                 Log.w("DATABASE", "Database is null!")
             }
 
-            // Getting the current data to add in a new column
             val c = Calendar.getInstance()
             val day = c[Calendar.DAY_OF_MONTH]
             val month = c.getDisplayName(Calendar.MONTH, Calendar.SHORT, Locale.getDefault())
@@ -220,15 +195,14 @@ class DatabaseTable private constructor(context: Context) {
             val day_of_week =
                 c.getDisplayName(Calendar.DAY_OF_WEEK, Calendar.SHORT, Locale.getDefault())
 
-            // String representing the current day, month, year and week day
             val date =
                 "d" + String.format("%02d", day) + " m" + month + " y" + year + " w" + day_of_week
             Log.d("CURRENT DATE", date)
             val cv = ContentValues()
-            cv.put(COL_TIPE, doctor)
-            cv.put(COL_PATTERN, hospital)
+            cv.put(COL_TIPE, tipe)
+            cv.put(COL_PATTERN, pattern)
             cv.put(COL_DATE, date)
-            cv.put(COL_ANSWER, transcript)
+            cv.put(COL_ANSWER, answer)
             return mDatabase!!.insert(FTS_VIRTUAL_TABLE, null, cv)
         }
 
@@ -253,99 +227,23 @@ class DatabaseTable private constructor(context: Context) {
 
     //Function to search given a query string
     fun getWordMatches(
-        query: String, columns: Array<String>?,
-        use4gram: Boolean, useDate: Boolean, useSynonym: Boolean
+        query: String
     ): Cursor? {
         var query = query
-        Log.d("searchtask_query", query)
-
-//        if (useDate) {
-//            val dMatch: DateMatch = Date.detectDates(query)
-//            val c = Calendar.getInstance()
-//            Log.d("searchtask_date",dMatch.day.toString())
-//            if (dMatch.day != null) {
-//                PerformanceTime.setFoundDate()
-//                query += " d" + dMatch.day
-//            }
-//            if (dMatch.month !== -1) {
-//                PerformanceTime.setFoundDate()
-//                c[Calendar.MONTH] = dMatch.month
-//                query += " m" + c.getDisplayName(
-//                    Calendar.MONTH,
-//                    Calendar.SHORT,
-//                    Locale.getDefault()
-//                )
-//            }
-//            if (dMatch.year != null) {
-//                PerformanceTime.setFoundDate()
-//                query += " y" + dMatch.year
-//            }
-//            if (dMatch.day_of_week !== -1) {
-//                PerformanceTime.setFoundDate()
-//                c[Calendar.DAY_OF_WEEK] = dMatch.day_of_week
-//                query += " w" + c.getDisplayName(
-//                    Calendar.DAY_OF_WEEK,
-//                    Calendar.SHORT,
-//                    Locale.getDefault()
-//                )
-//            }
-//        }
-
-        // End date detection
-        Log.d("DATE MATCHER:", query)
 
         val selectionArgs = arrayOfNulls<String>(1)
         var terms = query.trim { it <= ' ' }
             .replace("[\\/\\-.]".toRegex(), "-").split("[- +]+".toRegex())
             .toTypedArray()
 
-//        if (useSynonym) {
-//            var array_size = terms.size
-//            val terms_list = ArrayList(Arrays.asList(*terms))
-//            Log.d("SEARCH TERMS B SYNONYMS", Arrays.toString(terms))
-//            for (term: String? in terms) {
-//                val sinom = getSinom(term)
-//                Log.d("searchtask_synoms_result", sinom.toString())
-//                if (sinom != null) {
-//                    PerformanceTime.setFoundSinom()
-//                    val temp = sinom.split(" +".toRegex()).dropLastWhile { it.isEmpty() }
-//                        .toTypedArray()
-//                    array_size += temp.size
-//                    terms_list.addAll(Arrays.asList(*temp))
-//                }
-//            }
-//            terms = terms_list.toTypedArray()
-//            Log.d("SYNONYM", "Ended search for synonyms")
-//            Log.d("SEARCH TERMS A SYNONYMS", Arrays.toString(terms))
-//        }
-//        if (use4gram) {
-//            Log.d("SEARCH", "Using 4gram!")
-//            // Start 4gram
-//            var array_size = terms.size
-//            val temp_list = ArrayList(Arrays.asList(*terms))
-//            for (term: String in terms) {
-//                if (term.matches(".*\\d+.*".toRegex())) continue
-//                if (term.length > 4) {
-//                    val gram = term.substring(0, 4)
-//                    array_size++
-//                    temp_list.add("$gram*")
-//                }
-//            }
-//            terms = temp_list.toTypedArray()
-//            Log.d("SEARCH TERMS A 4Gram", Arrays.toString(terms))
-//            // End 4gram
-//        }
-
         //todo 1.3 start query berdsarkan terms
         for (term in terms) {
             Log.d("TERM", "\"" + term + "\"")
         }
-        Log.d("Setting terms for tfidf", Arrays.toString(terms))
-
 
         //todo 1.4 setting terms dokumen
         TfIdfMain.setSearchTerms(terms)
-        Log.d("calctime_setterms", PerformanceTime.TimeElapsed().toString())
+
         var args: String = ""
         for (i in terms.indices step 1) {
             args += terms[i]
@@ -353,28 +251,10 @@ class DatabaseTable private constructor(context: Context) {
                 args += " OR "
             }
         }
+
         selectionArgs[0] = args
-
         val selection = FTS_VIRTUAL_TABLE + " MATCH ? COLLATE NOCASE"
-
         return query(selection, selectionArgs)
-    }
-
-    fun getSinom(expression: String?): String? {
-        Log.d("searchtask_synoms_1", expression.toString())
-        val result = mDatabaseOpenHelper.readableDatabase.rawQuery(
-            "SELECT " + COL_SINOM2 + " FROM " +
-                    SINOM_TABLE + " WHERE " + COL_SINOM1 + " = ? COLLATE NOCASE",
-            arrayOf(expression)
-        )
-        var sinom: String? = null
-        if (result != null) {
-            if (result.moveToFirst()) {
-                sinom = result.getString(0)
-                result.close()
-            }
-        }
-        return sinom
     }
 
     val allRows: Cursor
@@ -405,9 +285,6 @@ class DatabaseTable private constructor(context: Context) {
     }
 
 
-    // Setting the new search terms in the tfidf helper
-
-    //Helper function to query the database
     private fun query(
         selection: String,
         selectionArgs: Array<String?>,

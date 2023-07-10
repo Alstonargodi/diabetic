@@ -101,7 +101,6 @@ class EnterDataActivity : AppCompatActivity() {
     private fun addInfo() {
         val i = 0
         val db: DatabaseTable = DatabaseTable.getInstance(baseContext)!!
-
     }
 
     private fun storeInfo(): Long {
@@ -121,7 +120,6 @@ class EnterDataActivity : AppCompatActivity() {
         binding.etTranscript.clearFocus()
     }
 
-    // Function to display a new toast when data is inserted
     private fun addToast(message: String) {
         Toast.makeText(applicationContext, message, Toast.LENGTH_LONG).show()
     }

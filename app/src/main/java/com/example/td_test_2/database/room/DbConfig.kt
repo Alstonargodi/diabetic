@@ -7,11 +7,13 @@ import androidx.room.Room
 import androidx.room.RoomDatabase
 import androidx.sqlite.db.SupportSQLiteDatabase
 import com.example.ad_rf.dbconfig.diabetes.PimaEntity
+import com.example.td_test_2.database.entity.algorithm.Algortihm
 import com.example.td_test_2.database.entity.testing.TestingRf
 import com.example.td_test_2.database.entity.words.WordEntity
 import com.example.td_test_2.database.entity.task.TaskEntity
 import com.example.td_test_2.database.entity.testing.TestingDf
 import com.example.td_test_2.database.entity.testing.TestingNv
+import com.example.td_test_2.database.entity.weightresult.WeightResult
 import com.example.td_test_2.database.room.dao.TaskDao
 import com.example.td_test_2.database.room.dao.WordDao
 import com.example.td_test_2.database.room.json.Loadjson
@@ -25,7 +27,9 @@ import java.util.concurrent.Executors
         TestingRf::class,
         TestingDf::class,
         TestingNv::class,
-        TaskEntity::class
+        TaskEntity::class,
+        Algortihm::class,
+        WeightResult::class
     ],
     version = 3,
     exportSchema = false

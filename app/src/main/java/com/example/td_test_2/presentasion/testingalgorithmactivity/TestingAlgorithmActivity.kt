@@ -99,10 +99,6 @@ class TestingAlgorithmActivity : AppCompatActivity() {
             mAdapter = SearchResultsAdapter(this)
             val searchDb = DatabaseTable.getInstance(baseContext)?.getWordMatches(
                 element,
-                null,
-                true,
-                true,
-                true
             )
             swapCursor(searchDb)
             position = if (null == mCursor) 0 else mCursor!!.count-1
