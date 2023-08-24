@@ -28,6 +28,7 @@ import com.example.td_test_2.database.entity.weightresult.WeightResult
 import com.example.td_test_2.database.entity.words.WordEntity
 import com.example.td_test_2.database.room.DbConfig
 import com.example.td_test_2.database.room.json.Loadjson
+import com.example.td_test_2.presentasion.ClasificationFormActivity
 import com.example.td_test_2.presentasion.mainactivity.MainActivity
 import com.example.td_test_2.reminder.TaskReminderBroadcast
 import com.example.td_test_2.utils.UtilsSetences
@@ -50,7 +51,6 @@ class ChatActivity : AppCompatActivity() {
     private var trainData = "pimall.csv"
     private var isMenu = false
     private var setReminder = false
-    private var setClassifier = false
 
     private var typeClassificer = 0
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -80,29 +80,44 @@ class ChatActivity : AppCompatActivity() {
             //input kalimat
             var inputText = binding.etInsertChat.text.toString()
 
-            val message = Message(
-                setences = inputText,
-                sender = "me"
-            )
-            val sendMessageItem = SendMessageItem(message)
-            messageAdapter.add(sendMessageItem)
-            //todo 1.1 preprocessing kalimat
-            StartTimer()
-            var cleanText = preprocessingKalimat(
-                this,
-                inputText
-            )
-            //todo 1.2 query kalimat
-            if(isMenu){
-                MenuResponse(inputText)
+            if(inputText.isNotEmpty()){
+                try{
+                    val message = Message(
+                        setences = inputText,
+                        sender = "me"
+                    )
+                    val sendMessageItem = SendMessageItem(message)
+                    messageAdapter.add(sendMessageItem)
+                    //todo 1.1 preprocessing kalimat
+                    StartTimer()
+                    var cleanText = preprocessingKalimat(
+                        this,
+                        inputText
+                    )
+                    //todo 1.2 query kalimat
+                    if(isMenu){
+                        MenuResponse(inputText)
+                    }else{
+                        queryDatabase(cleanText)
+                    }
+
+                    if (setReminder){
+                        setReminderClassifer(inputText)
+                    }
+                    if (inputText == "prediksi"){
+                        startActivity(Intent(
+                            this,ClasificationFormActivity::class.java
+                        ))
+                    }
+                    binding.etInsertChat.text.clear()
+                }catch (e : Exception){
+                    replyMessage("tidak dapat menemukan kaliamt terkait")
+                }
+
             }else{
-                queryDatabase(cleanText)
+                replyMessage("teksboks kosong silahkan masukan kembali")
             }
 
-            if (setReminder){
-                setReminderClassifer(inputText)
-            }
-            binding.etInsertChat.text.clear()
         }
         initNbTrainData()
         binding.rvChat.layoutManager = LinearLayoutManager(this)
@@ -149,8 +164,6 @@ class ChatActivity : AppCompatActivity() {
                         )
                     }
                 }
-
-
             }
         })
     }
@@ -220,7 +233,7 @@ class ChatActivity : AppCompatActivity() {
             }
             "reminder"->{
                 var pukul = reminderPreprocessing(question)
-                var setence = "Mengatur pengingat $question"
+                var setence = "Mengatur pengingat"
                 setReminder(pukul["pukul"].toString(),question)
                 replyMessageClasf(
                     "reminder",
@@ -385,6 +398,7 @@ class ChatActivity : AppCompatActivity() {
                     "${age},",
             result = "hasil random forest $message",
         )
+        replyMessage("hasil naive bayes $message")
     }
 
     //mengirimkan jawaban

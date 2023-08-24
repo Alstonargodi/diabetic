@@ -19,7 +19,7 @@ import com.example.td_test_2.presentasion.mainactivity.MainActivity
 import java.util.Calendar
 import java.util.concurrent.Executors
 
-class TaskReminderBroadcast() : BroadcastReceiver() {
+class TaskReminderBroadcast : BroadcastReceiver() {
     @RequiresApi(Build.VERSION_CODES.O)
     override fun onReceive(context: Context, intent: Intent) {
         Executors.newSingleThreadExecutor().execute {
