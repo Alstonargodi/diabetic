@@ -11,7 +11,7 @@ import com.example.td_test_2.presentasion.searchactivity.SearchActivity
 import com.example.td_test_2.SearchResultsAdapter
 import com.example.td_test_2.database.sqllite.DatabaseTable
 import com.example.td_test_2.databinding.ItemChatBinding
-import com.example.td_test_2.chat.tfidfmain.TfIdfMain
+import com.example.td_test_2.ml.tfidfmain.TfIdfMain
 
 class ChatAdapter(
     private val mContext : Context,

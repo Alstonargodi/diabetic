@@ -17,20 +17,21 @@ import com.example.td_test_2.presentasion.chatactivity.adapter.ReceiveMessageIte
 import com.example.td_test_2.presentasion.chatactivity.adapter.SendMessageItem
 import com.example.td_test_2.R
 import com.example.td_test_2.SearchResultsAdapter
-import com.example.td_test_2.chat.preprocessing.PreProcessing
+import com.example.td_test_2.ml.preprocessing.PreProcessing
 import com.example.td_test_2.database.sqllite.DatabaseTable
 import com.example.td_test_2.database.entity.message.Message
 import com.example.td_test_2.databinding.ActivityChatBinding
-import com.example.td_test_2.chat.preprocessing.PreProcessing.preprocessingKalimat
+import com.example.td_test_2.ml.preprocessing.PreProcessing.preprocessingKalimat
 import com.example.td_test_2.database.Repository
 import com.example.td_test_2.database.entity.task.TaskEntity
 import com.example.td_test_2.database.entity.weightresult.WeightResult
 import com.example.td_test_2.database.entity.words.WordEntity
 import com.example.td_test_2.database.room.DbConfig
 import com.example.td_test_2.database.room.json.Loadjson
+import com.example.td_test_2.ml.naivebayes.data.Input
 import com.example.td_test_2.presentasion.ClasificationFormActivity
 import com.example.td_test_2.presentasion.mainactivity.MainActivity
-import com.example.td_test_2.reminder.TaskReminderBroadcast
+import com.example.td_test_2.utils.reminder.TaskReminderBroadcast
 import com.example.td_test_2.utils.UtilsSetences
 import com.xwray.groupie.GroupAdapter
 import com.xwray.groupie.GroupieViewHolder
@@ -290,7 +291,8 @@ class ChatActivity : AppCompatActivity() {
         ).forEach { datapoint->
             classifier.apply {
                 var input = datapoint.values.toString().replace(" ","")
-                train(com.example.td_test_2.naivebayes.data.Input(
+                train(
+                    Input(
                     input,
                     datapoint.point
                 )

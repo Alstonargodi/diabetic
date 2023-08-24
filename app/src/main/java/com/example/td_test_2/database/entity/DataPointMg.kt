@@ -1,6 +1,6 @@
 package com.example.td_test_2.database.entity
 
-import com.example.td_test_2.naivebayes.data.splitWords
+import com.example.td_test_2.ml.naivebayes.data.splitWords
 
 data class DataPointMg(
     val point : String,

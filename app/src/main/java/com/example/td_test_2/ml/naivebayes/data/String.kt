@@ -1,4 +1,4 @@
-package com.example.td_test_2.naivebayes.data
+package com.example.td_test_2.ml.naivebayes.data
 
 fun String.splitWords(): Sequence<String>{
 //    val stopWords = javaClass

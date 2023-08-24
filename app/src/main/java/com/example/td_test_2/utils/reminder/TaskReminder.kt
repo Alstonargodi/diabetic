@@ -1,4 +1,4 @@
-package com.example.td_test_2.reminder
+package com.example.td_test_2.utils.reminder
 
 import android.app.NotificationChannel
 import android.app.NotificationManager

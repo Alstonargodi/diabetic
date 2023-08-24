@@ -7,8 +7,8 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.td_test_2.SearchResultsAdapter
-import com.example.td_test_2.chat.preprocessing.PreProcessing
-import com.example.td_test_2.naivebayes.data.Input
+import com.example.td_test_2.ml.preprocessing.PreProcessing
+import com.example.td_test_2.ml.naivebayes.data.Input
 import com.example.td_test_2.database.Repository
 import com.example.td_test_2.database.entity.words.WordEntity
 import com.example.td_test_2.database.room.DbConfig

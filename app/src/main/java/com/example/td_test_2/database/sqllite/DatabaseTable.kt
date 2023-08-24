@@ -9,7 +9,7 @@ import android.database.sqlite.SQLiteOpenHelper
 import android.database.sqlite.SQLiteQueryBuilder
 import android.util.Log
 import com.example.fts_tes.Utils.PerformanceTime
-import com.example.td_test_2.chat.tfidfmain.TfIdfMain
+import com.example.td_test_2.ml.tfidfmain.TfIdfMain
 import java.io.BufferedReader
 import java.io.InputStreamReader
 import java.text.SimpleDateFormat

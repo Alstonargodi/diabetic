@@ -1,4 +1,4 @@
-package com.example.td_test_2.chat.preprocessing
+package com.example.td_test_2.ml.preprocessing
 
 import android.content.Context
 import android.util.Log

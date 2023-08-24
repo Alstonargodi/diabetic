@@ -1,4 +1,4 @@
-package com.example.td_test_2.chat.utils
+package com.example.td_test_2.utils.data
 
 class DateMatch {
     var day: String = ""

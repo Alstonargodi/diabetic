@@ -1,6 +1,6 @@
 import android.util.Log
 import com.example.fts_tes.Utils.PerformanceTime
-import com.example.td_test_2.naivebayes.data.Input
+import com.example.td_test_2.ml.naivebayes.data.Input
 import kotlin.math.exp
 import kotlin.math.ln
 

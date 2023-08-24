@@ -28,7 +28,7 @@
             android:exported="false" />
 
         <receiver
-            android:name=".reminder.TaskReminderBroadcast"
+            android:name=".utils.reminder.TaskReminderBroadcast"
             android:enabled="true"
             android:exported="true" />
 

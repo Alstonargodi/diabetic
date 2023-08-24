@@ -6,7 +6,7 @@ import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import com.example.td_test_2.chat.preprocessing.PreProcessing
+import com.example.td_test_2.ml.preprocessing.PreProcessing
 import com.example.td_test_2.database.Repository
 import com.example.td_test_2.database.entity.words.WordEntity
 import com.example.td_test_2.database.room.DbConfig

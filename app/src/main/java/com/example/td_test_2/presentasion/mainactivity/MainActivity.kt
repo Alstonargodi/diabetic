@@ -17,8 +17,8 @@ import androidx.work.Data
 import androidx.work.PeriodicWorkRequest
 import androidx.work.WorkManager
 import com.example.td_test_2.SearchResultsAdapter
-import com.example.td_test_2.chat.preprocessing.PreProcessing
-import com.example.td_test_2.chat.tfidfmain.TfIdfMain
+import com.example.td_test_2.ml.preprocessing.PreProcessing
+import com.example.td_test_2.ml.tfidfmain.TfIdfMain
 import com.example.td_test_2.database.Repository
 import com.example.td_test_2.database.entity.algorithm.Algortihm
 import com.example.td_test_2.database.entity.task.TaskEntity
@@ -34,8 +34,8 @@ import com.example.td_test_2.presentasion.enterdataactivity.EnterDataActivity
 import com.example.td_test_2.presentasion.mainactivity.adapter.TestingResultAdapter
 import com.example.td_test_2.presentasion.searchactivity.SearchActivity
 import com.example.td_test_2.presentasion.viewdataactivity.ViewDataActivity
-import com.example.td_test_2.reminder.TaskReminder
-import com.example.td_test_2.reminder.TaskReminder.Companion.NOTIFICATION_Channel_ID
+import com.example.td_test_2.utils.reminder.TaskReminder
+import com.example.td_test_2.utils.reminder.TaskReminder.Companion.NOTIFICATION_Channel_ID
 import com.example.td_test_2.utils.UtilsSetences
 import com.example.td_test_2.utils.UtilsSetences.csvToString2
 import org.json.JSONException
@@ -221,9 +221,10 @@ class MainActivity : AppCompatActivity() {
         ).forEach { datapoint->
             classifier.apply {
                 var input = datapoint.values.toString().replace(" ","")
-                train(com.example.td_test_2.naivebayes.data.Input(
-                    input,
-                    datapoint.point
+                train(
+                    com.example.td_test_2.ml.naivebayes.data.Input(
+                        input,
+                        datapoint.point
                     )
                 )
                 Log.d("NBdata", input)

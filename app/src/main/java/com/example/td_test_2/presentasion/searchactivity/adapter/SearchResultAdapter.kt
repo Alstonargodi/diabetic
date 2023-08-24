@@ -12,7 +12,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.fts_tes.Utils.PerformanceTime
 import com.example.td_test_2.database.sqllite.DatabaseTable
 import com.example.td_test_2.presentasion.chatactivity.ChatActivity
-import com.example.td_test_2.chat.tfidfmain.TfIdfMain
+import com.example.td_test_2.ml.tfidfmain.TfIdfMain
 import com.example.td_test_2.database.entity.words.WordEntity
 import com.example.td_test_2.presentasion.mainactivity.MainActivity
 import com.example.td_test_2.presentasion.searchactivity.SearchActivity

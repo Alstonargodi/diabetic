@@ -1,4 +1,4 @@
-package com.example.td_test_2.chat.tfidfmain
+package com.example.td_test_2.ml.tfidfmain
 
 import android.content.Context
 import android.database.Cursor

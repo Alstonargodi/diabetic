@@ -1,4 +1,4 @@
-package com.example.td_test_2.naivebayes.data
+package com.example.td_test_2.ml.naivebayes.data
 
 data class Input<C>(
     val text : String,

@@ -9,7 +9,7 @@ import android.os.Bundle
 import android.util.Log
 import android.view.View
 import com.example.td_test_2.SearchResultsAdapter
-import com.example.td_test_2.chat.tfidfmain.TfIdfMain
+import com.example.td_test_2.ml.tfidfmain.TfIdfMain
 import com.example.td_test_2.database.Repository
 import com.example.td_test_2.database.entity.testing.TestingNv
 import com.example.td_test_2.database.entity.testing.TestingRf
@@ -66,10 +66,11 @@ class TestingAlgorithmActivity : AppCompatActivity() {
         ).forEach { datapoint->
             classifier.apply {
                 var input = datapoint.values.toString().replace(" ","")
-                    train(com.example.td_test_2.naivebayes.data.Input(
-                        input,
-                        datapoint.point
-                    )
+                    train(
+                        com.example.td_test_2.ml.naivebayes.data.Input(
+                            input,
+                            datapoint.point
+                        )
                 )
             }
         }
