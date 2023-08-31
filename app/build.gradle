@@ -2,6 +2,7 @@ plugins {
     id 'com.android.application'
     id 'org.jetbrains.kotlin.android'
     id 'kotlin-kapt'
+    id 'androidx.navigation.safeargs'
 }
 
 android {
@@ -55,6 +56,14 @@ dependencies {
     implementation "com.github.lisawray.groupie:groupie-kotlin-android-extensions:2.10.1"
     implementation "com.github.lisawray.groupie:groupie-databinding:2.10.1"
 
+    // Navigation Component
+    implementation 'androidx.navigation:navigation-fragment-ktx:2.5.3'
+    implementation 'androidx.navigation:navigation-ui-ktx:2.5.3'
+
+    //fragment
+    implementation "androidx.fragment:fragment-ktx:1.5.5"
+
+
     //room database
     implementation 'androidx.room:room-paging:2.5.0'
     implementation 'androidx.room:room-ktx:2.5.0'
@@ -62,4 +71,6 @@ dependencies {
 
     //workermanager
     implementation "androidx.work:work-runtime-ktx:2.7.1"
+
+    implementation 'androidx.recyclerview:recyclerview:1.2.1'
 }

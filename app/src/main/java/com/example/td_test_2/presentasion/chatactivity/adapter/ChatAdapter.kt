@@ -82,4 +82,7 @@ class ChatAdapter(
     interface OnDetailItemCallback{
         fun onDetailCallback(data : String)
     }
+
+
+
 }

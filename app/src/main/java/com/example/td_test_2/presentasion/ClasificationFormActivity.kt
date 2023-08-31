@@ -12,7 +12,6 @@ import com.example.td_test_2.database.entity.message.Message
 import com.example.td_test_2.database.entity.words.WordEntity
 import com.example.td_test_2.database.room.DbConfig
 import com.example.td_test_2.database.sqllite.DatabaseTable
-import com.example.td_test_2.databinding.ActivityChatBinding
 import com.example.td_test_2.databinding.ActivityClasificationFormBinding
 import com.example.td_test_2.presentasion.chatactivity.adapter.ReceiveMessageItem
 import java.io.FileOutputStream

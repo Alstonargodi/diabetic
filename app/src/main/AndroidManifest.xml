@@ -24,7 +24,8 @@
             android:name=".presentasion.testingalgorithmactivity.TestingAlgorithmActivity"
             android:exported="false" />
         <activity
-            android:name=".presentasion.mainactivity.MainActivity"
+            android:name=".presentasion.chatactivity.ChatFragment"
+            android:windowSoftInputMode="adjustPan"
             android:exported="false" />
 
         <receiver
@@ -42,7 +43,8 @@
             android:name=".presentasion.enterdataactivity.EnterDataActivity"
             android:exported="false" />
         <activity
-            android:name=".presentasion.chatactivity.ChatActivity"
+            android:name=".presentasion.mainactivity.MainActivity"
+            android:windowSoftInputMode="adjustPan"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

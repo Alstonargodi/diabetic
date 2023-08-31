@@ -4,12 +4,14 @@ import Classifier
 import android.content.Context
 import android.content.Intent
 import android.os.Build
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.view.LayoutInflater
 import android.view.View
+import android.view.ViewGroup
 import android.widget.Toast
 import androidx.annotation.RequiresApi
+import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.fts_tes.Utils.PerformanceTime.StartTimer
 import com.example.fts_tes.Utils.PerformanceTime.TimeElapsed
@@ -17,10 +19,8 @@ import com.example.td_test_2.presentasion.chatactivity.adapter.ReceiveMessageIte
 import com.example.td_test_2.presentasion.chatactivity.adapter.SendMessageItem
 import com.example.td_test_2.R
 import com.example.td_test_2.SearchResultsAdapter
-import com.example.td_test_2.ml.preprocessing.PreProcessing
 import com.example.td_test_2.database.sqllite.DatabaseTable
 import com.example.td_test_2.database.entity.message.Message
-import com.example.td_test_2.databinding.ActivityChatBinding
 import com.example.td_test_2.ml.preprocessing.PreProcessing.preprocessingKalimat
 import com.example.td_test_2.database.Repository
 import com.example.td_test_2.database.entity.task.TaskEntity
@@ -28,6 +28,7 @@ import com.example.td_test_2.database.entity.weightresult.WeightResult
 import com.example.td_test_2.database.entity.words.WordEntity
 import com.example.td_test_2.database.room.DbConfig
 import com.example.td_test_2.database.room.json.Loadjson
+import com.example.td_test_2.databinding.FragmentChatBinding
 import com.example.td_test_2.ml.naivebayes.data.Input
 import com.example.td_test_2.presentasion.ClasificationFormActivity
 import com.example.td_test_2.presentasion.mainactivity.MainActivity
@@ -36,43 +37,42 @@ import com.example.td_test_2.utils.UtilsSetences
 import com.xwray.groupie.GroupAdapter
 import com.xwray.groupie.GroupieViewHolder
 import org.json.JSONException
-import patternmatching.boyerMooreHorspoolSearch
 import java.io.FileOutputStream
 import java.io.OutputStreamWriter
-import java.lang.Thread.sleep
 import java.time.LocalDateTime
 
-class ChatActivity : AppCompatActivity() {
+class ChatFragment : Fragment() {
     private val messageAdapter = GroupAdapter<GroupieViewHolder>()
     private var mAdapter: SearchResultsAdapter? = null
     private lateinit var repository: Repository
     private val classifier = Classifier<String>()
-    private lateinit var binding : ActivityChatBinding
+    private lateinit var binding : FragmentChatBinding
 
     private var trainData = "pimall.csv"
     private var isMenu = false
     private var setReminder = false
 
     private var typeClassificer = 0
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        binding = ActivityChatBinding.inflate(layoutInflater)
-        repository = Repository(DbConfig.setDatabase(this))
-        setContentView(binding.root)
+    override fun onCreateView(
+        inflater: LayoutInflater, container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
+        binding = FragmentChatBinding.inflate(layoutInflater)
+        repository = Repository(DbConfig.setDatabase(requireContext()))
 
-        repository.readSentence().observe(this){
+        repository.readSentence().observe(viewLifecycleOwner){
             if (it.isEmpty()){
-                insertDataset(this)
+                insertDataset(requireContext())
             }
         }
-        repository.readSelectedAlgorithm().observe(this){ algo->
+        repository.readSelectedAlgorithm().observe(viewLifecycleOwner){ algo->
             algo.forEach { typeClassificer=it.type }
         }
         //todo init reply
         replyMessage("Halo !")
         binding.rvChat.adapter = messageAdapter
         binding.btnMenu.setOnClickListener {
-            startActivity(Intent(this,MainActivity::class.java))
+            startActivity(Intent(requireContext(),MainActivity::class.java))
         }
         binding.btnInsert.setOnClickListener {
             binding.progressBar.visibility = View.VISIBLE
@@ -82,6 +82,7 @@ class ChatActivity : AppCompatActivity() {
             var inputText = binding.etInsertChat.text.toString()
 
             if(inputText.isNotEmpty()){
+
                 try{
                     val message = Message(
                         setences = inputText,
@@ -92,7 +93,7 @@ class ChatActivity : AppCompatActivity() {
                     //todo 1.1 preprocessing kalimat
                     StartTimer()
                     var cleanText = preprocessingKalimat(
-                        this,
+                        requireContext(),
                         inputText
                     )
                     //todo 1.2 query kalimat
@@ -107,7 +108,8 @@ class ChatActivity : AppCompatActivity() {
                     }
                     if (inputText == "prediksi"){
                         startActivity(Intent(
-                            this,ClasificationFormActivity::class.java
+                            requireContext(),
+                            ClasificationFormActivity::class.java
                         ))
                     }
                     binding.etInsertChat.text.clear()
@@ -121,16 +123,18 @@ class ChatActivity : AppCompatActivity() {
 
         }
         initNbTrainData()
-        binding.rvChat.layoutManager = LinearLayoutManager(this)
+        binding.rvChat.layoutManager = LinearLayoutManager(requireContext())
 
         binding.rvSearch.adapter = messageAdapter
-        mAdapter = SearchResultsAdapter(this)
+        mAdapter = SearchResultsAdapter(requireContext())
         binding.rvSearch.layoutManager = LinearLayoutManager(
-            this,
+            requireContext(),
             LinearLayoutManager.VERTICAL,
             false
         )
         binding.rvSearch.adapter = mAdapter
+
+        return binding.root
     }
 
     //mencari kesamaan kalimat dalam database
@@ -138,7 +142,10 @@ class ChatActivity : AppCompatActivity() {
         questionInput : String
     ){
         //todo 1.3 start query
-        val searchDb = DatabaseTable.getInstance(baseContext)?.getWordMatches(questionInput)
+        val searchDb = DatabaseTable.getInstance(
+            requireContext().applicationContext
+        )?.getWordMatches(questionInput)
+
         //todo 1.6 mengambil data bedasarkan query dan proses tfidf
         mAdapter?.swapCursor(searchDb)
         if(searchDb?.count == 0){
@@ -155,7 +162,7 @@ class ChatActivity : AppCompatActivity() {
                     data.sentence,
                     data.result.toLowerCase()
                 ))
-                repository.readWeightResult().observe(this@ChatActivity){ list->
+                repository.readWeightResult().observe(viewLifecycleOwner){ list->
                     if (list.isNotEmpty()){
                         sortResult(
                             data.type,
@@ -169,13 +176,14 @@ class ChatActivity : AppCompatActivity() {
         })
     }
 
+    @RequiresApi(Build.VERSION_CODES.O)
     private fun sortResult(
         type : String,
         MatchQuestion : String,
         question : String,
         answer : String,
     ){
-        repository.sortWeightResult(MatchQuestion).observe(this){data->
+        repository.sortWeightResult(MatchQuestion).observe(viewLifecycleOwner){data->
             repository.readWeightResult().observe(this){ list->
                 list.distinct().forEach {
                     if(it.sentence == MatchQuestion){
@@ -286,16 +294,16 @@ class ChatActivity : AppCompatActivity() {
     //todo 2.3 inisialisasi dataset untuk prediksi
     private fun initNbTrainData(){
         UtilsSetences.csvToString2(
-            this,
+            requireContext(),
             trainData,
         ).forEach { datapoint->
             classifier.apply {
                 var input = datapoint.values.toString().replace(" ","")
                 train(
                     Input(
-                    input,
-                    datapoint.point
-                )
+                        input,
+                        datapoint.point
+                    )
                 )
             }
         }
@@ -353,8 +361,12 @@ class ChatActivity : AppCompatActivity() {
         var pedigree = preprocessing["pedigree"].toString()
         var age = preprocessing["umur"].toString()
 
-        baseContext.deleteFile("amytextfile.txt")
-        val fileOutputStream: FileOutputStream = openFileOutput("amytextfile.txt", Context.MODE_PRIVATE)
+        requireContext().applicationContext.deleteFile("amytextfile.txt")
+
+        val fileOutputStream: FileOutputStream = requireContext().openFileOutput(
+            "amytextfile.txt", Context.MODE_PRIVATE
+        )
+
         val outputWriter = OutputStreamWriter(fileOutputStream)
         outputWriter.write((
                 "${pregnancies},"+
@@ -369,7 +381,7 @@ class ChatActivity : AppCompatActivity() {
         )
         outputWriter.close()
         var result = randomforest.Input.main(
-            this,
+            requireContext(),
             "input",
             trainData,
             5,
@@ -415,7 +427,7 @@ class ChatActivity : AppCompatActivity() {
             sender = "me",
         )
         binding.progressBar.visibility = View.GONE
-        repository.readSentence(sentence).observe(this@ChatActivity){list->
+        repository.readSentence(sentence).observe(this@ChatFragment){ list->
             if(list.isEmpty()){
                 insertNewData(tipe, sentence, result)
             }
@@ -443,7 +455,7 @@ class ChatActivity : AppCompatActivity() {
         time : String,
         description : String
     ){
-        TaskReminderBroadcast().setDailyReminder(this,200)
+        TaskReminderBroadcast().setDailyReminder(requireContext(),200)
         val date = LocalDateTime.now().dayOfMonth
         val month = LocalDateTime.now().month.value
         val year = LocalDateTime.now().year
@@ -477,7 +489,7 @@ class ChatActivity : AppCompatActivity() {
     private fun removeReminder(){
         replyMessage("menghapus alarm")
         repository.deleteTask()
-        TaskReminderBroadcast().cancelAlarm(this)
+        TaskReminderBroadcast().cancelAlarm(requireContext())
     }
 
     private fun MenuResponse(
@@ -524,7 +536,7 @@ class ChatActivity : AppCompatActivity() {
     @RequiresApi(Build.VERSION_CODES.O)
     private fun showActivityList(){
         replyMessage("Berikut ini daftar kegiatan:")
-        repository.readTodayTask().observe(this){
+        repository.readTodayTask().observe(viewLifecycleOwner){
             it.forEach { task->
                 replyMessage("${task.title}")
             }
@@ -534,7 +546,7 @@ class ChatActivity : AppCompatActivity() {
     private fun insertDataset(
         context: Context,
     ){
-        val db: DatabaseTable = DatabaseTable.getInstance(baseContext)!!
+        val db: DatabaseTable = DatabaseTable.getInstance(requireContext().applicationContext)!!
         val setenceArray = Loadjson.loadSentenceJson(context)
         try {
             if (setenceArray != null){
@@ -543,7 +555,7 @@ class ChatActivity : AppCompatActivity() {
 
                     var inputCsv = item.getString("kalimat")
                     var cleanText = preprocessingKalimat(
-                        this,
+                        requireContext(),
                         inputCsv
                     )
 
@@ -570,7 +582,7 @@ class ChatActivity : AppCompatActivity() {
         }
     }
     private fun addToast(message: String) {
-        Toast.makeText(applicationContext, message, Toast.LENGTH_LONG).show()
+        Toast.makeText(requireContext().applicationContext, message, Toast.LENGTH_LONG).show()
     }
 
 
@@ -579,7 +591,7 @@ class ChatActivity : AppCompatActivity() {
         setence : String,
         result : String
     ){
-        val db: DatabaseTable = DatabaseTable.getInstance(baseContext)!!
+        val db: DatabaseTable = DatabaseTable.getInstance(requireContext().applicationContext)!!
 
         repository.insertSentence(
             WordEntity(

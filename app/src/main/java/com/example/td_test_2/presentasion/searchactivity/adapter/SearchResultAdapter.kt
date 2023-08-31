@@ -11,7 +11,7 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.fts_tes.Utils.PerformanceTime
 import com.example.td_test_2.database.sqllite.DatabaseTable
-import com.example.td_test_2.presentasion.chatactivity.ChatActivity
+import com.example.td_test_2.presentasion.chatactivity.ChatFragment
 import com.example.td_test_2.ml.tfidfmain.TfIdfMain
 import com.example.td_test_2.database.entity.words.WordEntity
 import com.example.td_test_2.presentasion.mainactivity.MainActivity
@@ -66,7 +66,7 @@ class SearchResultsAdapter(private val mContext: Context) :
         outputWriter.write(("$type"))
         outputWriter.close()
         //todo 1.16 mengembalikan hasil query berupa kesamaan dokumen
-        if (mContext.javaClass == ChatActivity::class.java || mContext.javaClass == SearchActivity::class.java || mContext.javaClass == MainActivity::class.java) {
+        if (mContext.javaClass == ChatFragment::class.java || mContext.javaClass == SearchActivity::class.java || mContext.javaClass == MainActivity::class.java) {
             itemCallback.onDetailCallback(
                 WordEntity(
                     0,
@@ -86,7 +86,7 @@ class SearchResultsAdapter(private val mContext: Context) :
     fun swapCursor(newCursor: Cursor?) {
         offset = null
         mCursor = newCursor
-        if (mContext.javaClass == ChatActivity::class.java ||mContext.javaClass == SearchActivity::class.java || mContext.javaClass == MainActivity::class.java){
+        if (mContext.javaClass == ChatFragment::class.java ||mContext.javaClass == SearchActivity::class.java || mContext.javaClass == MainActivity::class.java){
             Log.d("SEARCHRESULTSADAPTER", "Calculating Tf x Idf")
             //todo 1.7 proses perhitungan TFIDF
             offset = TfIdfMain.calcTfIdf(mContext, mCursor)

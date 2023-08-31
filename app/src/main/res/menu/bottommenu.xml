@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:showIn="navigation_view"
+    >
+    <item
+        android:id="@+id/homeFragment"
+        android:icon="@drawable/baseline_home_24"
+        android:title="home" />
+    <item
+        android:id="@+id/chatFragment"
+        android:icon="@drawable/baseline_chat_bubble_24"
+        android:title="chat" />
+    <item
+        android:id="@+id/settingFragment"
+        android:icon="@drawable/baseline_settings_24"
+        android:title="setting" />
+</menu>
