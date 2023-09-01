@@ -18,7 +18,9 @@ import com.example.td_test_2.databinding.FragmentHomeBinding
 class HomeFragment : Fragment() {
     private lateinit var binding : FragmentHomeBinding
     private lateinit var repository: Repository
+
     private lateinit var taskAdapter : TaskHomeRecylerViewAdapter
+    private lateinit var infoAdapter : InformasiRecyclerViewAdapter
 
     @RequiresApi(Build.VERSION_CODES.O)
     override fun onCreateView(
@@ -41,5 +43,11 @@ class HomeFragment : Fragment() {
         var recyclerViewTask = binding.rvTask
         recyclerViewTask.adapter = taskAdapter
         recyclerViewTask.layoutManager = LinearLayoutManager(requireContext())
+
+        infoAdapter = InformasiRecyclerViewAdapter(taskList)
+        var recviewInfo = binding.rvInformasi
+        recviewInfo.adapter = infoAdapter
+        recviewInfo.layoutManager = LinearLayoutManager(requireContext(),LinearLayoutManager.HORIZONTAL,true)
+
     }
 }

@@ -81,45 +81,55 @@ class ChatFragment : Fragment() {
             //input kalimat
             var inputText = binding.etInsertChat.text.toString()
 
-            if(inputText.isNotEmpty()){
+            val text = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum"
 
-                try{
-                    val message = Message(
-                        setences = inputText,
-                        sender = "me"
-                    )
-                    val sendMessageItem = SendMessageItem(message)
-                    messageAdapter.add(sendMessageItem)
-                    //todo 1.1 preprocessing kalimat
-                    StartTimer()
-                    var cleanText = preprocessingKalimat(
-                        requireContext(),
-                        inputText
-                    )
-                    //todo 1.2 query kalimat
-                    if(isMenu){
-                        MenuResponse(inputText)
-                    }else{
-                        queryDatabase(cleanText)
-                    }
+            val message = Message(
+                setences = text,
+                sender = "me"
+            )
+            val sendMessageItem = SendMessageItem(message)
+            messageAdapter.add(sendMessageItem)
+            replyMessage(text)
 
-                    if (setReminder){
-                        setReminderClassifer(inputText)
-                    }
-                    if (inputText == "prediksi"){
-                        startActivity(Intent(
-                            requireContext(),
-                            ClasificationFormActivity::class.java
-                        ))
-                    }
-                    binding.etInsertChat.text.clear()
-                }catch (e : Exception){
-                    replyMessage("tidak dapat menemukan kaliamt terkait")
-                }
-
-            }else{
-                replyMessage("teksboks kosong silahkan masukan kembali")
-            }
+//            if(inputText.isNotEmpty()){
+//
+//                try{
+//                    val message = Message(
+//                        setences = inputText,
+//                        sender = "me"
+//                    )
+//                    val sendMessageItem = SendMessageItem(message)
+//                    messageAdapter.add(sendMessageItem)
+//                    //todo 1.1 preprocessing kalimat
+//                    StartTimer()
+//                    var cleanText = preprocessingKalimat(
+//                        requireContext(),
+//                        inputText
+//                    )
+//                    //todo 1.2 query kalimat
+//                    if(isMenu){
+//                        MenuResponse(inputText)
+//                    }else{
+//                        queryDatabase(cleanText)
+//                    }
+//
+//                    if (setReminder){
+//                        setReminderClassifer(inputText)
+//                    }
+//                    if (inputText == "prediksi"){
+//                        startActivity(Intent(
+//                            requireContext(),
+//                            ClasificationFormActivity::class.java
+//                        ))
+//                    }
+//                    binding.etInsertChat.text.clear()
+//                }catch (e : Exception){
+//                    replyMessage("tidak dapat menemukan kaliamt terkait")
+//                }
+//
+//            }else{
+//                replyMessage("teksboks kosong silahkan masukan kembali")
+//            }
 
         }
         initNbTrainData()

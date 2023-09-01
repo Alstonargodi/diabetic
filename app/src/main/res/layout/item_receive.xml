@@ -16,7 +16,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="90dp"
-        android:background="#E7E7E7"
+        android:background="#D7C0AE"
         android:padding="10dp">
 
         <TextView
@@ -25,12 +25,11 @@
             android:layout_height="wrap_content"
             android:text="@{message.setences}"
             android:textColor="#000000"
-            android:textSize="17sp"
-            android:textStyle="bold"
+            android:textSize="16sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            tools:text="test" />
+            tools:text="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
